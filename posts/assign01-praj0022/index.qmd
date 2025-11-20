@@ -1,0 +1,321 @@
+---
+title: "Diving Deeper into Data Exploration: Introduction"
+author: "Pooja Rajendran Raju"
+date: "Aug 5, 2024"
+quarto-required: ">=1.3.0"
+output: 
+  html_document:
+categories: [Exploration]
+---
+
+```{r}
+#| echo: false
+# Set up chunk for all slides
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.height = 4,
+  fig.align = "center",
+  out.width = "100%",
+  code.line.numbers = FALSE,
+  fig.retina = 4,
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  cache = FALSE,
+  dev.args = list(pointsize = 11)
+)
+```
+
+```{r}
+#| echo: false
+# Load libraries
+library(tidyverse)
+library(conflicted)
+
+conflicts_prefer(dplyr::filter)
+conflicts_prefer(dplyr::select)
+conflicts_prefer(dplyr::slice)
+
+# Plot options and themes
+options(
+  digits = 2,
+  width = 60,
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis",
+  ggplot2.discrete.colour = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442"),
+  ggplot2.discrete.fill = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442")
+)
+
+theme_set(theme_bw(base_size = 14) +
+   theme(
+     aspect.ratio = 1,
+     plot.background = element_rect(fill = 'transparent', colour = NA),
+     plot.title.position = "plot",
+     plot.title = element_text(size = 24),
+     panel.background = element_rect(fill = 'transparent', colour = NA),
+     legend.background = element_rect(fill = 'transparent', colour = NA),
+     legend.key = element_rect(fill = 'transparent', colour = NA)
+   )
+)
+```
+
+```{r, echo= FALSE, eval= FALSE}
+
+# Loading libraries
+library(remotes)
+library(gardenR)
+
+# Installing the 'gardenR' package from GitHub
+remotes::install_github("llendway/gardenR")
+
+```
+
+
+## Introduction
+
+The data to used is available from [Tidy Tuesday 28 May 2024 page](https://github.com/rfordatascience/tidytuesday/blob/master/data/2024/2024-05-28/readme.md). Downloaded the data from here, using the `tidytuesdayR` package. 
+
+In addition the `gardenR` package, available from `remotes::install_github("llendway/gardenR")` has extra details about the garden. 
+
+```{r, eval= FALSE, echo= FALSE}
+
+# Downloading data using tidytuesdayR 
+tuesdata <- tidytuesdayR::tt_load('2024-05-28')
+```
+```{r, eval= FALSE, echo= FALSE}
+
+# Creating individual datasets 
+harvest_2020 <- tuesdata$harvest_2020
+harvest_2021 <- tuesdata$harvest_2021
+planting_2020 <- tuesdata$planting_2020
+planting_2021 <- tuesdata$planting_2021
+spending_2020 <- tuesdata$spending_2020
+spending_2021 <- tuesdata$spending_2021
+coords <- garden_coords
+```
+
+```{r, eval= FALSE, echo= FALSE}
+
+# Saving the datasets locally
+write.csv(harvest_2020, file = "harvest_2020", row.names = FALSE)
+write.csv(harvest_2021, file = "harvest_2021", row.names = FALSE)
+write.csv(planting_2020, file = "planting_2020", row.names = FALSE)
+write.csv(planting_2021, file = "planting_2021", row.names = FALSE)
+write.csv(spending_2020, file = "spending_2020", row.names = FALSE)
+write.csv(spending_2021, file = "spending_2021", row.names = FALSE)
+write.csv(coords, file = "garden_coords", row.names = FALSE)
+
+```
+## Exploration 
+
+a. How many types of vegetables were grown in each year?
+
+```{r}
+# Reading the data
+planting_2020 <- read.csv("data/planting_2020")
+planting_2021 <- read.csv("data/planting_2021")
+```
+
+```{r}
+# Counting number of unique vegetables in 2020
+vegetables_2020 <- planting_2020 |> 
+                   select(vegetable) |>
+                   unique() |> 
+                   count() |>
+                   rename(count_2020 = n )
+
+# Counting number of unique vegetables in 2021
+vegetables_2021 <- planting_2021 |> 
+                   select(vegetable) |>
+                   unique() |>
+                   count() |> 
+                   rename(count_2021 = n )
+
+cbind(vegetables_2020, vegetables_2021)
+```
+
+- In 2020, 31 types of vegetables were grown, where as in 2021 only 26 types of vegetables were grown. 
+
+b. How many vegetables were grown in 2020 that were not grown in 2021? 
+
+```{r}
+# Creating variable with all unique vegetables in 2020
+unique_2020 <- planting_2020 |> 
+                   select(vegetable) |>
+                   unique()
+
+# Creating variable with all unique vegetables in 2021
+unique_2021 <- planting_2021 |> 
+                   select(vegetable) |>
+                   unique()
+
+# Using anti_join to get the vegetables grown in 2020 but not in 2021 
+difference_2020 <- anti_join(unique_2020, unique_2021, by = c("vegetable"))
+
+# Counting the number of vegetables grown in 2020 but not in 2021 
+nrow(difference_2020)
+
+difference_2020
+```
+
+- 10 vegetables were grown in 2020 that were not grown in 2021. The vegetables are listed in the table above. 
+
+
+c. What are some of the data recording errors that can be seen by comparing vegetables grown in each year?
+
+- The names of vegetables and varieties are not recorded in a consistent manner. In some places, the first letter is capitalized and in other places its not. Variations in the use of upper and lower case when spelling the same vegetable/variety. 
+- For different years, the same vegetable is spelled differently. Mistakes in spelling the vegetable.
+- In some places the vegetables/variety is written in singular and other places its in plural 
+- Examples in planting data for 2020 and 2021:
+a. In planting_2021 - __swiss chard__ ; In planting _2020 - __Swiss Chard__ 
+- Here, S in "swiss" is in uppercase for 2020, whereas in 2021 it is lower case. 
+
+b. In planting_2021 - __pumpkin__ ; In planting _2020 - __pumpkins__
+- Here, "pumpkin" is written as singular in 2021, whereas in 2020 it is written in plural. 
+
+c. In planting_2021 - __rutabaga__ ; In planting _2020 - __rudabaga__
+- Here, "rutabaga" is misspelled while recording data in 2020 as "rudabaga" instead as rutabaga. 
+
+- Similar inconsistencies can be found in the variable "variety".
+- These data recording errors can lead to incorrect analysis as functions like "unique" are case sensitive.  
+
+
+
+
+## Exploring harvest data from two years
+
+a. Joining the harvest data for the two years, after adding a new variable each, called `year`. 
+
+```{r}
+# Reading the data
+harvest_2020 <- read.csv("data/harvest_2020")
+harvest_2021 <- read.csv("data/harvest_2021")
+```
+
+```{r}
+# Adding variable year to harvest_2020
+harvest_2020 <- harvest_2020 |> 
+                mutate( year = year(date))
+
+# Adding variable year to harvest_2021
+harvest_2021 <- harvest_2021 |> 
+                mutate( year = year(date))
+
+# Joining Data 
+combined_harvest <- full_join(harvest_2020, harvest_2021)
+```
+
+b. For the `tomatoes` compareing the weight of the harvest in both years.
+
+```{r}
+# Calculating the weight of harvest for tomatoes in 2020
+weight_2020 <- harvest_2020 |> 
+               filter(vegetable == "tomatoes") |> 
+               select(weight) |>
+               sum()
+
+# Calculating the weight of harvest for tomatoes in 2021
+weight_2021 <- harvest_2021 |> 
+               filter(vegetable == "tomatoes") |> 
+               select(weight) |>
+               sum()
+
+cbind(weight_2020, weight_2021)
+```
+
+- The weight of harvest for tomatoes in 2020 is 158231 grams and the weight of harvest for tomatoes in 2021 is 141509 grams. The weight of harvest is more in 2020 as compared to that in 2021. 
+
+c. Explaining what might be a problem when comparing the tomato yield from these two years.
+
+```{r}
+inconsistency <- combined_harvest |>
+     select(vegetable, variety, year) |>
+     filter(vegetable == "tomatoes") |>
+     group_by(variety, year) |>
+     count() |> 
+     pivot_wider(names_from = year, values_from = n)
+
+head(inconsistency, 6)
+```
+
+- Based on the output of the code above, we can observe that in both years the same varieties of tomatoes were not harvested. There is no consistency with the varieties harvested in both years. 
+- Further, for same varieties harvested in both years, the number of harvests are different. 
+
+## Exploring planting data with garden layout
+
+The planting data has the label of the garden plot where each vegetable is grown. The `gardenR` package has the spatial coordinates of these spots in the garden. 
+
+- Join the `planting_2020` and `planting_2021` data, after adding a variable labeling the year. And then joining with the `garden_coords` data, so that the locations of each plot are recorded.
+
+```{r}
+# Reading garden_coords data
+garden_coords <- read.csv("data/garden_coords")
+```
+
+```{r}
+# Adding variable year to harvest_2020
+planting_2020 <- planting_2020 |> 
+                mutate( year = year(date))
+
+# Adding variable year to harvest_2021
+planting_2021 <- planting_2021 |> 
+                mutate( year = year(date))
+
+# Joining planting data of 2020 and 2021
+combined_20_21 <- full_join(planting_2020, planting_2021)
+
+# Joining combined planting data of 2020 and 2021 with garden coordinates
+planting_coords <- full_join(combined_20_21 , garden_coords, by = "plot")
+```
+
+- Plot garden layout, with locations of tomatoes coloured, facetted by year.
+
+```{r gardenplot}
+#| fig-cap: "Garden Plot Layout"
+#| fig-align: center
+# Creating data for labels
+for_labs <- garden_coords |>
+  group_by(plot) |>
+  summarize(x = mean(x), y = mean(y), .groups = 'drop')
+
+# Plotting the garden layout
+ggplot() +
+  geom_polygon(data = planting_coords |> filter(!is.na(year)),                
+               aes(x = x, y = y, group = plot), 
+               color = "black") +
+  geom_polygon(data = planting_coords |> filter(vegetable == "tomatoes"),
+               aes(x = x, y = y, group = plot), 
+               fill = "red", 
+               alpha = 0.5, 
+               color = "black") + 
+  geom_text(data = for_labs, 
+            aes(x = x, y = y, label = plot), 
+            color = "yellow",
+            size = 5) +
+  theme_void() +
+  theme(panel.background = element_rect(fill = "darkgray")) + 
+  facet_wrap(~year)
+
+```
+
+- The above plot shows the garden plot with the locations of tomatoes highlighted in red for years 2020 and 2021. 
+- In 2020, plots N and J are fully planted with tomatoes, while plot O has been planted with tomatoes along with few other vegetables. 
+- In 2021, plots N and D are fully planted with tomatoes, while plot O has been planted with tomatoes along with few other vegetables.
+
+
+## Generative AI analysis
+
+- I used generative AI to understand what kind of data inconsistencies to look for in the datasets. 
+- I used it to find information on functions like unique, full_join and bind_rows. 
+- Further, I used it to understand how to layer the geom_polygon function to make the garden plot, coloring the locations of tomatoes differently. I faced issues while trying to color the plot of tomatoes differently and I wasn't sure how to add two layers of geom_polygon to the same plot and if it is possible at all. With the use of ChatGPT, I was able to arrive at the solution using the questions in the link to my ChatGPT chat history. 
+- I also used it to understand if the function "filter" can be used when passing data to geom_polygon and I was able to clarify my doubt with the help of ChatGPT. 
+
+## Citations 
+
+1. Lendway, L (2024). gardenR: Gardening Resources and Tools. R package <https://github.com/llendway/gardenR>
+
+2. Wickham, H, Chang, W, Wickham, M, Hester, J, Bryan, J, & others (2024). tidyverse: R package version 2.0.0, <https://CRAN.R-project.org/package=tidyverse>
+
+3. OpenAI, 2024. ChatGPT (Version 4) <https://www.openai.com/chatgpt>
+
+
