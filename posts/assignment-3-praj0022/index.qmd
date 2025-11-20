@@ -1,0 +1,641 @@
+---
+title: "Diving Deeper into Data Exploration: Visualisation"
+author: "Pooja Rajendran Raju"
+date: "Sep 16, 2024"
+quarto-required: ">=1.3.0"
+Output:
+    html: 
+        embed-resources: true
+        code-fold: true
+categories: [Exploration]
+---
+
+```{r}
+#| echo: false
+# Set up chunk for all slides
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.height = 4,
+  fig.align = "center",
+  out.width = "100%",
+  code.line.numbers = FALSE,
+  fig.retina = 4,
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  cache = FALSE,
+  dev.args = list(pointsize = 11)
+)
+```
+
+```{r}
+#| echo: false
+# Load libraries
+library(tidyverse)
+library(readxl)
+library(visdat)
+library(naniar)
+library(imputeTS)
+library(rvest)
+library(conflicted)
+library(viridis)   
+library(hexbin) 
+library(nullabor)
+library(patchwork)
+library(scales)
+conflicts_prefer(dplyr::filter)
+conflicts_prefer(dplyr::select)
+conflicts_prefer(dplyr::slice)
+
+# Plot options and themes
+options(
+  digits = 2,
+  width = 60,
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis",
+  ggplot2.discrete.colour = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442"),
+  ggplot2.discrete.fill = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442")
+)
+
+theme_set(theme_bw(base_size = 14) +
+   theme(
+     aspect.ratio = 1,
+     plot.background = element_rect(fill = 'transparent', colour = NA),
+     plot.title.position = "plot",
+     plot.title = element_text(size = 24),
+     panel.background = element_rect(fill = 'transparent', colour = NA),
+     legend.background = element_rect(fill = 'transparent', colour = NA),
+     legend.key = element_rect(fill = 'transparent', colour = NA)
+   )
+)
+```
+
+
+## Visual Exploration 
+
+### Is it really there?
+
+a. 
+
+> doubledecker(xtabs(n ~ Dept + Gender + Admit, data = ucba),
+    gp = gpar(fill = c("grey90", "orangered")))
+
+$H_0$ : There is no association between Department, Gender and Admits. That is, the distribution of admits are not influenced by either department or gender."
+
+- To generate null samples for the doubledecker plot, we employ permutation since the data consists of categorical variables (department, gender, and admission status). This involves randomly rearranging the admission status while leaving the department and gender categories unchanged. This breaks any original associations between admission and the other variables, resulting in new datasets with randomized relationships. By repeating this process several times, we can build a collection of null samples, each with a different random assignment of admission status, illustrating how the data behaves under random circumstances.
+
+b. 
+
+ > ggplot(landmine, aes(x, y)) + 
+        geom_point(alpha=0.6)
+
+$H_0$ : There is no spatial association between the x and y coordinates of the landmines. The distribution of landmines across the field is random, with no significant clustering or pattern in their spatial arrangement.
+
+- To generate null samples for this plot, we use simulation due to the continuous nature of the x and y spatial coordinates. The process involves randomly reassigning new x and y coordinates to each landmine within the boundary of the field, which disrupts any existing spatial patterns or clustering and assumes randomness. By repeating this random reassignment of new coordinates multiple times, we create a series of null samples, each with a different random spatial distribution of landmines. This method allows us to assess whether the observed clustering in the original data is statistically significant or could simply be due to random variation.
+
+
+### Can we detect landmine locations?
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+landmine <- read_csv("data/landmine3.csv")
+```
+
+a. **Alternative plots for the data that might help to discover the landmine locations are** 
+
+- Scatter Plot: Displays the spatial distribution of landmines, helping to identify any potential clustering or spatial patterns.
+- Heatmap: Highlights regions with high landmine concentrations by using color gradients to represent density.
+- Contour Plot: Displays lines representing regions of equal density to highlight areas with varying concentrations of landmines.
+- Overlayed Density Plot: Integrates density estimation with spatial data to pinpoint regions where landmine density is particularly high.
+- Hexbin Map: Groups landmine data into hexagonal bins to provide a clearer view of density patterns and clustering.
+- Kernel Density Estimation (KDE) Plot: Offers a smoothed view of landmine distribution to uncover patterns in the spatial density of landmines.
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+# 1. Scatter Plot
+ggplot(landmine, aes(x = x, y = y)) +
+  geom_point(alpha=0.3) +
+  labs(title = "Scatter Plot of Coordinates") 
+
+# 2. Heatmap
+ggplot(landmine, aes(x = x, y = y)) +
+  stat_bin2d(bins = 30) +
+  scale_fill_viridis_c() +
+  labs(title = "Heatmap of Landmine Density") +
+  theme_minimal()
+
+# 3. Contour Plot
+ggplot(landmine, aes(x = x, y = y)) +
+  geom_density_2d() +
+  labs(title = "Contour Plot of Landmine Density") +
+  theme_minimal()
+
+# 4. Overlayed Density Plot
+ggplot(landmine, aes(x, y)) + 
+  geom_point(alpha = 0.4) +  
+  geom_density2d(color = "blue") + 
+  stat_density2d(aes(fill = ..level..), geom = "polygon", alpha = 0.4) +  
+  scale_fill_gradient(low = "yellow", high = "red") +  
+  theme_minimal() + 
+  labs(title = "Overlayed Density Plot of Landmine Locations",
+       x = "X Coordinate",
+       y = "Y Coordinate") +
+  theme_minimal()
+
+# 5. Hexbin Plot
+ggplot(landmine, aes(x = x, y = y)) +
+  stat_bin_hex(bins = 30) +     
+  scale_fill_viridis() +   
+  labs(title = "Hexbin Plot of Landmine Density") +
+  theme_minimal()
+
+
+# 6. KDE Plot 
+ggplot(landmine, aes(x, y)) + 
+  geom_density_2d_filled() +
+  labs(title = "KDE of Landmine Locations") +
+  theme_minimal()
+  
+```
+
+b. **Can we see any potential locations of landmines? **
+
+Yes, we can observe potential locations of landmines from the plots generated above. 
+
+Lets consider the overlayed density plot: In the plot, the red area represents the region with the highest density of points, indicating that the landmines are likely concentrated in that area.
+
+**Observations**:
+
+- The highest density of points (in red) is around the center of the plot. This is the most probable region where landmines are clustered.
+- The dark yellow to orange gradient surrounding the red zone indicates areas with moderately high densities, which are also potential regions with landmine locations, but with lower certainty compared to the red area.
+- The light yellow regions and blue contour lines on the outer parts of the plot show regions of lower density , indicating a lower likelihood of landmines in these areas.
+- Hence, the landmines are most likely concentrated in the red, high-density region at the center of the plot. There could be other smaller clusters in some of the lighter orange areas, but they are less significant compared to the central cluster. To effectively detect landmines, the red and orange zones where the density is highest should be prioritized. 
+
+c. **Line up experiment** 
+
+- Constructing the lineup for Kernel Density Estimation (KDE) Plot
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+set.seed(20190709)
+ggplot(lineup(null_permute('y'), landmine), 
+  aes(x=x, y=y)) +
+  geom_density_2d_filled() +
+  theme_minimal() +
+  facet_wrap(~ .sample) +
+  theme(axis.text=element_blank(),
+        axis.title=element_blank())
+
+# decrypt("o0vr 8ZGZ D3 k5fDGD53 YM")
+```
+- I presented the lineup to 8 of my friends, and all 8 independently identified plot 13 as the most distinctive. Each of them noted that the bright yellow spot at the center of plot 13 made it stand out clearly from the other plots, highlighting it as the most unique in the lineup.
+
+**Computing the p-value**
+
+As true data position is indeed plot 13
+
+- x = 8 ; As 8 people chose the data plot
+- n = 8 ; Total number of people the lineup was shown to is 8
+- Total number of plots in the lineup = 20
+
+We suppose that each person has the same ability to identify the data plot. If we let X be the number of people who correctly identified the data plot in the lineup, then X ~ B(8,p). The visual inference p-value is calculated from testing the hypothesis $h_0$: p = 0.05 vs $H_1$: p != 0.05 , and so P(X = 8) is an extremely small value. The visual inference p-value is extremely small so there is strong evidence to reject the null hypothesis. Hence, it strongly suggests that the data plot is distinguishable from the random plots, meaning it likely contains meaningful features that set it apart from the null distribution and is not just a random occurrence.  
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+nullabor::pvisual(8, 8, 20)
+```
+
+The p-value is $3.9e^{-11}$. 
+
+
+### Exploring the relationships in availability of clean fuel and import/exports of fuel.
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+fuel_data <- read_csv("data/wdi_valid.csv")
+```
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+options(scipen = 999)
+fuel <- fuel_data |>
+        filter(year == "2022")
+```
+
+**Checking the Composition of Data types**
+```{r}
+#| echo: true  
+#| code-fold: true
+
+vis_dat(fuel)
+```
+- As we can observe from the above plot, the data consists of character and numeric datatypes. 
+
+a. **Summary of the distribution of each of the variable**
+
+Plotting the histograms of each variable to assess the distribution. 
+```{r}
+#| echo: true  
+#| code-fold: true
+
+g1 <- ggplot(fuel, aes(x = clean_fuels_all)) +
+  geom_histogram(binwidth = 5, color = "white") 
+
+g2 <- ggplot(fuel, aes(x = clean_fuels_rural)) +
+  geom_histogram(binwidth = 5, color = "white") 
+
+g3 <- ggplot(fuel, aes(x = clean_fuels_urban)) +
+  geom_histogram(binwidth = 5, color = "white") 
+
+g4 <- ggplot(fuel, aes(x = fuel_exports)) +
+  geom_histogram(binwidth = 5, color = "white") 
+
+g5 <- ggplot(fuel, aes(x = fuel_imports)) +
+  geom_histogram(binwidth = 5, color = "white") 
+
+g1 + g2 + g3 + g4 + g5 + plot_layout(ncol = 3)
+```
+From the above plot, we can observe that:
+
+1. **clean_fuels_all** 
+
+- The distribution is not symmetric. It is left skewed as there are more countries with high values close to 100%, fewer countries with low values. 
+- No clear outliers. 
+- Weak multi-modality. There exists a slight peaks around 25% and a proper peak around 100%. 
+- Heaping around 100%, where many countries report high access to clean fuel. 
+- While uneven, the distribution is continuous with no significant gaps. 
+- No implausible values. The values are within possible range. 
+
+2. **clean_fuels_rural**
+
+- The distribution is somewhat uniform with a few peaks. It is more balanced with peaks on both ends. There is no notable skewness.
+- There are no outliers. 
+- It is bi-modal, with peaks around 15% and at 100% indicating two distinct groups. 
+- There are gaps in the 25-50% range, indicating fewer countries with medium levels of rural clean fuel access. 
+- No heaping is present. No sharp accumulation of values at any specific point. 
+- No implausible values. The values are within possible range. 
+  
+3. **clean_fuel_urban**
+
+- The distribution is not symmetric. There are more countries with high values close to 100%, fewer countries with low values. The distribution is left skewed with most countries showing high levels of urban access to clean fuels. 
+- There are outliers towards 0%. While this may not be considered as an extreme outlier. 
+- It is unimodal, with a significant peak at 100%. 
+- There are gaps between 0 - 50% range, suggesting fewer countries have mid-range urban access to clean fuels. 
+- There is considerate heaping around 100%, indicating that many countries have almost full access to clean fuels in urban areas. 
+- There seems to be some discreteness and no implausible values. The values are within possible range. 
+
+4. **fuel_exports**
+
+- The distribution is not symmetric. It is right skewed with the tail extending toward the higher values, as the majority of countries report low percentages of fuel exports, with fewer countries showing higher export levels. 
+- There are outliers towards 100%. 
+- It is unimodal, with a clean peak in the lower range around 0 - 10%.  
+- There are gaps between the 75 - 90% range, where fewer countries report moderate to high fuel exports. 
+- There is some heaping in the lower ranges around 0 - 15%, where many countries have minimal fuel exports. 
+- No implausible values. The values are within possible range.
+
+5. **fuel_imports**
+
+- The distribution is mostly symmetric with data centered around the middle. It largely follows a normal distribution with a central peak and balanced tails. There is no skewness. 
+- The distribution is unimodel, with a prominent peak around 20%. 
+- There are no clear outliers observable in the distribution. 
+- No heaping is evident, the values are distributed relatively evenly.
+- The data is spread continuously without any gaps. 
+- No implausible values. The values are within possible range.
+
+
+**Creating Boxplots to confirm outliers**
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+df_long <- fuel |>
+  pivot_longer(
+    cols = -c(country_code, year),     
+    names_to = "fuel_type",    
+    values_to = "percentage"  
+  )
+```
+
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+ggplot(df_long, aes(x = percentage)) +
+  geom_boxplot() +
+  facet_wrap(~ fuel_type) +  
+  labs(title = "Boxplot of fuel variables",
+       x = "Percentage",
+       y = "Count") + 
+      theme_minimal()
+  
+
+```
+
+- Using the histograms, while we were able to observe outliers only for **clean_fuels_urban** and **fuel_exports**. From the boxplots we can actually detect outliers in **fuel_imports** as well. 
+- Therefore, along with **clean_fuels_urban** and **fuel_exports** , **fuel_imports** variable also has outliers present. 
+
+
+b. **Summary of the relationship between each of the pairs of variables**
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+fuel |> select(-country_code, -year) |> 
+    GGally::ggpairs()
+```
+
+1. **clean_fuels_all and clean_fuels_rural**
+
+- Linear form: There is a clear linear relationship between the two variables.
+- Positive trend: As clean_fuels_all increases, so does clean_fuels_rural.
+- Strong: Corr:0.950, the relationship is very strong with minimal variation around the trend line.
+- Outliers: No noticeable outliers.
+- Heteroskedastic: No evidence of heteroskedasticity.
+- No gaps, clusters, or discreteness: The points are tightly packed along the trend line.
+
+2. **clean_fuels_all and clean_fuels_urban**
+
+- Linear form: The relationship is strongly linear.
+- Positive trend: Both variables increase together.
+- Strong: Corr:0.950, the correlation is strong with minimal variation.
+- Outliers: No significant outliers.
+- Heteroskedastic: No heteroskedasticity.
+- No gaps, clusters, or discreteness: Points closely follow the trend without clustering or gaps.
+
+3. **clean_fuels_all and fuel_exports**
+
+- No trend: There is no visible relationship.
+- No form: The scatterplot is random, showing no linear or nonlinear form.
+- Corr:−0.067, the correlation is extremely weak with significant variation.
+- Outliers: There are a few outliers at the top, where fuel_exports is much higher than the general spread of the data.
+- No heteroskedasticity: The variation is constant throughout the plot.
+- No gaps, clusters, or discreteness: The points are scattered randomly.
+
+4. **clean_fuels_all vs fuel_imports**
+
+- Linear form: A weak linear relationship exists.
+- Negative trend: As clean_fuels_all increases, fuel imports tend to decrease slightly.
+- Weak: Corr:−0.278, the relationship is weak, with significant variation around the trend.
+- Heteroskedastic: No clear signs of heteroskedasticity exists, while there is a slightly more spread at higher levels of clean_fuels_all but the change is minimal.
+- Outliers: There is one significant outlier below the trend line.
+- No gaps or clusters: No noticeable clustering.
+
+5. **clean_fuels_rural and clean_fuels_urban**
+
+- Nonlinear form: The relationship is slightly nonlinear, with a curve.
+- Positive trend: Both variables increase together, though not at a constant rate.
+- Moderate: Corr:0.851, the relationship is moderately strong with noticeable variation.
+- Outliers: Some outliers where clean_fuels_rural is lower than expected, despite high urban access.
+- Heteroskedastic: Slight heteroskedasticity is visible, as the spread of points increases a bit at higher values.
+- No gaps or clusters: No noticeable clustering.
+
+6. **clean_fuels_rural and fuel_exports**
+
+- No trend: No discernible trend exists between the two variables.
+- No form: The points are scattered randomly, no visible pattern either linear or nonlinear.
+- Corr:−0.069, the correlation is very weak with significant variation suggesting no relationship.
+- Outliers: There are outliers at the top, where a few countries have very high fuel exports despite varying levels of rural clean fuel access.
+- No gaps, clusters, or discreteness: The points are spread randomly.
+- No heteroskedasticity: The variation is fairly consistent. 
+
+7. **clean_fuels_rural and fuel_imports**
+
+- Linear form: A weak linear relationship exists.
+- Negative trend: As clean_fuels_rural increases, fuel imports tend to decrease slightly.
+- Weak: Corr:−0.281, the relationship is weak, with considerable variation around the trend.
+- Heteroskedastic: Slight heteroskedasticity is present with more variation in fuel imports at higher values of clean_fuels_rural.
+- Outliers: There are ouliers. 
+- No gaps or clusters: Points are widely spread.
+
+8. **clean_fuels_urban and fuel_exports**
+
+- No trend: There is no clear trend between clean_fuels_urban and fuel_exports.
+- No form: The scatterplot shows random points.
+- Corr:−0.109: the correlation is very weak with significant variation suggesting no relationship.
+- Outliers: There are outliers at the top, where a few countries have very high fuel exports despite typical or high urban access to clean fuels.
+- No gaps, or discreteness: The points are randomly scattered.
+- Clustering: There is significant concentration of points in the lower right corner, where countries have high clean_fuels_urban values but low fuel_exports.
+- No heteroskedasticity: No clear variation in the spread. 
+
+9. **clean_fuels_urban and fuel_imports**
+
+- Linear form: A very weak linear relationship is present.
+- Negative trend: As clean_fuels_urban increases, fuel imports tend to decrease slightly.
+- Weak: Corr:−0.161, the relationship is weak with significant variation.
+- Heteroskedastic: Slight heteroskedasticity is present, as the spread of fuel_imports increases slightly at higher values of clean_fuels_urban.
+- Outliers: There are outliers at the lower end, where some countries have very low fuel imports.
+- No gaps or discreteness. 
+- Clustering: There is considerable concentration of points toward the right side of the plot, where many countries have high urban clean fuel access and moderate to low fuel imports.
+
+10. **fuel_exports and fuel_imports**
+
+- No trend: There is no visible relationship.
+- No form: The scatterplot is random, no visible pattern either linear or nonlinear.
+- Corr:−0.039, the correlation is extremely weak with significant variation suggesting no relationship.
+- Outliers: There are outliers on the right side where a few countries have high fuel exports.
+- No gaps, or discreteness: 
+- Clustering: There is concentration of points in the lower-left corner, where most countries have low fuel exports and low fuel imports.
+- No heteroskedasticity: There is no significant change in the spread of the points across the plot.
+
+c. **Deciding on which variables to transform, and examine the before and after patterns**
+
+**Data Plot before transformation**
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+fuel |> select(-country_code, -year) |> 
+    GGally::ggpairs()
+```
+- Post analysis of the histograms of each variable, given that variables **clean_fuels_all**, **clean_fuels_urban** show considerable left skewness, applying square and cube transformations respectively would be appropriate. 
+- Further, for **fuel_exports** which exhibits right skewness, I am applying log transformation. 
+- **clean_fuels_rural** seems somewhat uniform and is bi-modal, while **fuel_imports** appears to be fairly symmetric and close to normal so based on this, I am not applying transformations for both.
+
+**Applying the transformations**
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+transformed <- fuel |> 
+       mutate(clean_fuels_all_power_2 = (clean_fuels_all)^2, 
+              clean_fuels_rural_nt = clean_fuels_rural, 
+              clean_fuels_urban_power_3 = (clean_fuels_urban)^3, 
+              fuel_exports_log = log1p(fuel_exports), 
+              fuel_imports_nt = fuel_imports)
+
+transformed |> select(-country_code, -year, -clean_fuels_all, -clean_fuels_rural, -clean_fuels_urban, -fuel_exports, -fuel_imports) |> 
+    GGally::ggpairs()
+```
+
+- Post transformation we can observe in **clean_fuels_all** and **clean_fuels_urban**, the skewness is less visible as compared to before. While the transformation has reduced skewness, the plots are not symmetric and nonlinear. 
+- The log transformation on **fuel_exports** has worked really well. The transformation has significantly reduced the skewness and the plot is now roughly symmetric. 
+- In the scatter plots, the transformations have increased variance in few such as **clean_fuels_all** vs **fuel_imports**. 
+
+- Heteroskedasticity in most scatter plots has slightly reduced and we can observe a reduction in skewness as well. That is, in the plots without transformations, few plots have significant concentration of data points in one side of the plot, post transformation this has reduced. 
+- The transformation has helped in increasing linearity and reducing curvature as observed in plots related to **clean_fuels_all** vs **clean_fuels_rural**. The same can be observed in few other plots as well.  
+
+
+d. **Three expected observations from the data**
+
+1. Negative relationship between fuel exports and imports: As countries export more fuel, their need to import fuel typically decreases, leading to a negative relationship between these two variables.
+
+2. Urban areas having better access to clean fuels than rural areas: Due to better infrastructure and access to resources, urban areas generally are expected to have significantly higher access to clean fuels compared to rural areas.
+
+3. Countries with higher economic development are likely to have greater access to clean fuels: Countries with stronger economies and more resources are expected to show better access to clean fuels, as they can invest in cleaner energy infrastructure and technology.
+
+e. **Three things that are most surprising, or unexpected in the data**
+
+1. Simultaneous increases in both fuel exports and imports: In some cases, countries like Brazil and Jamaica have similar levels of of both fuel exports and fuel imports. This is unexpected, as one would assume that increased exports would reduce the need for imports, but it may point to the import and export of different types of fuel.
+
+2. Similar levels of clean fuel access in both urban and  rural areas: In many countries like Algeria and Belarus the access to clean fuels in rural and urban are at par. Moreover, there are instances where rural areas show slightly higher access to clean fuels than urban areas like in Jamaica, which is unexpected since urban regions generally have better infrastructure. 
+
+3. Minimal progress in clean fuel access in some countries: Despite global initiatives, some countries like Benin and Ethiopia still show very low access to clean fuels, especially in rural areas. This disparity is surprising, given the overall progress worldwide.
+
+
+
+### Predicting the winner
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+winner <- read_csv("data/polls_Sep1_2024.csv")
+```
+
+a. **Population Categories**
+
+**Checking the categories in population**
+```{r}
+#| echo: true  
+#| code-fold: true
+
+unique(winner$population)
+```
+
+1. "lv" - Likely Voters
+
+- Likely voters are those considered most probable to cast a ballot in the election. This determination is made based on factors such as their past voting habits, involvement in political matters, and their stated intention to participate. This group represents  a narrower, more focused group compared to registered voters, as they have demonstrated a stronger commitment to actually casting a ballot. 
+
+2. "rv" - Registered Voters
+
+- This group consists of individuals who are registered to vote but might not necessarily participate in the election. Registered voters represent a broader category than likely voters, as they include anyone who has met the legal requirements to vote, regardless of their intention to do so. This group covers a diverse range of people, including regular voters, those who vote occasionally, and others who may not vote at all. It offers a general view of the electorate but may not accurately represent the group that will turn out on Election Day.
+
+3. "a" - Adults 
+
+- This category includes all adults, regardless of whether they are registered or plan to vote. It is the broadest group, capturing opinions from a wide range of people, many of whom may not participate in the election. While it provides a general view of public sentiment, it includes many non-voters, making it less reflective of the actual electorate.
+
+
+**How the results differ**
+
+- Likely Voters: Polls of likely voters are considered the most dependable when predicting election outcomes because they specifically focus on individuals who are highly expected to vote. By narrowing the survey sample to people most likely to show up on Election Day, these polls reduce the uncertainty found in broader population categories, such as registered voters or all adults. As a result, the data from likely voter polls closely aligns with actual voting behavior, making them more accurate in estimating the final results. Additionally, because these voters are more politically engaged, their preferences often reflect more informed and committed choices, further increasing the reliability of the polling outcome.
+
+- Registered Voters: Polls of registered voters tend to be less accurate in predicting election results because they include people who are eligible to vote but might not turn out on Election Day. This group consists of individuals with varying levels of political involvement, from those highly motivated to vote to those who are less inclined to do so. As a result, these polls offer a broader view of public opinion but often misjudge actual voter turnout. Since registered voter polls capture opinions from people who may not be fully committed to voting, the results can change as the election draws nearer. This makes these polls less reliable when compared to likely voter polls, as the surveyed preferences may not convert into actual votes. While they provide a broader perspective, the chances of their results differing from the final outcome are higher.
+
+- Adults: Polls of all adults provide a broader perspective on public opinion, capturing the views of both voters and non-voters. However, this makes them less accurate for predicting election outcomes, as many respondents may not actually vote. These polls can reflect general societal attitudes or preferences, but they may overrepresent groups that are less likely to participate, such as younger adults or those less politically engaged. As a result, while they offer valuable insights into the overall mood of the public, they are not a reliable measure of how the electorate will behave on Election Day, making them less useful for predicting actual results compared to polls focused on likely or registered voters.
+
+b. **Pollster Bias**
+
+**Examining the average results for Trump and Harris by each Pollster** 
+
+```{r}
+#| echo: true  
+#| code-fold: true
+
+# Average results for Harris and Trump by pollster
+pollster_bias <- winner |>
+  group_by(pollster) |>
+  summarise(Harris = mean(Harris, na.rm = TRUE),
+            Trump = mean(Trump, na.rm = TRUE)) |>
+  pivot_longer(cols = c(Harris, Trump), names_to = "Candidate", values_to = "Average_Result")
+
+
+ggplot(pollster_bias, aes(x = pollster, y = Average_Result, fill = Candidate)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +  
+  labs(title = "Average Results for Harris and Trump by Pollster",
+       x = "Pollster", y = "Average Result (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 10)) +  
+  scale_fill_manual(values = c("blue", "red")) +
+  theme(legend.position = "right") 
+
+
+```
+From the bar plot, it seems that most pollsters report relatively balanced results for Harris and Trump. However, there are a few observations:
+
+- Pollsters showing larger differences: Some pollsters, such as Change Research and Outward Intelligence, appear to report noticeably higher values for Harris compared to Trump. Conversely, pollsters like Bullfinch and Fabrizio/GBAO seem to report higher results for Trump compared to Harris.
+- The majority of pollsters display bars for Harris and Trump that are quite close in height, which suggests no strong favoritism from most pollsters. However, the few mentioned exceptions with more significant gaps could indicate some level of bias toward one candidate.
+
+
+**Examining the transparency score for each Pollster**
+```{r}
+#| echo: true  
+#| code-fold: true
+
+
+#Average transparency score for each pollster
+pollster_transparency <- winner |>
+  group_by(pollster) |>
+  summarise(avg_transparency = mean(transparency_score, na.rm = TRUE))
+
+ggplot(pollster_transparency, aes(x = pollster, y = avg_transparency, fill = avg_transparency)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Transparency Score by Pollster",
+       x = "Pollster",
+       y = "Avg Transparency Score") +
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))  
+
+```
+
+From the Transparency Plot, we can make the following observations: 
+
+- Pollsters with high transparency score: Pollsters like Marist, Kaplan Strategies, Ipsos, and Emerson, with average transparency scores above 8, tend to be more open about their methodologies and data collection practices. This openness suggests that their results are more reliable and balanced. Typically, pollsters with higher transparency scores are less prone to significant bias, as transparency often aligns with greater credibility in polling.
+
+- Pollsters with low transparency score: Pollsters like Big Village, Civics, Clarity, and Change Research, with transparency scores around 4 or lower, often demonstrate less openness regarding their polling methodologies, which can raise concerns about potential bias. Low transparency typically makes it harder to assess the reliability of their results, increasing the likelihood of bias due to the lack of visibility into their methods and data sources.
+
+- Pollsters with mid level transparency score: Pollsters with transparency scores between 5 and 7, show some openness about their methodologies. This partial transparency can raise questions about their credibility and potential biases, highlighting the need for greater clarity to build trust in their results.
+
+
+**Based on the average result by pollster and transparency scores we can make the following observations:** 
+
+- Change Research, Bullfinch, and Fabrizio/GBAO all display low transparency scores and noticeable bias—Change Research toward Harris, and both Bullfinch and Fabrizio/GBAO toward Trump. This combination of low transparency and bias strongly suggests that their polling results may not be fully impartial or reliable.
+
+- Outward Intelligence shows moderate transparency, but given their bias toward Harris, their results should still be scrutinized. While their transparency is not as low as Change Research or Bullfinch, the bias is still noticeable.
+
+- Similar observations can be made for other pollsters showing difference in average result for Trump and Harris. 
+
+- Hence, Pollsters with low transparency and visible bias in their results are more likely to be influenced by unreliable methods. Change Research, Bullfinch, and Fabrizio/GBAO fit this pattern, suggesting a closer examination in their polling outcomes. Higher transparency generally correlates with more reliable results, so focusing on pollsters with high transparency scores might provide more balanced and credible insights.
+
+
+
+
+## Generative AI analysis
+
+- I used ChatGPT to discover new alternative plots like Kernel Density Estimation Plot and Overlayed Density Plot and understand more about these plots. I also used it to understand functions like "doubledecker" and "xtabs". 
+
+- I was able to get information on websites where I could read about the population categories in US election data. Further, I used it to understand what demographics made up these categories. 
+
+- I also used it to understand the power of ladder transformations. Lastly, it helped me in formatting ggplot labels in the right way for the graphs made to check pollster bias.
+
+
+
+
+

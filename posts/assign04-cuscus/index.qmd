@@ -1,0 +1,1031 @@
+---
+title: "Do different sensors at the same location report the same values?"
+author: "Pooja Rajendran Raju & Thi My Ngoc Tran"
+date: "09-24-2024"
+output: 
+  html:
+    code-fold: true
+categories: [Group Project]
+---
+
+```{r}
+#| echo: false
+# Set up chunk for all slides
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.height = 4,
+  fig.align = "center",
+  out.width = "100%",
+  code.line.numbers = FALSE,
+  fig.retina = 4,
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  cache = FALSE,
+  dev.args = list(pointsize = 11)
+)
+```
+
+```{r}
+#| echo: false
+# Load libraries
+library(tidyverse)
+library(readxl)
+library(visdat)
+library(naniar)
+library(imputeTS)
+library(rvest)
+library(conflicted)
+#library(airpurifyr)
+library(kableExtra)
+library(sugrrants)
+library(ggplot2)
+library(patchwork)
+library(GGally)
+library(skimr)
+library(tsibble)
+
+conflicts_prefer(dplyr::filter)
+conflicts_prefer(dplyr::select)
+conflicts_prefer(dplyr::slice)
+
+# Plot options and themes
+options(
+  digits = 2,
+  width = 60,
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis",
+  ggplot2.discrete.colour = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442"),
+  ggplot2.discrete.fill = c("#D55E00", "#0072B2", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442")
+)
+
+theme_set(theme_bw(base_size = 14) +
+   theme(
+     aspect.ratio = 1,
+     plot.background = element_rect(fill = 'transparent', colour = NA),
+     plot.title.position = "plot",
+     plot.title = element_text(size = 24),
+     panel.background = element_rect(fill = 'transparent', colour = NA),
+     legend.background = element_rect(fill = 'transparent', colour = NA),
+     legend.key = element_rect(fill = 'transparent', colour = NA)
+   )
+)
+```
+
+## Introduction
+
+<!-- 
+Write an introductory paragraph explaining what the measurements of `pm25`, `pm10`, `so2`, `o3`, `no2`, `co` are and how they relate to problematic air.
+-->
+
+Pollutants with the strongest evidence for public health concern include particulate matter (PM), sulfur dioxide (SO2), ozone (O3), nitrogen dioxide (NO2) and carbon monoxide (CO)
+
+- *Particulate Matter* (`pm25`, `pm10`): consists of tiny particles in the air that can be inhaled. `pm25` refers to particles smaller than 2.5 micrometers, while `pm10` includes larger particles up to 10 micrometers. These particles originate from various sources, such as traffic emissions, industrial activities, construction sites, and natural sources like pollen and dust. Because they are small enough to penetrate deep into the lungs and even enter the bloodstream, high concentrations of `pm25`, `pm10` are associated with poor air quality and can lead to serious health issues, including respiratory and cardiovascular problems.
+
+- *Sulfur dioxide* (`so2`) is a colorless gas that is readily soluble in water. It mainly comes from the combustion of fossil fuels for domestic heating, industries and power generation. Exposure to SO2 is associated with asthma hospital admissions and emergency room visits.
+
+- *Ozone* (`o3`) is a key ingredient in smog, created when sunlight reacts with pollutants like volatile organic compounds, carbon monoxide, and nitrogen oxides from vehicles and industries. Because it forms in sunlight, ozone levels are often highest on sunny days. Additionally, some household devices, like portable air cleaners, can also produce ozone. Exposure to excessive ozone can cause problems breathing, trigger asthma, reduce lung function and lead to lung disease. 
+
+- *Nitrogen dioxide* (`no2`) is a reddish-brown gas that is soluble in water, and a strong oxidant. It mainly comes from burning fuels in heating, transportation, industry, and power generation, as well as from household appliances like furnaces and gas stoves. Exposure to NO₂ can irritate the airways and worsen respiratory diseases. It also contributes to ozone formation, linking it to asthma and other respiratory issues.
+
+- *Carbon monoxide* (`co`) is a colorless, odorless gas produced from the incomplete burning of fuels like wood, petrol, coal, and natural gas. The main source of CO in the air is motor vehicles. Carbon monoxide diffuses across the lung tissues and into the bloodstream, making it difficult for the body’s cells to bind to oxygen. This lack of oxygen damages tissues and cells. Exposure to carbon monoxide can cause difficulties breathing, exhaustion, dizziness, and other flu-like symptoms. Exposure to high levels of carbon monoxide can be deadly.
+
+**Do different sensors at the same location report the same values?**
+
+The question being assessed focuses on analyzing if sensors placed within close proximity report same values. Analyzing data from these varied suburban and urban sensors helps to determine if air quality measurements are consistent across these distinct environments or if local geographic and environmental factors lead to significant differences in reported values. Such insights will clarify how air quality varies across coastal and urban settings, helping to assess whether sensor readings can be directly compared or if adjustments are needed for accurate regional air quality assessments. This can improve the relevance of public health responses and policies specific to each area’s unique conditions.
+
+
+**Expectations**:
+
+- Sensor data from locations like Melbourne are expected to show higher pollution levels compared to areas like Geelong South, which is closer to the coast.
+
+- A positive correlation is anticipated between pollutant levels, where an increase in one pollutant is likely to correspond with increases in others.
+
+- Weekday and weekend trends in pollutant levels are expected to differ, potentially reflecting variations in daily activities and emissions.
+
+**Limitations**:
+
+- Not all locations have sensors that measure every pollutant. Most sensors capture data for only two pollutants, with exceptions like Alphington and Geelong South, which measure a broader range.
+
+- There may be significant missing data for certain pollutants, which could affect analysis outcomes.
+
+- The varying scales and units of pollutants may complicate direct comparisons.
+
+- As the data originates from third-party organizations and government agencies, there could be occasional concerns about data accuracy and consistency.
+
+
+## Data description
+
+
+**Data Source**
+
+OpenAQ is an open-source platform that aggregates real-time air quality data from governmental and research sources worldwide. Using sensors managed by environmental agencies, OpenAQ collects pollutant measurements such as PM2.5, ozone, and nitrogen dioxide. The data is standardized and made accessible on their platform, enabling researchers, policymakers, and the public to monitor air quality, track trends, and support efforts to enhance environmental health globally.
+
+**License**
+
+OpenAQ provides air quality data aggregated from multiple sources, each with its own licensing terms. While some data might be available under open licenses such as Creative Commons (e.g., CC0), others may require attribution, restrict commercial use, or have specific conditions as determined by the original providers. OpenAQ includes these license details to ensure users comply with any necessary terms when accessing or using the data.
+
+**Data**
+
+This dataset captures air quality measurements across various locations in Australia, focusing on pollutant levels such as particulate matter (e.g., PM10, PM2.5) over time. It provides spatial and temporal data, including the concentration of pollutants, the geographic location of sampling sites, and time-stamps for when each measurement was recorded. The data allows for a detailed analysis of air quality trends, helping to assess pollution levels and their potential impacts on public health. By studying these pollutant concentrations over time and location, it becomes possible to identify pollution hot spots, track seasonal variations, and evaluate overall compliance with air quality standards.
+
+The dataset contains 36,326 rows and 9 columns. The variables in the dataset are as follows: 
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+data_description <- data.frame(
+  Variable = c("location_id", "location", "parameter", "value", "date_utc", "unit", "lat", "long", "country"),
+  Description = c(
+    "Unique identifier for each location.",
+    "Name of the location where measurements were taken.",
+    "Type of pollutant measured: PM10, PM25, SO2, NO2, CO, O3",
+    "Recorded value of the pollutant.",
+    "Timestamp in UTC for the recorded measurement",
+    "Measurement unit, primarily µg/m³ and ppm",
+    "Latitude co-ordinates for the location",
+    "Longitude co-ordinates for the location",
+    "Country code (AU for all records)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+kable(data_description, caption = "Description of Data Variables")
+
+```
+
+**Data Checking and Cleaning Methods** 
+
+- **Data Type Validation**: - It is necessary to ensure that each column has the correct data type. For example, date_utc should be in datetime format for time series analysis. 
+- **Handling Missing or Null values**: Although no null values are detected, there may still be missing or erroneous data entries. It’s essential to review columns like value for potential issues like zero or extreme values that may indicate faulty measurements. Further, we might be able to discover missing values once the data is transformed into tidy form. 
+- **Duplicate Records**: Given that location_id and date_utc might uniquely identify each record, checking duplicates based on these columns to prevent redundant data.
+- **Outlier Detection**: The value column could contain outliers. Outliers could be identified using statistical methods like IQR analysis. This is particularly important in environmental data to avoid skewed analyses.
+- **Unit Consistency**: Ensure all entries use consistent units for accurate analysis.
+- **Location Summary**: Check the number of observations at each location to determine if it is consistent for the selected time period. 
+- **Parameter Distribution**: Check for consistency in number of parameters measured at each location. 
+
+<!--
+Download the data you need to answer your questions. Try downloading a small amount of data first. (Make sure you save a copy on your repo - assuming files size is not too large - and *turn off the code chunk that does the download*.) To download all the data you need might require downloading in chunks, like a week or two at a time. Your data needs to contain all 6 pollutants. The data that you work with needs to have **at least**:
+
+    - two locations
+    - two months
+    - all six pollutants, with a sufficient number of not missings to be able to do some multivariate analysis of at least four. (See the next step to help manage missing values.)
+-->
+
+```{r, eval = FALSE}
+#| echo: true 
+#| code-fold: true
+
+# download data and save as csv file
+#install.packages("devtools")
+#devtools::install_github("numbats/airpurifyr")
+#set_openaq_api_key("")
+
+#melbourne <- get_measurements_for_location(country = "AU", 
+#                                           city = "Melbourne",
+#                                           date_from =as.Date("2024-07-01"), 
+#                                           date_to = as.Date("2024-09-01"))
+
+#geelong <- get_measurements_for_location(country = "AU", 
+#                                       city = "Geelong",
+#                                       date_from = as.Date("2024-07-01"), 
+#                                       date_to = as.Date("2024-09-01"))
+
+
+#write.csv(melbourne, file = "melbourne.csv", row.names = FALSE)
+#write.csv(geelong, file = "geelong.csv", row.names = FALSE)
+
+
+#combine data
+#options(scipen = 999)
+#original_df <- bind_rows(melbourne, geelong)
+#write.csv(original_df, file = "data/original_df.csv", row.names = FALSE)
+
+```
+
+## Initial data analysis
+
+<!--
+4. You will need to aggregate the data at some level, because the measurements are like time stamps, that pollutants are not recorded at the same instant. Aggregating to hourly seems to provide reasonably complete data.
+
+5. Pre-process the data as needed, and do necessary quality control checks of the data. We don't recommend imputing missings, at least do it sparingly, but exploring the missingness is very important.
+
+-->
+
+#### Load data
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+#Load data
+original_df <- read_csv("data/original_df.csv")
+
+```
+
+
+**Population**
+
+- The population of interest in this context would be all sensors deployed at the same location that measure the same type of pollutants over a given period of time. 
+
+#### Data Screening
+
+**Evaluating Data Type Composition**
+```{r}
+#| echo: true 
+#| code-fold: true
+
+vis_dat(original_df)
+```
+
+- Understanding the composition of variable types in the dataset using _'vis_dat'_. Here, the dataset primarily comprises of character type variables, numeric variables, POSIXct and POSIXt variables used to efficiently represent date-time objects. 
+- Based on observing the dataset, it appears that not all sensors measure all pollutants, hence once in tidy format we will be able to explore the missing values.
+
+**Checking for Duplicate Rows**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+# Detecting duplicate rows
+sum(duplicated(original_df))
+```
+
+**Checking Unit Consistency** 
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+unique(original_df$unit)
+```
+
+**Evaluating the structure of Data** 
+
+```{r}
+glimpse(original_df)
+```
+
+- The glimpse function provides an overview of a dataset by displaying each variable's name, its data type, and a sample of the initial values. This allows for a quick examination of the dataset's structure, making it easier to confirm data types and gain an immediate understanding of the data.
+
+**Creating a location Summary**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+location_summary <- original_df |>
+  group_by(location) |>
+  summarise(n = n())
+
+kable(location_summary, 
+      caption = "Location Summary") |>
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Number of parameters in each location
+parameter_count <- original_df |>
+  group_by(location) |> 
+  summarise(no_parameters = n_distinct(parameter))
+
+kable(parameter_count, 
+      caption = "Number of Parameters in each Location") |>
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+- Based on the location summary, we observe inconsistencies in sensor readings across the dataset's time period. Alphington and Geelong South each have approximately 8,000 observations, while Dandenong records around 6,000, with other locations having significantly fewer observations. This suggests that not all sensors capture data for every pollutant. Further, on exploring the number of parameters detected at each sensor location we can confirm that only Alphington and Geelong South detect all six pollutants. Hence, filtering the data to include locations with sufficient observations for all 6 pollutants. 
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+#Filter data of "Alphington" and "Geelong South" in July and August:
+alp_gee <- original_df |>
+  filter(location %in% c("Alphington", "Geelong South"), 
+         date_utc != as.POSIXct("2024-09-01 00:00:00", tz = "UTC")) |>
+  arrange(date_utc)
+```
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+#Converting data to wider form to explore missingness 
+data_wider <- alp_gee |> 
+             select(-unit)  |>
+           pivot_wider(names_from = parameter,
+                       values_from = value)
+```
+
+#### Missing Data Evaluation
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+# Calculating the missing percentage for each location
+missing_summary <- data_wider |> 
+  summarise(across(everything(), ~ sum(is.na(.)) / n() *100)) |> 
+  select( -location, -location_id, -date_utc, -lat, -long, -country) |> 
+  pivot_longer(cols = everything(),
+               names_to = "variable", 
+               values_to = "missing_percentage") 
+
+#Plotting the missing percentage for each variable
+ggplot(missing_summary, 
+       aes(x = reorder(variable,-missing_percentage), 
+           y = missing_percentage))  +
+  geom_segment(aes(xend = variable, yend = 0), color = "blue") +
+  geom_point(size = 2, color = "black") +
+  coord_flip() +
+  labs(title = "Missing Data Percentage",
+       x = "Pollutant",
+       y = "Missing Percentage (%)") +
+  theme_minimal()
+```
+
+- Based on the above plot, we can infer that the data is relatively complete with minimal missing values except for `no2`, which shows around 26% missing values. Further, exploring the missing data by location. 
+
+**Exploring Missing Data by Location**
+```{r}
+#| echo: true 
+#| code-fold: true
+
+# Calculating the missing percentage for each location
+missing_summary <- data_wider |> 
+  filter(location == "Alphington") |>
+  summarise(across(everything(), ~ sum(is.na(.)) / n() *100)) |> 
+  select( -location, -location_id, -date_utc, -lat, -long, -country) |> 
+  pivot_longer(cols = everything(),
+               names_to = "variable", 
+               values_to = "missing_percentage") 
+
+#Plotting the missing percentage for each variable
+p1 <- ggplot(missing_summary, 
+       aes(x = reorder(variable,-missing_percentage), 
+           y = missing_percentage))  +
+  geom_segment(aes(xend = variable, yend = 0), color = "blue") +
+  geom_point(size = 2, color = "black") +
+  coord_flip() +
+  labs(title = "Missing Data Percentage - Alphington",
+       x = "Pollutant",
+       y = "Missing Percentage (%)") +
+  theme_minimal()
+
+# Calculating the missing percentage for each location
+missing_summary <- data_wider |> 
+  filter(location == "Geelong South") |>
+  summarise(across(everything(), ~ sum(is.na(.)) / n() *100)) |> 
+  select( -location, -location_id, -date_utc, -lat, -long, -country) |> 
+  pivot_longer(cols = everything(),
+               names_to = "variable", 
+               values_to = "missing_percentage") 
+
+#Plotting the missing percentage for each variable
+p2 <- ggplot(missing_summary, 
+       aes(x = reorder(variable,-missing_percentage), 
+           y = missing_percentage))  +
+  geom_segment(aes(xend = variable, yend = 0), color = "blue") +
+  geom_point(size = 2, color = "black") +
+  coord_flip() +
+  labs(title = "Missing Data Percentage - Geelong South",
+       x = "Pollutant",
+       y = "Missing Percentage (%)") +
+  theme_minimal()
+
+p1 / p2
+```
+
+
+- The data from Alphington is nearly complete, with less than 5% of values missing. In contrast, Geelong South has relatively complete data for most pollutants, with missing values ranging between 0% and 5%. However, for `pm10`, approximately 10% of data is missing, and for `no2`, there is a significant gap with around 45% of data missing.  
+
+
+**Specific Date Analysis of Missing Data**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+
+alp_gee_ts <- data_wider |>
+  as_tsibble(key = location, index = date_utc)
+
+alp <- alp_gee_ts|> 
+  filter(location == "Alphington")
+
+count_gaps(alp)
+
+
+gee <- alp_gee_ts |> 
+  filter(location == "Geelong South") 
+
+count_gaps(gee)
+ 
+
+```
+
+Between July and August 2024, both Alphington and Geelong South experienced several instances of missing data, with some overlaps. Both locations had a one-hour gap on July 3rd at 13:00 and a 10-hour gap from July 18th at 22:00 to July 19th at 07:00. Additionally, Alphington had gaps on July 15th at 05:00 and August 15th at 10:00, while Geelong South also missed data on August 15th at 10:00. Geelong South experienced a unique three-hour gap on August 22nd from 01:00 to 03:00.
+
+**Analysis of Possible Factors Contributing to Missing Data**
+
+Based on information from the OpenAQ documentation and GitHub resources, potential causes of data gaps across different sensor locations may include: 
+
+1. Monitoring stations typically measure specific pollutants based on local priorities, regulations, and resources, leading to incomplete data coverage for certain pollutants across regions.
+
+2. OpenAQ uses both reference monitors and low-cost sensors. While low-cost sensors expand coverage, they may inconsistently measure pollutants like PM10 due to calibration and environmental factors, resulting in data gaps.
+
+3. OpenAQ collects data from various government and third-party sources, each with different reporting practices. Changes in data-sharing agreements, or provider disruptions can cause temporary data gaps for certain pollutants.
+
+4. Technical disruptions, such as routine sensor maintenance, calibration, network outages, power failures, and equipment malfunctions, can temporarily pause data transmission, leading to missing data.
+
+While the above offer a general overview of data handling and reasons for data gaps on the OpenAQ platform. For specific details on missing data, consulting the relevant data provider or monitoring station is often necessary, as they may have insights into the cause.
+
+
+#### Detecting Outliers
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+ggplot(alp_gee |> filter(parameter == c("pm10", "pm25")) , aes(x = value)) +      geom_boxplot() + 
+  facet_wrap(~parameter ) +
+  theme_minimal()
+```
+
+From the boxplots we can deduce the following:
+
+- `pm10` has a wider spread and greater variability compared to `pm25`. Both pollutants have a narrow IQR, indicating low variability within the central 50% of values, with most data concentrated near the median. However, both also have numerous outliers, which are more extreme in `pm10` The spike in `pm10` levels may result from events like dust storms, construction, or excessive road dust, while the elevated `pm25` levels likely stem from combustion sources such as vehicle exhaust during peak traffic hours.
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+ggplot(alp_gee |> filter(!(parameter %in% c("pm10", "pm25"))), aes(x = value)) + 
+       geom_boxplot() + 
+  facet_wrap(~parameter, scales = "free_x" ) +
+  theme_minimal()
+```
+
+
+- The `co` boxplot shows a narrow IQR, indicating low variability within the central 50% of data. The short whiskers and numerous outliers (up to about 1.5 ppm) suggest a concentrated distribution around the median but substantial variability in extreme values, suggesting occasional spikes in `co` concentration.
+
+- The `no2` boxplot reveals a narrow IQR, signifying low variability within the central 50% of data. The whiskers extend just beyond the box, with outliers reaching up to 0.06 ppm, indicating occasional peaks in `no2` concentrations and moderate variability in extreme values, though not as pronounced as for `co`.
+
+- The `o3` boxplot shows a relatively wide IQR, indicating moderate variability within the central 50% of the data. The median is slightly off-center, and the whiskers are slightly unequal, suggesting a slight asymmetry in the distribution. The absence of outliers indicates that `o3` values are spread consistently within the range, with no extreme deviations, leading to a stable variability overall.
+
+- The `so2` boxplot shows a narrow IQR, similar to `co` and `no2`, signifying a low variability in the central 50% of values. The short whiskers and presence of outliers up to 0.008 ppm suggest a concentrated distribution around the median, with occasional high values adding to overall variability.
+
+- The outliers in each of the pollutant may be attributed to factors like emissions from combustion, peak traffic periods, seasonal variations (holiday, non-holiday period), weather conditions like high humidity, natural events like wildfires or could possibly be anomalies in measurements. These would provide additional perspective while doing further analysis and best to retain them.
+
+
+**Summary mean/median of each measurements**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+options(scipen = 999)
+
+skim_summary <- data_wider |> 
+  skim(pm25, pm10, so2, o3, no2, co) 
+
+skim_summary <- skim_summary |> 
+  select(-c(n_missing, numeric.hist, complete_rate))
+  
+
+skim_summary
+
+```
+
+
+Overall, `pm25` has an average concentration of 6.82 µg/m³, with a standard deviation of 6.96, indicating variability in measurements. The minimum value for `pm25` is 0.00 µg/m³, while the maximum reaches 63.01 µg/m³. Additionally, `pm10` shows a highest mean concentration at 19.83 µg/m³ and a wide range, with a maximum of 188.09 µg/m³. The other pollutants, such as `so2`, `o3`, `no2`, and `co`, show lower mean concentrations. Based on the max and min (p0 and p100 respectively) values for each pollutant, the values are with probable range. 
+
+
+
+## Exploratory data analysis
+
+<!--
+Make an exploratory analysis of the data, to learn if there is anything unusual or unexpected in the data. Your exploration needs to look at relationships between the different pollutants, and temporal patterns. 
+-->
+
+
+#### Distribution and Correlations
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+ggscatmat(data_wider, columns=7:12)
+
+```
+
+All five sensors `pm25`, `pm10`, `so2`, `no2`, and `co` exhibit right-skewed distributions, while `o3` shows a multimodal distribution. Additionally, there is a strong positive correlation between `pm25` and `co`, with a correlation coefficient of 0.79, and a moderate positive correlation between `no2` and `co`, with a coefficient of 0.65. While there are negative relationships between `o3` and `no2`,  `o3` and `co` with correlations are -0.78 and -0.7.
+
+#### General Analysis - Overview 
+
+```{r}
+#| echo: true 
+#| code-fold: true
+#overview
+alp_gee |> filter(parameter %in% c("pm25", "pm10")) |>
+  ggplot(aes(x=date_utc, y=value, color= parameter)) + 
+  geom_point(alpha = 0.4) +
+  theme_minimal()
+```
+
+
+Overall, based on the hourly concentrations of `pm10` and `pm25`during July and August 2024 in Alphington and Geelong South, it is evident that PM₁₀ levels are almost higher than `pm25`.
+
+Notably, `pm10` concentrations exceed 75 µg/m³ at times, with several instances reaching or surpassing 150 µg/m³, indicating significant variability. In contrast, `pm25` concentrations remain below 75 µg/m³ and exhibit less fluctuation, with a narrower range of variation compared to `pm10`.
+
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+alp_gee |> filter(!(parameter %in% c("pm25", "pm10"))) |>
+  ggplot(aes(x=date_utc, y=value, color= parameter)) + 
+  geom_point(alpha = 0.6) +
+  theme_minimal()
+
+```
+
+Among the four parameters `co`, `no2`, `o3` and `so2` measured during July and August 2024 in Alphington and Geelong South, `co` stands out with the highest concentration and significant fluctuations, ranging from around 0.1 to as high as 1.5 ppm. This wide range indicates notable variability in `co` levels over time. 
+
+In contrast, `no2`, `o3` and `so2` concentrations are considerably lower, all remaining below 0.1 ppm throughout the period. Despite their lower levels, these parameters will be analyzed in more detail below to assess whether they show any noticeable fluctuations. 
+
+
+#### Detailed Parameter Analysis
+
+
+##### 1. **`pm25`** 
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+alp_gee |> filter(parameter == "pm25") |>
+  ggplot(aes(x=date_utc, y=value, color=location)) + 
+  geom_point(alpha = 0.6) +
+  facet_wrap(~location) +
+  labs(title = "Hourly pm2.5 Concentration",
+       y = "pm2.5")+
+  scale_color_discrete(guide = "none")+
+  theme_minimal()
+```
+
+
+- `pm25` concentrations in both Alphington and Geelong South show similar levels on certain days, around 10 µg/m³. 
+
+- Both locations have peaks at the beginning of July and August, though the highest concentrations in Alphington are generally higher than in Geelong South, reaching approximately 60 µg/m³ compared to around 40 µg/m³. 
+
+- A more detailed look at the concentration levels in both locations is provided in the calendar plot below.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+aggregate_data <- data_wider |>
+  mutate(date = as.Date(date_utc)) |>
+  group_by(date, location) |>
+  summarise(across(c("pm25", "pm10", "so2", "o3", "no2", "co"), mean, na.rm = TRUE)) 
+
+```
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+aggregate_data |>  
+  ggplot(aes(x = date, y = pm25, color = location)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Daily Average pm2.5 Concentration",
+       x = "Date",
+       y = "Average Concentration") +
+  theme_minimal()
+
+```
+
+- Similar to the hourly concentrations, the daily average `pm25` concentrations in both locations reveal a clearer trend, with peaks at the beginning of each month followed by a gradual decrease. 
+
+- Additionally, the average concentration in Alphington is consistently higher than in Geelong South.
+
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+calendar <-  alp_gee |>
+  mutate(date = as.Date(date_utc),
+         hour = hour(date_utc)) |>
+  arrange(date)
+ 
+#"pm25" "pm10" "so2"  "o3"   "no2"  "co"
+# "Alphington" and "Geelong South" 
+
+calendar |> filter(parameter == "pm25") |>
+ggplot() +   
+    geom_line(aes(x=hour, y=value,color=location)) +
+    facet_calendar(~date) +
+  theme(axis.title = element_blank(),
+        axis.text.y = element_blank(),
+        aspect.ratio = 0.5)+
+  ggtitle("Calendar of pm2.5 Concentration for Alphington & Geelong South") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+- There is no clear seasonal pattern in `pm25` concentrations. However, during the first week of July and August, the concentrations fluctuate more widely compared to the rest. 
+
+- Notably, on July 4, July 31, and August 3, `pm25` levels in Alphington are significantly higher than in Geelong South, ranging between 20 and 60 µg/m³, while Geelong South remains around or below 20 µg/m³. 
+
+- In contrast, on August 1, Geelong South shows higher concentrations than in Alphington, with a peak of 40 µg/m³ compared to Alphington’s peak of around 20 µg/m³.
+
+
+##### 2. **`pm10`**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+alp_gee |> filter(parameter == "pm10") |>
+  ggplot(aes(x=date_utc, y=value, color=location)) + 
+  geom_point(alpha = 0.6) +
+  facet_wrap(~location) +
+  labs(title = "Hourly pm10 Concentration",
+       y = "pm10")+
+  scale_color_discrete(guide = "none")+
+  theme_minimal()
+```
+
+There is missing data for Geelong South at the beginning of July. While `pm25` concentrations are generally higher in Alphington, `pm10` levels in Geelong South fluctuate more widely. Geelong South experiences peaks above 100 µg/m³, whereas the highest levels in Alphington are around 60 µg/m³.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+aggregate_data |>  
+  ggplot(aes(x = date, y = pm10, color = location)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Daily Average pm10 Concentration",
+       x = "Date",
+       y = "Average Concentration") +
+  theme_minimal()
+
+```
+
+- There are different trends in the average daily `pm10` concentrations between the 2 locations at the beginning of July. 
+
+- In Geelong South, concentrations increase from the start of the month, while in Alphington they decrease. 
+
+- However, after mid-July, both locations follow a similar trend. One reason for this difference may be the missing data at the beginning of July in Geelong South.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+calendar |> filter(parameter == "pm10") |>
+ggplot() +   
+    geom_line(aes(x=hour, y=value,color=location)) +
+    facet_calendar(~date) +
+  theme(axis.title = element_blank(),
+        axis.text.y = element_blank(),
+        aspect.ratio = 0.5)+
+  ggtitle("Calendar of pm10 Concentration for Alphington & Geelong South")+
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+- There is no clear seasonal pattern in `pm10` concentrations. Throughout July and August, levels in Geelong South are generally higher than those in Alphington. 
+
+- Specifically, at the beginning of August, concentrations in Geelong South fluctuate over a wider range compared to Alphington. Additionally, there are some days when the highest levels occur around midnight. 
+
+- Moreover, on August 18 and 22, for instance, the concentrations peak around 100 µg/m³, while daytime levels are significantly lower, averaging around 25 µg/m³ or below.
+
+
+##### 3. **`so2`**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+alp_gee |> filter(parameter == "so2") |>
+  ggplot(aes(x=date_utc, y=value, color=location)) + 
+  geom_point(alpha = 0.6) +
+  facet_wrap(~location)+
+  labs(title = "Hourly so2 Concentration",
+       y = "so2")+
+  scale_color_discrete(guide = "none")+
+  theme_minimal()
+```
+
+- Most `so2` concentrations in both locations fall within the range of 0 to 0.001 ppm. 
+
+- The highest levels in Geelong South exceed those in Alphington, with concentrations reaching above 0.002 ppm, while Alphington's highest levels are at 0.002 ppm.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+aggregate_data |>  
+  ggplot(aes(x = date, y = so2, color = location)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Daily Average so2 Concentration",
+       x = "Date",
+       y = "Average Concentration") +
+  theme_minimal()
+
+```
+
+- There are distinct trends in the average daily `so2` concentrations between the two locations. 
+
+- Geelong experiences peaks at the beginning of both July and August, while levels in Alphington show less fluctuation and gradually decrease after mid-August.
+
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+calendar |> filter(parameter == "so2") |>
+ggplot() +   
+    geom_line(aes(x=hour, y=value,color=location)) +
+    facet_calendar(~date) +
+  theme(axis.title = element_blank(),
+        axis.text.y = element_blank(),
+        aspect.ratio = 0.5)+
+  ggtitle("Calendar of so2 Concentration for Alphington & Geelong South")+
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+
+- There is no clear seasonal pattern in the calendar plot, and the `so2` concentrations fluctuate within a narrow range on most days in both locations. 
+
+- However, a few days show significant differences between the two locations, indicating short-term increases in concentration. 
+
+- For instance, on July 3 and August 12, `so2` levels in Geelong South peak much higher than in Alphington. On July 3, the peak occurs around midnight, reaching approximately 0.005 ppm, while on August 12, the concentration peaks in the early morning at around 0.008 ppm.
+
+
+##### 4. **`o3`**
+```{r}
+#| echo: true 
+#| code-fold: true
+
+alp_gee |> filter(parameter == "o3") |>
+  ggplot(aes(x=date_utc, y=value, color=location)) + 
+  geom_point(alpha = 0.6) +
+  facet_wrap(~location)+
+  labs(title = "Hourly o3 Concentration",
+       y = "o3")+
+  scale_color_discrete(guide = "none")+
+  theme_minimal()
+```
+
+- `o3` concentrations at both Alphington and Geelong South range from approximately 0.003 ppm to over 0.03 ppm, indicating relatively low ozone levels overall. 
+
+- The scatterplot succinctly captures the hourly fluctuations within each day. This could to attributed to daily cycles of traffic patterns or weather conditions. 
+
+- Both Alphington and Geelong South have similar distributions and ranges of `o3`, suggesting comparable air quality with respect to ozone in both locations. 
+
+- The data points are within a tight range, with no extreme spikes, indicating stable ozone levels that are not prone to sudden increases. 
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+aggregate_data |>  
+  ggplot(aes(x = date, y = o3, color = location)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Daily Average o3 Concentration",
+       x = "Date",
+       y = "Average Concentration") +
+  theme_minimal()
+```
+
+- The above plot shows the daily average concentration for Alphington and Geelong South, with both locations displaying a similar trend. 
+
+- `o3` levels drop to their lowest point in July, then rise, dip slightly around mid-August, and increase again toward the end of August.
+
+- On average, Geelong South generally has higher `o3` concentrations compared to Alphington, particularly in early July and from mid-August onward.
+
+- Despite minor differences, the parallel LOESS curves suggest that both locations experience similar seasonal or environmental influences on `o3` levels.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+calendar |> filter(parameter == "o3") |>
+ggplot() +   
+    geom_line(aes(x=hour, y=value,color=location)) +
+    facet_calendar(~date) +
+  theme(axis.title = element_blank(),
+        axis.text.y = element_blank(),
+        aspect.ratio = 0.5)+
+  ggtitle("Calendar of o3 Concentration for Alphington & Geelong South")+
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+- Most days, both locations follow a daily cycle, where `o3` levels rise in the morning, peaking at midday and declining by evening. 
+
+- Geelong South consistently shows higher peaks compared to Alphington, suggesting elevated `o3` levels overall. 
+
+- July 3rd, 4th, 5th, and 31st: Geelong South has sharp peaks with minimal variation in Alphington, likely due to localized factors.
+
+- There is an unusual increasing trend on July 19th, instead of the usual decreasing trend in the evenings for both Alphington and Geelong South. 
+
+- July 15, August 26, 30, 31: The `o3` levels seem to be consistently high at around 0.03 ppm with minimal variations throughout the day. 
+
+- Weekend peaks are frequently as high as those on weekdays, and the overall patterns remain largely consistent across all days, indicating that ozone levels are influenced by sustained factors, regardless of the day of the week.
+
+
+##### 5. **`no2`**
+
+```{r}
+#| echo: true 
+#| code-fold: true
+alp_gee |> filter(parameter == "no2") |>
+  ggplot(aes(x=date_utc, y=value, color=location)) + 
+  geom_point(alpha = 0.6) +
+  facet_wrap(~location)+
+  labs(title = "Hourly no2 Concentration",
+       y = "no2")+
+  scale_color_discrete(guide = "none")+
+  theme_minimal()
+```
+
+- There is data missing for Geelong South for a significant part of August.
+
+- The variations of `no2` at both Alphington and Geelong South are similar, ranging from 0.00 ppm to 0.04 ppm for most time although the highest concentrations in Alphington are generally lower than in Geelong South, reaching approximately 0.04 ppm compared to over 0.06 ppm. 
+
+- `no2` concentrations remain stable over time, with no clear seasonal or time-dependent trends.
+
+- There are daily variations, but no consistent pattern of peaks or troughs is apparent in the scatterplot. 
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+aggregate_data |>  
+  ggplot(aes(x = date, y = no2, color = location)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Daily Average no2 Concentration",
+       x = "Date",
+       y = "Average Concentration") +
+  theme_minimal()
+
+```
+
+- The average levels of `no2` concentration appears to follow a similar trend at both Alphington and Geelong South. Both peak at the start of July with concentration over 0.015 ppm and dip mid July before rising again in early August before declining again.
+
+- Average `no2` levels are slightly higher at Alphington until late July, likely due to its proximity to the city and increased traffic, which could account for the elevated `no2` levels compared to Geelong South.
+
+- With data missing for much of August at Geelong South, we might expect a similar downward trend as observed at Alphington. However, further investigation is necessary to confirm this assumption.
+
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+calendar |> filter(parameter == "no2") |>
+ggplot() +   
+    geom_line(aes(x=hour, y=value,color=location)) +
+    facet_calendar(~date) +
+  theme(axis.title = element_blank(),
+        axis.text.y = element_blank(),
+        aspect.ratio = 0.5)+
+  ggtitle("Calendar of no2 Concentration for Alphington & Geelong South")+
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+
+- There is no clear seasonal pattern in `no2` concentrations, but the first week of July shows wider fluctuations compared to other days. 
+
+- Notably, on July 3, `no2` levels in Geelong South peak twice, mid-day and late night, reaching around 0.04 ppm and above 0.06 ppm, higher than Alphington's peak of 0.03 ppm in the morning. 
+
+- On July 4, Geelong South shows a reverse trend, with levels decreasing from around 0.03 ppm early in the day before rising again at night, whereas in Alphington, `no2` levels increase and peak later in the morning, then decline from noon.
+
+
+##### 6. **`co`**
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+alp_gee |> filter(parameter == "co") |>
+  ggplot(aes(x=date_utc, y=value, color=location)) + 
+  geom_point(alpha = 0.6) +
+  facet_wrap(~location)+
+  labs(title = "Hourly co Concentration",
+       y = "co")+
+  scale_color_discrete(guide = "none")+
+  theme_minimal()
+```
+
+- `co` levels follow a similar pattern over the observed period at both locations, with higher concentrations at the start of each month that gradually stabilize by mid-month. 
+
+- In Alphington `co` levels are higher, ranging up to 1.5 ppm, with multiple spikes exceeding 1.0 ppm, particularly in early July and early August. In Geelong `co` levels range from 0.0 to around 1.2 ppm, with occasional peaks above 0.5 ppm, indicating some variability.
+
+- While, Alphington shows more frequent and intense spikes, likely due to urban sources such as traffic. Geelong South has overall lower `co` levels, with less frequent and smaller peaks, suggesting fewer or less intense sources.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+aggregate_data |>  
+  ggplot(aes(x = date, y = co, color = location)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Daily Average co Concentration",
+       x = "Date",
+       y = "Average Concentration") +
+  theme_minimal()
+
+```
+
+- Both locations display a decline in average `co` levels from early July, reaching a low around late August. The steepest decline is observed in the first half of July, particularly at Alphington.
+
+- There is a noticeable peak at the start of each month, with `co` levels higher in early July and early August before tapering off towards the middle and end of the month.
+
+- Alphington starts with a higher `co` concentration, peaking near 0.6 ppm, which steadily decreases over time. Its levels remain higher than Geelong South’s until late July, when they begin to converge towards end of August.
+
+- Geelong South maintains generally lower `co` concentrations, peaking around 0.3 ppm in early July and declining more gradually. This trend indicates consistently lower `co` pollution in comparison to Alphington.
+
+
+```{r}
+#| echo: true 
+#| code-fold: true
+
+calendar |> filter(parameter == "co") |>
+ggplot() +   
+    geom_line(aes(x=hour, y=value,color=location)) +
+    facet_calendar(~date) +
+  theme(axis.title = element_blank(),
+        axis.text.y = element_blank(),
+        aspect.ratio = 0.5)+
+  ggtitle("Calendar of co Concentration for Alphington & Geelong South")+
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+- Both locations show `co` peaks, mainly in the morning, likely due to traffic emissions. Alphington consistently has higher peaks than Geelong South.
+
+- Alphington frequently surpasses 0.5 ppm, with some peaks over 1.0 ppm. Geelong South generally stays below 0.5 ppm and exhibits fewer fluctuations.
+
+- High Spikes in Early July and August, Alphington shows significant spikes on July 2nd to 4th, and August 3rd-4th, reaching over 1.0 ppm, not seen at Geelong South except on July 3rd. Although, most high spikes but in reduced levels for Geelong appear around the same time. 
+
+- Low Variability in late August, both locations show reduced `co` levels and minimal fluctuations, possibly due to improved dispersion conditions. Similar trend can be observed in July, from 19th to 26th, although there is data missing on July 19th. 
+
+- While weekdays have more pronounced peaks, both locations follow a similar pattern across all days, with Alphington displaying consistently higher `co` due to its urban environment.
+
+
+## Summary 
+
+Overall, the sensors in Alphington and Geelong South do not consistently report the same values: 
+
+- `pm25` concentrations in both locations are generally below 20 µg/m³ on most days, which is within the safe threshold of 25 µg/m³. However, Alphington generally records more higher values, with peaks reaching up to 60 µg/m³ compared to Geelong South’s maximum of 40 µg/m³.
+
+- `pm10` concentrations in both locations mostly remain below 20 µg/m³, which is well under the recommended limit of 50 µg/m³. However, Geelong South frequently experiences higher values, exceeding 50 µg/m³ and even surpassing 100 µg/m³, whereas Alphington’s peak levels reach only around 60 µg/m³.
+
+- `so2` concentrations typically range from 0 to 0.001 ppm in both locations, staying within the safe range of 0 to 0.005 ppm. However, Geelong South occasionally experiences spikes with higher levels, reaching between 0.006 and 0.008 ppm.
+
+- `o3` concentrations at Alphington and Geelong South range from approximately 0 ppm to over 0.03 ppm, with both locations displaying similar trends in average levels. Both remain within the safe limit of 0.07 ppm for 8-hour exposure. However, Geelong South tends to show higher levels, particularly in the morning.
+
+- `no2` concentrations typically range from 0.00 ppm to 0.04 ppm in both locations, remaining below the safe limit of 0.08 ppm for one-hour exposure. Only on July 3, Geelong South recorded a high peak of 0.06 ppm at night. Due to missing data for Geelong South in August, trends during this period are uncertain, but both locations exhibited similar daily average values in July.
+
+- `co` concentrations in both locations peak at the start of each month, with Alphington consistently higher, reaching up to 1-1.5 ppm. Despite these peaks, both locations remain well below the safe limit of 6 ppm for 8-hour exposure. 
+
+
+In conclusion, although we expect that Alphington will be more polluted than Geelong South due to its proximity to the Melbourne CBD, which is more crowded, Geelong South still faces more frequent and significant spikes in `pm10` and `so2`. This indicates a potential for health risks in that area as well. The consistently higher pollution levels of the other pollutants in Alphington suggest urban influences, likely from traffic and other sources. Further, there doesn't seem to appear a different trend on weekdays compared to weekends. The variations and patterns are quite similar on all days of the week. In addition, the expectation of positive correlations among pollutants was partially met, with strong positive correlations between `pm25` and `co` (0.79), and moderate positive correlations between `no2` and `co` (0.65). However, unexpected negative correlations were observed between `o3` and both `no2` (-0.78) and `co` (-0.7), which diverges from the anticipated trend, suggesting a more complex relationship involving ozone.
+
+
+
+
+
+
+## References
+
+1. OpenAQ. (n.d.). Explore Open Air Quality. Retrieved from https://explore.openaq.org/#1.2/13.8/40
+2. World Health Organization. (n.d.). Types of Pollutants. Retrieved from https://www.who.int/teams/environment-climate-change-and-health/air-quality-and-health/health-impacts/types-of-pollutants
+3. NSW Government. (n.d.). Air Quality Categories - Health Advice. Retrieved from https://www.airquality.nsw.gov.au/health-advice/air-quality-categories
+4. OpenAQ. (2022). Open Air Quality Data Global Landscape 2022. Retrieved from https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+Landscape+2022.pdf
+5. OpenAQ. (2020). Open Air Quality Data Global State of Play 2020. Retrieved from https://documents.openaq.org/reports/Open+Air+Quality+Data+Global+State+of+Play+2020.pdf
+6. Clean Air Fund. (n.d.). Countries Failing to Report Data on Air Pollution. Retrieved from https://www.cleanairfund.org/news-item/countries-failing-data-on-air-pollution/
+
