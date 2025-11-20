@@ -1,0 +1,612 @@
+---
+title: "Renewable Energy Transition over Decades Around the World"
+author: Echidna Group
+date: "September 13, 2024"
+format: 
+  html:
+    toc: true
+    toc_float:
+      collapsed: true
+  pdf:
+    toc: true
+bibliography: ref.bib
+categories: [Group Project]
+---
+
+```{r Setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r Library load, include=FALSE}
+library(dplyr)
+library(kableExtra)
+library(tidyverse)
+library(readr)
+library(knitr)
+library(ggplot2)
+library(tidyr)
+library(tinytex)
+```
+
+# Executive Summary
+
+- The report centers on the comprehensive analysis tracing the trajectory of energy generation trends spanning ancient to modern times, elucidating the notable transition from traditional fuels to renewables. It underscores the historical dominance of fossil fuels, the dwindling role of nuclear power, and the accelerating adoption of renewables, particularly in leading nations such as China and Germany.
+
+- Furthermore, the report meticulously examines the global surge in renewable energy utilization across diverse countries, exploring the factors contributing to the gradual rise in world averages. Emphasizing the pivotal role of renewable sources like solar, wind, hydro, and geothermal, it advocates for sustainable solutions with minimal environmental footprint.
+
+- Beyond energy statistics, the study delves into the intricate relationship between the proportion of renewable consumption and countries’ GDP, seeking to unravel the nuanced dynamics between these two vital factors. By weaving together these insights, the report offers a holistic understanding of the evolving energy landscape and underscores the imperative for strategic shifts towards sustainable energy practices worldwide.
+
+# Introduction
+
+- The evolution of energy sources dates back to primitive ages, where wood and biomass fuels were prevalent, progressing into the coal-powered steam engines of the industrial revolution. The 19th century witnessed disruptive advancements in electricity generation, ushering in the dominance of fossil fuels and the emergence of nuclear power as a relatively cleaner alternative. However, recent decades have marked a significant shift fueled by climate change concerns, with a notable rise in clean and sustainable energy technologies, driving increased adoption of renewables like wind, solar, and hydroelectric power.
+
+- Renewable energy, derived from continuously replenished natural processes, stands in stark contrast to non-renewable sources, which are finite  resources formed over millions of years and depleting at an alarming rate. One of the most critical distinctions lies in their environmental impact, with renewables offering a far greener alternative.
+
+- The report meticulously analyzes recent trends in the share of renewable energy in primary energy consumption across various countries. Utilizing a comprehensive dataset encompassing percentages of primary energy sourced from renewables such as hydropower, solar, wind, geothermal, bioenergy, wave, and tidal, excluding traditional biofuels. It will further elucidate the distribution of renewable energy usage globally, highlighting the five countries witnessing the highest and lowest increases in renewable energy utilization. These findings will be further scrutinized in the context of GDP analysis, offering valuable insights into the interplay between renewable energy adoption and economic dynamics.
+
+## Research Question
+**Our research is guided by the following objectives:**
+
+- To Analyze electricity generation trends from 1985 to 2021 to gain insights into shifts and trends in renewable energy sources. It aims to provide an overview of our current standing in producing reliable, sustainable, and clean electricity and to identify areas for improvement. Furthermore, to comprehensively grasp renewable energy generation across various geographical regions, we aim to identify the countries that have been leading in renewable energy production over recent years.
+
+- To investigate, which five countries have shown the most significant advancement in the proportion of renewable energy, and approximately from which regions do these countries originate?
+
+- To delve into the correlation between share of renewable consumption and countries’ GDP, aiming to picture the nuanced relationship between energy preference and economic excellence
+
+## Dataset Introduction
+1. [Renewable Share Energy](https://ourworldindata.org/grapher/renewable-share-energy?tab=chart#research-and-writing): Includes information on the share of primary energy consumption from renewable sources. The ratio of renewable energy use in countries around the world from 1965 to 2022 is recorded. This report will use data from 1985-2021. The average data for each continent and the world will be shaved off during the data cleaning process because it will not be used in this analysis. 
+
+2. [Renewable electricity generation, World](https://ourworldindata.org/grapher/modern-renewable-energy-consumption):
+The data provides insights into the progression of renewable energy sources over time and facilitates comparative analysis across diverse geographical regions.
+
+3. [Share of electricity generation from fossil fuels, renewables and nuclear](https://ourworldindata.org/grapher/electricity-fossil-renewables-nuclear-line): The dataset offers comprehensive insights into electricity generation, covering Fossil Fuels, Nuclear Power, and Renewable Sources since the 1960s.
+
+```{r, echo=FALSE}
+data <- read_csv("Data/renewable-share-energy.csv", show_col_types = FALSE)
+caption <- "Variable table"
+
+variable_names <- c("Entity", "Code", "Year", "Renewables%","difference")
+
+variable_descriptions <- c("The name of the country", "Country Name Abbreviation", "The year of the data", "The percentage of renewable energy to all energy used","The renewables% changes between 1985 and 2021.")
+
+variable_table <- data.frame(Variable_Names = variable_names, Description = variable_descriptions)
+
+kableExtra::kable(variable_table, caption = caption, align = "l")
+```
+
+
+# Methodology
+
+- The methodology employed in this study aimed to analyze the growth of renewable energy usage rates in various countries between 1985 and 2021. The following steps were undertaken to accomplish this:
+
+## Data Collection
+
+- __Licenses__: All visualizations, data, and articles produced by Our World in Data are open access under the [Creative Commons BY license](https://creativecommons.org/licenses/by/4.0/).
+
+- __Source of Datasets__: [ourworldindata.org](https://ourworldindata.org/)
+
+- The data is sourced from the following avenues for their respective datasets:
+1. Renewable energy usage rates for multiple countries from 1965 to 2022: _Energy Institute_
+
+2. Renewable Energy Generation: _Energy Institute - Statistical Review of World Energy (2023)_
+
+3. Share of electricity generation from fossil fuels, renewables and nuclear: _Ember - Yearly Electricity Data (2023); Ember - European Electricity Review (2022); Energy Institute - Statistical Review of World Energy (2023)_
+
+4. Low-carbon energy consumption: _Energy Institute’s Statistical Review of World Energy and GDP per Capita data from the World Bank’s World Development Indicators (WDI)_
+
+## Data Processing and Analysis
+- The foremost step is the procedure of tidying the datasets. Wherein, it comprises of subjecting the datasets to the removal of missing values, redundant variables and furthermore, renaming the variables to make them more meaningful. 
+
+- The datasets then undergo further processing tailored to extract specific insights. This involves employing mathematical functions, such as calculating averages, summarizing values over multiple years, filtering and extracting specific data required to understand latest trends across different geographical locations.These operations are conducted using the R programming language within the RStudio environment. Primarily, the library tidyverse @tidyverse is utilized to facilitate these analytical procedures. 
+
+- Finally, the mathematical analyses conducted on the data are translated into visual representations, such as graphical forms, to facilitate thorough analysis and presentation of the findings. Primarily, the ggplot2 library @ggplot2 is employed to transform the analytical results into appropriate graphical representations. 
+
+
+### Energy Generation 
+
+```{r}
+#Reading the data
+all_sources <- read.csv("data/electricity-fossil-renewables-nuclear-line.csv")
+
+#Cleaning the dataset 
+
+all_sources_tidy <- all_sources |> 
+                    select(-Code) |> 
+                    rename( Nuclear = Nuclear.....electricity, 
+                    Fossil_Fuels = Fossil.fuels.....electricity, 
+                    Renewable = Renewables.....electricity) 
+
+#Filtering the required years and removing NA values 
+
+remove_na <- complete.cases(all_sources_tidy)
+
+temp <- all_sources_tidy[remove_na, ]
+
+new_all_sources <- temp |> 
+                   filter(Year >= 1985 & 
+                          Year <= 2021)
+```
+
+```{r}
+#Calculating average values for each energy source variable by grouping year 
+
+avg_all_sources <- new_all_sources |> 
+                   group_by(Year) |> 
+                   summarise(mean_Nuclear = mean(Nuclear), 
+                   mean_Fossils = mean(Fossil_Fuels), 
+                   mean_Renewables = mean(Renewable))
+```
+
+```{r Figures}
+#| label: fig-trend
+#| fig-cap: "Evolution of Energy Generation from Fossil Fuels, Renewables, and Nuclear Sources"
+
+
+#Create ggplot with geom_line
+ 
+avg_all_sources |> ggplot(aes(x = Year)) + 
+                   geom_line(aes(y = mean_Nuclear), color = "blue") +
+                   geom_line(aes(y = mean_Fossils), color = "green") +
+                   geom_line(aes(y = mean_Renewables), color = "red") +
+                   geom_text(aes(x = 2007, y = 9, label = "Nuclear Energy"), vjust = -0.3) +
+                   geom_text(aes(x = 2005, y = 59, label = "Fossil Fuels"), vjust = -0.5) + 
+                   geom_text(aes(x = 2005, y = 33, label = "Renewable Sources"), vjust = -0.5) +
+                   labs(title = "Average Energy Generation Per Year", x = "Year", y = "Percentage of Generation %") 
+      
+
+ 
+```
+
+- Notably in @fig-trend, Fossil fuels remain predominant for electricity generation, with a recent decline observed since 2015, despite a temporary decrease between 1990 and 2000. @primaryconsumption
+
+- Renewable energy shows consistent growth, becoming the second most utilized energy source, particularly surging around 2000. @bhuiyan2022renewable
+
+- Nuclear energy, initially growing, experiences a decline since approximately 1998, attributed to safety concerns and regulatory uncertainty.
+
+```{r}
+#Reading the data
+renewable_sources <- read.csv("data/modern-renewable-energy-generation.csv")
+
+#Cleaning the dataset 
+renewable_sources_tidy <- renewable_sources |> 
+                          filter(Code != "" & !grepl("OWID_", Code)) |> 
+                          rename( Other_Renewables =    Other.renewables..including.geothermal.and.biomass..electricity.generation...TWh, 
+                                  Solar = Solar.generation...TWh, Wind =   Wind.generation...TWh, 
+                                  Hydro = Hydro.generation...TWh) 
+
+#Filtering the required years and removing NA values 
+
+na_removed <- complete.cases(renewable_sources_tidy)
+
+temp_renewable <- renewable_sources_tidy[na_removed, ]
+
+new_renewable_source <- temp_renewable |> 
+                        filter(Year >= 2018 & 
+                               Year <= 2021)
+
+```
+
+```{r}
+
+# Analysis to find out the countires using the most renewable energy sources to generate electricity
+
+# In the years 2018-2021, the country that generated electricity using Other Renewables
+
+temp_other_remewables <- new_renewable_source |> 
+                         arrange(desc(Other_Renewables)) 
+temp_other_remewables <- temp_other_remewables[1:4, 1:4]
+
+
+# In the years 2018-2021, the country that generated electricity using Solar
+
+temp_solar <- new_renewable_source |>  
+              arrange(desc(Solar)) |> 
+              select(- "Other_Renewables")
+temp_solar <- temp_solar[1:4, 3:4]
+
+
+# In the years 2018-2021, the country that generated electricity using Wind
+
+temp_wind <- new_renewable_source |> 
+             arrange(desc(Wind)) |> 
+             select(- "Other_Renewables", - "Solar") 
+temp_wind <- temp_wind[1:5, 3:4]
+temp_wind <- temp_wind[-4, , drop = FALSE]
+
+# In the years 2018-2021, the country that generated electricity using Hydro
+
+temp_hydro <- new_renewable_source |> 
+              arrange(desc(Hydro)) |> 
+              select(- "Other_Renewables", - "Solar", - "Wind")
+temp_hydro <- temp_hydro[1:4, 3:4]
+
+temp_hydro <- temp_hydro |> 
+              arrange(desc(Year))
+
+#Joining the different data frames generated above
+
+dataframe_1 <- temp_other_remewables |>
+              inner_join(temp_solar, by = "Year")
+
+dataframe_2 <- dataframe_1 |>
+              inner_join(temp_wind, by = "Year")
+
+final_dataframe <- dataframe_2 |>
+                   inner_join(temp_hydro, by = "Year")
+
+
+```
+
+
+```{r}
+#| label: tbl-topcountries
+#| tbl-cap: "Countries Leading in Renewable Energy Production from 2018 to 2021" 
+# View the combined data
+
+kable(final_dataframe, format='html', digits = 3)
+
+
+```
+
+- The generated dataframe offers a concise summary, as displayed in @tbl-topcountries, presenting the leading countries in each year for renewable energy generation across various sources.
+
+- China consistently leads in recent years, excelling in generating the highest quantity of renewable energy across diverse resources such as wind, solar, hydro, and others.
+
+### Growth Rate of the Proportion of Renewable Energy in Total Energy Usage
+
+```{r selectdata, echo=FALSE}
+
+
+data_selected <- data %>%
+  filter(Year>= 1985 & Year<= 2021) 
+
+difference <- data_selected %>%
+  group_by(Entity) %>%
+  summarise(difference = last(`Renewables (% equivalent primary energy)`) - first(`Renewables (% equivalent primary energy)`)) %>%
+  arrange(desc(difference))
+
+excluded_entities <- c('South America', 'South and Central America (EI)', 'Asia', 'South Africa', 'Africa', 'Africa (EI)','Asia Pacific (EI)','CIS','Eastern Africa (EI)','Europe', 'Europe (EI)','High-income countries
+', 'Lower-middle-income countries', 'Middle Africa (EI)', 'Middle East (EI)','Non-OECD (EI)', 'OECD (EI)', 'Upper-middle-income countries','Western Africa (EI)')
+
+filtered_difference <- difference %>%
+  filter(Entity %in% c("World", head(unique(Entity), 5))) %>%
+  filter(!Entity %in% excluded_entities)
+
+top_5 <- head(filtered_difference, 6)
+
+top_5_data <- merge(top_5, data_selected, by = "Entity")
+
+filtered_difference_last <- difference %>%
+  filter(!Entity %in% excluded_entities)
+
+last_5 <- tail(filtered_difference_last, 5)
+
+last_5_data <- merge(last_5, data_selected, by = "Entity")
+```
+
+```{r top5_figure , echo=FALSE,fig.align='center'}
+#| label: fig-topfive
+#| fig-cap: Top 5 countries renewable energy used increasing dunring the period
+
+
+ggplot(top_5_data, aes(x = Year, y = `Renewables (% equivalent primary energy)`, group = Entity, color = Entity)) +
+  geom_line() +
+  labs(title = " Top 5 countries with the highest increase in renewable energy usage ratio",
+       x = "Year",
+       y = "Renewables (%)") +
+  theme_minimal()
+```
+ 
+**Identification of Top Five Countries:** 
+- Through data analysis, the top five countries with the highest growth rates in renewable energy usage between 1985 and 2021 were identified.
+
+- The following @tbl-topfive presents the filtered data.
+
+```{r, label = "top5data", echo=FALSE}
+#| label: tbl-topfive
+#| tbl-cap: Data of Renewable Energy Usage Rates for Top Five Countries
+kable(top_5_data[1:5, ]) %>%
+  scroll_box(height = "200px")
+
+
+```
+
+  
+### Renewable Souces as Opposed to Non-Rewnewable Sources 
+
+```{r, echo=FALSE, eval=FALSE}
+read.csv("C:/Users/ezram/Downloads/annual-change-primary-energy-source.csv")
+energy_data <- ("C:/Users/ezram/Downloads/annual-change-primary-energy-source.csv")
+head(energy_data)
+str(energy_data)
+
+```
+
+```{r}
+library(ggplot2)
+library(reshape2)
+
+
+# Assuming your dataset is named energy_data
+# First, load your dataset
+energy_data_try <- read.csv("data/annual-change-primary-energy-source.csv")
+
+# Reshape the data into long format
+energy_data_long <- melt(energy_data_try, id.vars = c("Entity", "Code", "Year"))
+
+# Create the ggplot
+ggplot(energy_data_long, aes(x = Year, y = value, color = variable)) +
+  geom_line() +
+  labs(x = "Year", y = "TWh Growth", color = "Energy Source") +
+  theme_minimal() +
+  ggtitle("Energy Generation Growth Over Time")
+
+```
+### Correlation Between Renewable and Non Renewable Energy Use versus Countries' GDP
+
+```{r Loading Dataset}
+#Here's the dataset looks like
+dataset <- read.csv("data/share-of-low-carbon-energy-vs-gdp.csv")
+```
+
+```{r Data Cleaning step-1: column names and removing irrelevant, message=FALSE}
+# Note: dataset_cl(the cleaning iteration)
+
+# Cleaning the dataset by:
+# Remove unnecessary column, rename columns name, filter out irrelevant entity or country
+dataset_cl1 <- dataset %>% select(-Continent) %>% 
+  rename(country = Entity, ctry_code = Code, year = Year, 
+          share_low_carbon_energy = Low_carbon_energy_equivalent_primary_energy,
+          GDP_per_capita = GDP_per_capita_PPP_constant_2017_international) %>%
+  filter(ctry_code != "" & !grepl("OWID_", ctry_code) & 
+           year >= 1985 & year <= 2021) # 'OWID_' indicates fallen countries
+
+# Filter rows where both share_low_carbon_energy and GDP_per_capita are NA
+na_rows <- dataset_cl1 %>%
+           filter(is.na(share_low_carbon_energy) & is.na(GDP_per_capita))
+
+# Remove rows included in na_rows from the original dataset
+dataset_cl2 <- dataset_cl1 %>%
+  anti_join(na_rows)
+
+```
+
+```{r Data Cleaning step-2: eliminate bad quality observations}
+library(dplyr)
+
+# Group by country and count the total number of years and non-NA values for share_low_carbon_energy
+country_summary <- dataset_cl2 %>%
+  group_by(country) %>%
+  summarize(
+    total_years = n(),
+    non_na_energy = sum(!is.na(share_low_carbon_energy)),
+    non_na_gdp = sum(!is.na(GDP_per_capita))
+  )
+
+# Filter out countries where all years have NA values for share_low_carbon_energy
+countries_to_keep <- country_summary %>%
+  filter(non_na_energy > 0) %>%
+    filter(non_na_gdp > 0) %>%
+  pull(country)
+
+# Filter dataset to keep only rows for countries to keep
+dataset_cl3 <- dataset_cl2 %>%
+  filter(country %in% countries_to_keep)
+
+```
+
+```{r Data Cleaning step-3: modifying NA values appropriately}
+#| label: tbl-cleaneddataset
+#| tbl-cap: "The First 10 Rows in Cleaned Dataset of Countries' Share of Low Carbon Energy and GDP per Capita"
+#| message: FALSE
+#| include: FALSE
+
+library(VIM)
+library(dplyr)
+
+# Impute missing values using KNN method for each country
+imputed_data <- dataset_cl3 %>%
+  group_by(country) %>%
+  mutate(GDP_per_capita_imputed = ifelse(is.na(GDP_per_capita), 
+                                         kNN(data.frame(year, GDP_per_capita), 
+                                             k = 8)$GDP_per_capita, 
+                                             GDP_per_capita)) %>%
+  select(-GDP_per_capita)  # Remove the GDP_per_capita column
+
+```
+
+```{r}
+#| label: fig-correlation
+#| fig-cap: Distribution of Low Carbon Energy Usage and GDP per Capita
+
+library(ggplot2)
+library(tidyverse)
+
+# Aggregate the data for each country
+aggregated_data <- imputed_data %>%
+  group_by(country) %>%
+  summarise(share_low_carbon_energy = mean(share_low_carbon_energy, na.rm = TRUE),
+            GDP_per_capita = mean(GDP_per_capita_imputed, na.rm = TRUE))
+
+# Create ggplot with all countries and add density plot
+ggplot(aggregated_data, aes(x = share_low_carbon_energy, y = GDP_per_capita)) +
+  geom_point() +
+  geom_density_2d() +  # Add density plot
+  labs(x = "Share of Low Carbon Energy", y = "GDP per Capita")
+```
+
+- In @fig-correlation, using dplyr library @dplyr we can seen that most of countries with low GDP per Capita tend to have also minimal share of low carbon energy usage and also the opposite. There are only 6 countries that have more than 40% of low carbon energy. The distribution of countries are concentrated in 0-25% of low carbon energy usage of total and 0-50000 dollars of GDP per Capita.
+
+
+# Results
+
+
+```{r}
+#| label: fig-pattern
+#| fig-cap: "Trends in Renewable Energy Generation Across Diverse Sources: Hydro, Other Renewables, Solar and Wind"
+
+
+data_long <- pivot_longer(final_dataframe, 
+                          cols = c(Other_Renewables, Solar, Wind, Hydro), 
+                          names_to = "Renewable_Type", 
+                          values_to = "Energy_Generated")
+
+ggplot(data_long, 
+       aes(x = Year, y = Energy_Generated)) +
+       geom_bar(stat = "identity", fill = "blue") +
+       facet_wrap(~ Renewable_Type) +
+       labs(x = "Year", y = "Energy Generated in unit TWh", title = "Renewable Energy Generated Using Various Sources") 
+```
+
+
+- From the @fig-pattern, Hydro power is the most utilized renewable energy source, consistently producing over 1000 TWh. Its reliability and minimal maintenance contribute to sustained high production levels.Following hydro power, wind energy emerges as the next highest used source, exhibiting a continuous increase in production since 2018.
+
+- While solar energy production has shown an upward trend, its contribution to renewable energy production remains less pronounced compared to hydro power. Both solar and wind energy face intermittency due to factors like nighttime hours and calm wind conditions. Geographical constraints and high infrastructure costs further impede their widespread adoption.
+
+- Lastly, other renewable resources have contributed the least to renewable energy producbut show a rising trend.
+
+- Further, we examined the evolution of renewable energy adoption across various entities from 1985 to 2021. The analysis primarily focused on identifying the top five entities with the highest increase in renewable energy consumption and world's average over this period.
+
+
+- From the @tbl-difference below, you can get a clear understanding of how much these countries and the world average have grown.
+
+
+```{r difference_tabel, echo=FALSE}
+#| label: tbl-difference
+#| tbl-cap: "The growth rate during the period from 1985 to 2021."
+
+kable(top_5,table.attr = 'style="width:30%"')
+
+```
+
+- From @fig-topfive, we can observe that among the top five countries with the highest growth rates, Sweden has the highest utilization rate among all countries, having grown from approximately 30% to over 50%.Germany started with a renewable energy usage rate of less than 10%, but after years of effort, it surpassed the world average from year 2010 , becoming the fifth-ranked country in terms of growth rate. Denmark had almost zero renewable energy usage rate in 1985, but it grew by over 40% in just over 30 years.Finland and Croatia had a similar trend, with an increase of around 20% during this period.
+
+-  This shift is graphically represented, illustrating the proportion of renewable and non-renewable energy sources across the years. The bar chart vividly portrays the increasing dominance of renewable energy and the corresponding decline in non-renewable sources. @dissanayake2023nexus
+
+```{r}
+
+years <- c(2019, 2020, 2021)
+renewable_energy <- c(19, 25, 32)  
+non_renewable_energy <- c(81, 75, 68)  
+
+
+data <- data.frame(Year = factor(years), 
+                   Renewable = renewable_energy, 
+                   Non_Renewable = non_renewable_energy)
+
+
+data <- tidyr::pivot_longer(data, cols = c("Renewable", "Non_Renewable"), names_to = "Energy_Type", values_to = "Percentage")
+
+
+ggplot(data, aes(x = Year, y = Percentage, fill = Energy_Type)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Primary Energy Sources Transition (2019-2021)",
+       x = "Year",
+       y = "Percentage") +
+  scale_fill_manual(values = c("Renewable" = "green", "Non_Renewable" = "red")) +
+  theme_minimal()
+
+```
+
+- The data analysis reveals a clear trend of transition towards renewable energy sources over the years. From 2019 to 2021, there has been a significant increase in the proportion of renewable energy in the total primary energy mix, with renewable sources accounting for 19%, 25%, and 32% in 2019, 2020, and 2021 respectively. 
+
+- This upward trajectory indicates a growing acceptance and adoption of renewable energy technologies. Conversely, there has been a corresponding decline in the share of non-renewable energy sources over the same period. Non-renewable energy decreased from 81% in 2019 to 68% in 2021. @book
+
+```{r Top 5 Countries by GDP and Plotted}
+#| label: fig-top5
+#| fig-cap: Distribution of Top Five Countries by Low Carbon Energy Usage Share and GDP per Capita
+
+library(tidyverse)
+library(ggplot2)
+
+
+# 3. Create ggplot with top 5 countries by GDP_per_capita and share_low_carbon_energy
+top5_gdp <- aggregated_data %>%
+  top_n(5, GDP_per_capita)
+
+top5_share_low_carbon <- aggregated_data %>%
+  top_n(5, share_low_carbon_energy)
+
+# Identify countries common to both categories
+common_countries <- intersect(top5_gdp$country, top5_share_low_carbon$country)
+
+# Create datasets for plotting
+plot_data_gdp <- mutate(top5_gdp, category = if_else(country %in% common_countries, "Both", "GDP per Capita"))
+plot_data_share_low_carbon <- mutate(top5_share_low_carbon, category = if_else(country %in% common_countries, "Both", "Share Low Carbon Energy"))
+
+# Combine datasets
+combined_data <- bind_rows(plot_data_gdp, plot_data_share_low_carbon)
+
+# Left join combined_data with imputed_data to get country code
+combined_data <- left_join(combined_data, imputed_data %>% select(country, ctry_code), by = "country")
+
+# Plot
+ggplot(data = combined_data, aes(x = share_low_carbon_energy, y = GDP_per_capita, color = category)) +
+  geom_point(data = combined_data %>% filter(category != "Both"), 
+    aes(shape = category), size = 3) +
+  geom_point(data = combined_data %>% filter(category == "Both"), 
+    aes(shape = category), size = 3) +
+  geom_text(aes(label = ctry_code), nudge_x = 0.02, vjust = -0.5, color = "black", size = 4) +
+  labs(x = "Share of Low Carbon Energy", y = "GDP per Capita") +
+  scale_color_manual(values = 
+    c("GDP per Capita" = "blue", "Share Low Carbon Energy" = "red", "Both" = "yellow")) 
+
+```
+
+- In recent years, high-income countries have taken the lead in promoting sustainable energy. According to @guney2021renewable study, there is a positive correlation between renewable energy consumption and sustainable development. Specifically, a 1% increase in renewables is associated with a 0.326% improvement in sustainability. Conversely, reliance on non-renewable energy sources undermines sustainability.
+
+- Based on @fig-top5, we can see that there are 2 countries out of total 5 countries (Switzerland and Norway) included in both highest GDP per Capita and highest share of low carbon energy usage, while the remaining three best low carbon energy user are close by the top 5 countries by GDP. This can indicate that high-income countries are more likely to invest their energy usage into the more sustainable one possibly due to capability and resources available. 
+
+- This shift is graphically represented , illustrating the proportion of renewable and non-renewable energy sources across the years. The bar chart vividly portrays the increasing dominance of renewable energy and the corresponding decline in non-renewable sources. @energy_institute
+
+
+# Discussion
+
+- The analysis above provides a comprehensive overview of the current landscape of renewable energy generation. While fossil fuels continue to dominate the energy generation sector, the upward trajectory of renewable sources offers promising prospects for a sustainable future.
+As the consequences of climate change become increasingly apparent, it is imperative for countries worldwide to prioritize renewable energy development and transition towards a more sustainable energy future.
+
+- The data analysis reveals a clear trend of transition towards renewable energy sources over the years. From 2019 to 2021, there has been a significant increase in the proportion of renewable energy in the total primary energy mix, with renewable sources accounting for 19%, 25%, and 32% in 2019, 2020, and 2021 respectively. This upward trajectory indicates a growing acceptance and adoption of renewable energy technologies.
+
+- Conversely, there has been a corresponding decline in the share of non-renewable energy sources over the same period. Non-renewable energy decreased from 81% in 2019 to 68% in 2021. This shift can be attributed to various factors such as increasing awareness of environmental concerns, advancements in renewable energy technologies, and policy interventions aimed at promoting sustainable energy sources.
+
+# Conclusion
+
+- Energy generation trends show a consistent dominance of fossil fuels, with a notable increase in renewable sources, particularly hydroelectric power, while nuclear energy declines due to safety concerns. China leads global renewable energy generation, maintaining its top position across various renewable sources.
+Despite progress, a significant gap remains between renewable and fossil fuel energy generation, highlighting the urgent need for accelerated investment in renewables to combat climate change.
+
+- The top five countries in terms of growth in renewable energy usage rates are Denmark, Finland, Sweden, Croatia, and Germany. All of these countries are from Europe, indicating significant progress in renewable energy usage in Europe.
+
+- The findings underscore the ongoing global transition towards a more sustainable and renewable energy future. The steady increase in the adoption of renewable energy sources reflects a growing recognition of the need to mitigate climate change, reduce dependence on finite fossil fuels, and enhance energy security.
+
+- However, while progress has been made, there are still challenges to overcome, including intermittency issues associated with some renewable energy sources, the need for infrastructure investments, and policy uncertainties. Continued efforts and investments are required to accelerate the transition to renewable energy and achieve long-term sustainability goals.
+
+
+# Recommendations
+
+
+- The world average growth rate of renewable energy usage is only 6%. We can examine the five countries with the lowest growth rates from @fig-lastfive to identify reasons, enabling a substantial increase in the world average in the future.
+
+```{r last5_figure , echo=FALSE,fig.align='center'}
+#| label: fig-lastfive
+#| fig-cap: Last 5 countries renewable energy used increasing dunring the period
+
+
+ggplot(last_5_data, aes(x = Year, y = `Renewables (% equivalent primary energy)`, group = Entity, color = Entity)) +
+  geom_line() +
+  labs(title = " Last 5 countries with the highest increase in renewable energy usage ratio",
+       x = "Year",
+       y = "Renewables (%)") +
+  theme_minimal()
+```
+- Policy Support: Governments should continue to implement supportive policies and incentives to encourage the deployment of renewable energy technologies. This includes subsidies, tax incentives, and regulatory frameworks that prioritize renewable energy development.
+
+- Investment in Research and Development: Increased investment in research and development is essential to drive innovation and improve the efficiency and cost-effectiveness of renewable energy technologies. This will help address existing challenges and unlock new opportunities in the renewable energy sector.
+
+- Infrastructure Development: Investments in renewable energy infrastructure, such as grid expansion and energy storage systems, are crucial to overcome the challenges associated with intermittency and ensure the reliable integration of renewable energy into the grid.
+
+- Public Awareness and Education: Efforts to raise public awareness and promote education about the benefits of renewable energy are essential to garner support and drive consumer demand for clean energy solutions.
+
+- Collaboration and Partnerships: Collaboration among governments, industry stakeholders, and international organizations is vital to facilitate knowledge sharing, technology transfer, and capacity building in the renewable energy sector. Building strategic partnerships can accelerate progress towards a sustainable energy future.
+
+# Reference
+
