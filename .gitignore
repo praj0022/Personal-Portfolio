@@ -1,0 +1,101 @@
+# -----------------------------
+# R + Quarto Project Ignore
+# -----------------------------
+
+# R session files
+.Rhistory
+.RData
+.Rproj.user/
+.Ruserdata
+.Rproj*
+
+# renv library (HUGE)
+renv/
+renv.lock
+**/renv/
+
+# -----------------------------
+# Large raw data files
+# -----------------------------
+*.csv
+*.rds
+*.xlsx
+*.xls
+*.sav
+*.dta
+*.zip
+*.gz
+*.tar
+*.7z
+
+# allow specific small CSV for thumbnails if needed
+!posts/**/thumbnail.jpg
+!posts/**/thumbnail.png
+
+# -----------------------------
+# Quarto generated files
+# -----------------------------
+**/index_files/
+**/report_files/
+**/*_files/
+**/*_cache/
+**/figure-html/
+**/libs/
+**/site_libs/
+**/htmlwidgets/
+**/presentation_files/
+**/report.html
+**/index.html
+**/*.html
+
+# keep html only inside docs (needed for website)
+!docs/**/*.html
+
+# -----------------------------
+# Large media files
+# -----------------------------
+*.gif
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.pdf
+
+# allow only PDFs inside "copingmethodsapp"
+!posts/copingmethodsapp/*.pdf
+
+# -----------------------------
+# Git folders inside posts (submodules)
+# -----------------------------
+**/.git
+
+# -----------------------------
+# Specific huge datasets from posts
+# -----------------------------
+posts/Proj_2_wcd1/data/
+posts/Proj_3_wcd2/data/
+posts/Proj_3_wcd2/raw_data/
+posts/Proj_5_colb/data/
+posts/assign04-bettong/data/
+posts/assign04-cuscus/data/
+posts/assign02-fix-praj0022/data/
+posts/assign01-praj0022/data/
+posts/advr3/_targets/
+posts/advr3/data/
+posts/ml1/*.csv
+posts/ml2/*.csv
+posts/scm1/*.png
+posts/scm2/*.png
+
+# -----------------------------
+# Xmind mindmaps and misc
+# -----------------------------
+*.xmind
+*.bak
+*.tmp
+
+# -----------------------------
+# OS files
+# -----------------------------
+.DS_Store
+Thumbs.db
