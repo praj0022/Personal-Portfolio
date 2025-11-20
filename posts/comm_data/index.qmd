@@ -1,0 +1,97 @@
+---
+title: "Breaking Down Different Media Formats"
+author: "Pooja Rajendran Raju"
+date: "2024-08-22"
+output: 
+  html:
+categories: [Blog]
+---
+
+# Australians say AI shouldn't produce political news, but its OK for sport
+
+The article studied here is from The Conversation, titled “Australians say AI shouldn't produce political news, but its OK for sport: new research”, available online via [The Conversation Website](https://theconversation.com/australians-say-ai-shouldnt-produce-political-news-but-its-ok-for-sport-new-research-231369).
+
+The article is best described as "online news media" due to its exclusive online publication utilizing digital format with interactive features, engaging readers through online channels. It highlights academic research and expert views, which sets it apart from traditional print media, despite the traditional journalistic standards it upholds.
+
+The article summarizes that based on the Digital News Report 2024, Australians generally prefer news created by humans over that produced by AI, although their acceptance depends on the type of news. People are more open to AI-generated content in sports and entertainment than in political or crime news. Trust in news sources and familiarity with AI are crucial factors in shaping public attitudes, highlighting the importance for news organizations to openly disclose their use of AI to preserve audience trust. 
+
+While the main background information is presented in the first three paragraphs. The article’s background offers crucial context by outlining the growing role of AI in news media and and highlighting the key question about public attitudes toward this shift. This background is crucial appreciating the study's findings, which explore how Australians perceive AI-generated news in different domains. This context helps explain why the research into public opinion on AI's role in news is significant and how it reflects broader concerns about media authenticity and quality.
+
+The lede in this article is in the title "Australians say AI shouldn’t produce political news, but it’s OK for sport". It presents the prime findings of the article and captures interest by emphasizing a significant insight from the research. This is an unusual placement for lede, as it is usually placed in the opening paragraph but it's increasingly typical for articles that are published exclusively online, where publishers aim for clicks mainly through their headlines.
+
+The summary of the article can be found after the background in the fourth paragraph. 
+
+> "The online survey of 2,003 adult Australians finds they are much more comfortable with sport (31%) and entertainment (26%) news being produced mainly by AI than with politics (19%) and crime (21%) news being produced the same way (see the chart below)."
+
+The summary effectively reveals that Australians are generally more comfortable with AI-generated news in areas like sports (31%) and entertainment (26%) than in politics (19%) and crime (21%), highlighting how public acceptance of AI in news production varies by topic. By presenting specific data, it effectively highlights the research's key result in a concise manner.
+
+The main result of the article is present in the upper middle section of the  article: 
+
+> "Overall, 59% say they feel uneasy about news produced by AI with human oversight. This is compared to 28% who say they are uncomfortable about news that is mainly produced by human journalists with AI assistance."
+
+The study's main finding reveals that 59% of people are uneasy with AI-produced news overseen by humans, while 28% are uncomfortable with news primarily created by human journalists with AI assistance. This key finding is placed in the middle of the article keeping readers engaged by ensuring they see the key finding early on, even if they don’t finish the entire piece. This allows for further context and analysis to be built around the result, prompting readers to consider its importance as they continue reading. 
+
+
+# Dear Mona, What's The Most Common Name In America? 
+
+The article studied here is from FiveThirtyEight (ABC News), titled “Dear Mona, What's The Most Common Name In America?”, available online via the [ABC News Website](https://fivethirtyeight.com/features/whats-the-most-common-name-in-america/).
+
+This piece is best categorized as a "blog post" based on its online publication and format. Its digital format includes interactive graphics and a conversational tone, distinguishing it from print media. The article’s use of hyperlinks and a comment section highlights its role as an online blog intended for interactive engagement with readers.
+
+The article investigates which full names are most prevalent in the U.S., focusing on whether "John Smith" is the top name. The authors use data from the Social Security Administration for first names and the Census Bureau for surnames, adjusting for factors like mortality and immigration. Their analysis shows that simple probability calculations are misleading, revealing that "James Smith" is more common than "John Smith" when demographic factors are taken into account.
+
+The background of the article, provided in the initial four paragraphs, explores the challenge of determining the most common full names in the U.S. It starts by questioning whether "John Smith" is truly the most frequent name and discusses the complications of integrating first and last name databases. The authors describe their approach, which includes adjusting Social Security Administration data for mortality and factoring in names of immigrants. This context is essential as it highlights the complexities involved in analyzing name frequency and explains the need for advanced methodologies, preparing the reader for the detailed findings and conclusions presented in the article.
+
+The lede in this article is in the opening question "Is John Smith really the most common name?": 
+
+> "What are the most common first- and last-name combinations in the United States? Is John Smith really the most common name?"
+
+The lede effectively introduces the main question of the article, focusing on determining the most common name combinations in the U.S., particularly whether "John Smith" is the most prevalent. It captures the reader's interest by addressing a widespread curiosity about name popularity and sets the stage for discussion that follows. The lede is distinctively positioned as a standalone question right at the beginning of the article, separate from the main text. This unusual format employs a direct question to immediately capture the reader’s interest and outline the article's key focus.
+
+The summary of the article is positioned early, in the second paragraph. 
+
+> "To get you an answer, my colleague Andrew Flowers and I tried a more sophisticated technique that reached a different conclusion: We think the most common name in America might very well be James Smith"
+
+This provides a concise and straightforward summary of the article's findings. The author promptly introduces the main conclusion, questioning the common belief that "John Smith" is the most prevalent name and proposing that "James Smith" might actually take that spot. This early summary offers readers a quick glimpse into the results of the article's exploration. Presenting the key conclusion at the start grabs readers' attention and sets a clear direction for the article. It helps readers grasp the main point early, enabling them to better understand and engage with the detailed analysis and evidence presented later. This method effectively frames the article's investigation and aligns readers' expectations with the forthcoming detailed findings.
+
+The main result can be found later in the article, in the second last paragraph. 
+
+> "As a result, “Michael Smith” dropped down from the most likely name in America to second place and was bypassed by “James Smith.” There were more dramatic changes, too. For example, according to independent probabilities, “Maria Garcia” was expected to be the 354th most common full name (and “Maria Smith” would rank as No. 74). But according to Hartman’s data set, “Maria” and “Garcia” correlate nearly 700 percent more than you’d expect. That means “Maria Garcia” skyrockets to the 15th most common name combination overall. (We’ve posted all the data used in our analysis to our GitHub page.)"
+
+The finding that "James Smith" might be the most common name in the U.S., rather than "John Smith," is presented after a thorough explanation of the methodology. This positioning helps establish a strong basis for its findings. This sequence allows readers to grasp the thorough analysis supporting the result, making the conclusion more credible and impactful. Revealing the result after explaining the process ensures that the conclusion is seen as well-supported and logically derived.
+
+
+# How did Australia’s housing market get so bad, and is it all negative gearing’s fault? 
+
+The video studied here is from The Guardian, titled “How did Australia’s housing market get so bad, and is it all negative gearing’s fault?”, available online via Youtube on the [Guardian Australia's channel](https://youtu.be/iqUFERBJwoY?si=leQwkEU9KA6FYeY9). 
+
+The video "How did Australia’s housing market get so bad, and is it all negative gearing’s fault?" is a form of "digital media", specifically an explanatory or educational video. Found on platforms like YouTube, it uses visuals such as charts and graphics along with spoken narration to educate viewers on complex subjects like the housing market and negative gearing, setting it apart from traditional print or blog content.
+
+The video examines how the reduction in capital gains tax in 1999, coupled with negative gearing, has intensified the crisis in Australia's housing market by encouraging investors to take on greater risks and push property prices higher. It shows how these policy changes have led to a vicious cycle where house prices continually rise, benefiting investors while negatively impacting potential home buyers and the broader economy.
+
+The background of this video is provided from (0:06 – 1:27). It features a chart (0:06 – 0:20) comparing Australian disposable income with housing prices, which demonstrates the widening gap between earnings and property costs, and a discussion of negative gearing (0:20 – 1:27), explaining how investors can offset property investment losses against their taxable income. This information is essential for understanding the housing market crisis, as the chart shows the extent of the affordability problem, while the negative gearing explanation reveals how this practice contributes to rising property prices and worsens the crisis. Together, these elements provide a solid basis for analyzing the current issues in the housing market.
+
+The lede in the video is present at the following time stamp: (0:00 - 0:06). The lede introduces the video with an engaging statement: "You know what's cool starting a video with a chart to show how cooked the Australian housing market is," setting up the viewer’s expectations by focusing on the dramatic state of the housing market with a compelling visual. This approach is relevant as it captures attention and establishes the central theme of the video, highlighting the severity of the crisis and piquing interest in the underlying issues and policies contributing to the current situation. In contrast, Print media and blog posts typically use a straightforward written lede that introduces the topic concisely, relying solely on text to engage the reader.
+
+The summary of the video can be found in the segment (3:11 – 4:04). The summary outlines how the 1999 cut in capital gains tax, combined with negative gearing, has worsened issues in Australia’s housing market. It describes how these factors have created a cycle of rising property prices that encourages more investment and intensifies the affordability crisis. The summary, located near the end of the video, consolidates earlier information and provides an overview of how specific policies have led to the current crisis. This placement helps viewers grasp the combined impact of the factors before the video presents the main takeaway and broader implications.
+
+The main result appears at the end of the video (4:04 – 4:58). The main result identifies the 1999 reduction in capital gains tax, coupled with negative gearing, as a major factor worsening the Australian housing market crisis. Positioned at the end of the video, this section highlights the culmination of the factors discussed and their significant effect on the housing market. By placing it here, the video reinforces the central finding after a thorough analysis and summary, ensuring viewers grasp the primary cause and its wider implications.
+
+# Combined Reflection
+
+- Video 
+
+The format focuses on visual engagement and dynamic presentation. Videos use visuals and audio to simplify complex information, making it more engaging for viewers by incorporating charts, graphs, and narration. This mix of visuals, voice-over, and text creates an interactive, multi-sensory experience that often conveys information more effectively than text. This approach captures and maintains audience interest through interactive elements, clarifies abstract ideas, and provides a brief, easily digestible summary, which is perfect for viewers who want a quick explanation without getting into lengthy texts. Its effectiveness is captured in engagement, clarity and time efficiency. 
+
+- Print Media 
+
+In Print Media, the format designs the articles to provide a deep dive into topics, offering comprehensive analysis and rich context. This format is ideal for detailed reporting and in-depth discussions, as it organizes information systematically, following a clear journalistic structure. It allows readers to thoroughly explore subjects, making it suitable for those looking for a more profound understanding. Moreover, print articles act as a lasting resource that can be revisited, catering to readers who value detailed, well-thought-out arguments over concise summaries.
+
+
+- Blog Post
+
+Blogs are designed for accessibility by integrating text with visuals like info-graphics and charts, making the content both engaging and easy to understand. This format effectively serves both quick reads and detailed content, utilizing interactive features like hyperlinks and multimedia to boost engagement and offer additional context. By balancing text and visuals, blogs capture readers' interest and present data in a more accessible way.  They are designed for rapid consumption, catering to those who favor concise yet informative content, while their flexible, conversational style makes complex subjects more relatable for a broader audience.
+
+
+
+

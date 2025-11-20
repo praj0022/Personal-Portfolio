@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Pooja Rajendran Raju">
+<meta name="dcterms.date" content="2024-05-22">
+
+<title>Patagonia - Part 2 SCM Practices and Strategies – Pooja Rajendran Raju</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Pooja Rajendran Raju</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/praj0022"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Patagonia - Part 2 SCM Practices and Strategies</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Supply Chain</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Pooja Rajendran Raju </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 22, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="scm-practicesoperational-strategies" class="level1">
+<h1>SCM Practices/Operational Strategies</h1>
+<section id="chase-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="chase-strategy">Chase strategy</h2>
+<p>Patagonia utilizes a form of the chase strategy to manage its production and inventory efficiently, aligning closely with its sustainability goals and ensuring that it meets customer demand without overproducing.</p>
+<section id="just-in-time-jit-inventory-management" class="level3">
+<h3 class="anchored" data-anchor-id="just-in-time-jit-inventory-management">Just-in-Time (JIT) Inventory Management</h3>
+<p>Patagonia employs Just-in-Time (JIT) inventory management as part of its chase strategy to reduce inventory costs by producing and delivering products only as needed. In their production of <strong>Nano Puff</strong> jackets, where sales data and real-time demand align production schedules to match seasonal requirements. This approach is crucial during winter when demand fluctuates due to weather and market trends. JIT minimizes excess inventory, reducing waste and environmental impact, while allowing Patagonia to quickly adapt to customer demand changes, thereby avoiding stock-outs and overstock situations and maintaining operational efficiency and customer satisfaction.</p>
+</section>
+<section id="responsive-supply-chain" class="level3">
+<h3 class="anchored" data-anchor-id="responsive-supply-chain">Responsive Supply Chain</h3>
+<p>Patagonia’s supply chain is highly responsive, allowing quick adjustments to production based on real-time demand data through close collaboration with suppliers and manufacturers. Patagonia collaborates with suppliers like <strong>Tin Shed Ventures</strong>, its venture capital fund that invests in sustainable start-ups, ensuring access to innovative and flexible manufacturing processes. During peak periods, production is ramped-up to meet demand, while it is scaled back during off-peak times. This approach effectively manages inventory, reduces carrying costs, and aligns with Patagonia’s sustainability goals by preventing overproduction and waste.</p>
+<p>Patagonia’s <strong>Worn Wear Program</strong> exemplifies its chase strategy by aligning production with real-time demand and promoting sustainability. The program encourages customers to return used gear, which is then repaired, refurbished, and resold, extending product lifecycle. By tracking returned items and demand for Worn Wear products, Patagonia efficiently allocates resources, such as increasing jacket repairs before fall. This strategy enhances cost efficiency by avoiding excess inventory costs and minimizing raw material use. The <strong>Worn Wear Program</strong> provides affordable options and effectively manages inventory.</p>
+</section>
+</section>
+<section id="utilization-flexibility-strategy" class="level2">
+<h2 class="anchored" data-anchor-id="utilization-flexibility-strategy">Utilization Flexibility Strategy</h2>
+<p>Patagonia’s Utilization Flexibility Strategy employs adaptable manufacturing processes and labor practices to meet fluctuating demand and sustainability objectives. This approach enables Patagonia to quickly respond to changes, optimize resource use, and uphold high standards.</p>
+<section id="multi-skilled-workforce" class="level3">
+<h3 class="anchored" data-anchor-id="multi-skilled-workforce">Multi-Skilled Workforce</h3>
+<p>Patagonia invests significantly in training its workforce to be multi-skilled and versatile, enabling employees to perform various tasks and roles as required. In Patagonia’s repair centers, technicians undergo training to handle a wide range of repair tasks, including mending zippers and patching holes in different gear types. During peak seasons, this multi-skilled workforce ensures quick turnaround times by managing a wide variety of product repairs. While enhancing flexibility, allows Patagonia to reallocate labor resources as per current needs. Consequently, downtime is reduced, productivity is increased, as employees can seamlessly transition between tasks without requiring specialized training each time.</p>
+</section>
+<section id="adaptive-supply-chain-partners" class="level3">
+<h3 class="anchored" data-anchor-id="adaptive-supply-chain-partners">Adaptive Supply Chain Partners</h3>
+<p>Patagonia collaborates closely with supply chain partners capable of swiftly adapting to changing requirements to ensure flexibility and responsiveness. Its partnership with <strong>Yulex</strong>, a provider of plant-based rubber, enables seamless transition to more sustainable materials. When Patagonia opted to substitute neoprene with <strong>Yulex</strong> in their wetsuits, supply chain partners adjusted their processes effortlessly to accommodate this change. This adaptability enables integration of new materials and technologies efficiently while minimizing disruptions stemming from material availability fluctuations or shifts in market trends.</p>
+<p>During the COVID-19 pandemic, Patagonia effectively utilized its flexibility strategy to handle demand shifts and supply chain disruptions. After retail closures, it redeployed staff to assist with the surge in online orders and prioritized products with available materials, focusing on products like lightweight travel gear. The company transitioned to remote work, implementing systems for collaboration and flexible hours across design, marketing, and administrative functions, served customers, and upheld sustainability by focusing on less resource-intensive products. This approach ensured job security and safety for employees, fostering morale and productivity amidst adversity.</p>
+</section>
+</section>
+</section>
+<section id="tools-employed-for-productsservices-to-achieve-supply-chain-efficiency" class="level1">
+<h1>Tools Employed for Products/Services to Achieve Supply Chain Efficiency</h1>
+<p>Patagonia uses tools encompassing advanced technology, strategic partnerships, and innovative practices, all aimed at streamlining operations and optimizing performance.</p>
+<section id="enterprise-resource-planning-erp-system" class="level2">
+<h2 class="anchored" data-anchor-id="enterprise-resource-planning-erp-system">Enterprise Resource Planning (ERP) System</h2>
+<p>Patagonia utilizes <strong>SAP ERP</strong> (Enterprise Resource Planning) for streamlined inventory management, integrating data from various warehouses and retail locations to optimize stock levels and reduce excess inventory. This real-time visibility informs decisions on restocking and redistribution based on current demand and sales data. The ERP system manages supplier relationships, ensuring timely procurement of raw materials like organic cotton and recycled polyester. Automated purchase orders and supplier performance tracking maintains a consistent flow of materials without delays. This enhances operational efficiency, reducing lead times and minimizes stock-outs.</p>
+</section>
+<section id="advanced-forecasting-and-demand-planning-using-salesforce-commerce-cloud" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-forecasting-and-demand-planning-using-salesforce-commerce-cloud">Advanced Forecasting and Demand Planning using Salesforce Commerce Cloud</h2>
+<p>Patagonia utilizes <strong>Salesforce Commerce Cloud</strong>, a cloud-based platform, to predict customer demand accurately and adjust production schedules accordingly, through advanced analytics and forecasting tools. By analyzing historical sales data, market trends, and seasonal patterns, Salesforce Commerce Cloud enables Patagonia to forecast product demands effectively, such as anticipating higher sales for winter gear like insulated jackets and base layers during fall and winter. This allows Patagonia to adapt production schedules, such as increasing production for specific product lines like the <strong>R1 TechFace Hoody</strong>, to meet projected demand. Advanced forecasting minimizes overproduction and stock-outs, enhancing inventory management efficiency. Enabling Patagonia to respond promptly to market changes, improving customer satisfaction and reducing waste in the supply chain.</p>
+</section>
+</section>
+<section id="role-of-information-and-processing-strategies" class="level1">
+<h1>Role of Information and Processing Strategies</h1>
+<section id="risk-management-and-contingency-planning" class="level2">
+<h2 class="anchored" data-anchor-id="risk-management-and-contingency-planning">Risk Management and Contingency Planning</h2>
+<p>Patagonia effectively uses information to identify potential supply chain risks and develop contingency plans. In response to the COVID-19 pandemic, the company carried out risk assessment leveraging real-time sales data and supplier performance metrics. Recognizing the risk of production delays and distribution challenges, Patagonia implemented contingency planning by diversifying its supplier base, partnering with companies like <strong>Polartec</strong> along with alternative suppliers like <strong>Malden Mills</strong> and <strong>Toray Industries</strong> for fleece products and <strong>Yulex</strong> for plant-based rubber wetsuits, and adjusted production schedules based on supplier availability and capacity. Prioritizing production of versatile products like the <strong>Torrentshell 3L Jacket</strong>, which can be produced with materials from multiple suppliers. The company also communicated transparently with customers about potential delays in products such as the <strong>Down Sweater</strong> and <strong>Torrentshell 3L Jacket</strong>, offering flexible return policies to maintain customer satisfaction.</p>
+</section>
+<section id="customer-feedback-and-product-innovation" class="level2">
+<h2 class="anchored" data-anchor-id="customer-feedback-and-product-innovation">Customer Feedback and Product Innovation</h2>
+<p>Patagonia collects and analyzes customer feedback to inform product development and innovation initiatives, ensuring that its offerings align with customer preferences and market trends. Through its <strong>Worn Wear Program</strong>, it collects insights on product durability, performance, and design preferences from customers returning worn gear for repair or recycling. When multiple customers reported issues with the <strong>Torrentshell 3L Jacket</strong>, citing concerns regarding zipper durability and seam integrity, in response, Patagonia collaborated with suppliers like <strong>YKK</strong> for more durable zippers and <strong>Gore-Tex</strong> for enhanced seam sealing techniques to enhance these aspects. By integrating specific feedback from customers into its product development process, Patagonia ensures that its offerings are finely tuned to meet the evolving needs and expectations of its customer base.</p>
+</section>
+</section>
+<section id="supply-chain-obstaclesrisks-affecting-sc-coordination-efficiency" class="level1">
+<h1>Supply Chain Obstacles/Risks Affecting SC Coordination Efficiency</h1>
+<section id="environmental-disruptions-in-raw-material-supply-chains" class="level2">
+<h2 class="anchored" data-anchor-id="environmental-disruptions-in-raw-material-supply-chains">Environmental Disruptions in Raw Material Supply Chains</h2>
+<p>Environmental disruptions, such as extreme weather events and changing climate patterns, pose significant challenges to Patagonia’s supply chain for key raw materials. For instance, Patagonia sources <strong>Merino wool</strong> from suppliers like <strong>ZQ Merino</strong> in New Zealand, a region that experiences fluctuations in weather patterns, including droughts and heavy rainfall. These conditions have adversely affected sheep farming and the availability of high-quality Merino wool, creating uncertainties in the supply chain and impacting production schedules for popular products like the <strong>Merino Air Base Layer</strong>. The primary impact of these disruptions is delays in the availability of raw materials leading to production delays, hindering Patagonia’s ability to meet customer demand.</p>
+</section>
+<section id="labor-rights-violations-in-manufacturing-facilities" class="level2">
+<h2 class="anchored" data-anchor-id="labor-rights-violations-in-manufacturing-facilities">Labor Rights Violations in Manufacturing Facilities</h2>
+<p>Labor rights violations in manufacturing facilities present significant ethical and reputation risks to Patagonia’s supply chain, impacting coordination efficiency and brand integrity. Patagonia produces its outdoor apparel in factories worldwide, including in Bangladesh and Vietnam. Recent reports have highlighted issues such as unsafe working conditions and worker exploitation. For instance, the <strong>Rana Plaza</strong> supplier factory in <strong>Bangladesh</strong> forced workers to endure long hours in unsafe conditions to meet production targets for items like the Down Sweater. Similarly, <strong>Triumph International</strong> in <strong>Vietnam</strong> faced allegations of child labor and wage exploitation, impacting the production of the <strong>Torrentshell 3L Jacket</strong>. These violations damage Patagonia’s reputation as a socially responsible brand, undermining consumer trust and brand loyalty.</p>
+</section>
+</section>
+<section id="strategies-used-to-mitigate-these-risks" class="level1">
+<h1>Strategies Used to Mitigate These Risks</h1>
+<p>To address supply chain obstacles like environmental disruptions in raw material supplies and labor rights violations in manufacturing facilities, Patagonia employs targeted mitigation strategies.</p>
+<section id="environmental-disruptions-in-raw-material-supply-chains-1" class="level2">
+<h2 class="anchored" data-anchor-id="environmental-disruptions-in-raw-material-supply-chains-1">Environmental Disruptions in Raw Material Supply Chains</h2>
+<section id="strategy-1-diversification-of-supply-sources" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-1-diversification-of-supply-sources">Strategy 1: Diversification of Supply Sources</h3>
+<p>Patagonia mitigates the risk of environmental disruptions by diversifying its sources of raw materials. By working with multiple suppliers across different regions, Patagonia reduces its reliance on a single supplier or location, thereby minimizing the impact of localized environmental challenges. In addition to sourcing Merino wool from suppliers in New Zealand like <strong>ZQ Merino</strong>, Patagonia collaborates with suppliers such as <strong>Woolmark</strong> in Australia and <strong>Ovis 21</strong> in Argentina, South America. This diversification strategy ensures continuity of supply and resilience against environmental risks specific to any one region.</p>
+</section>
+<section id="strategy-2-adoption-of-sustainable-farming-practices" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-2-adoption-of-sustainable-farming-practices">Strategy 2: Adoption of Sustainable Farming Practices</h3>
+<p>Patagonia partners with suppliers such as ZQ Merino to promote sustainable farming practices that enhance resilience to environmental disruptions. By investing in regenerative agriculture, water conservation, and biodiversity preservation, Patagonia and its suppliers mitigate the impact of climate change on raw material production. Patagonia supports initiatives like the <strong>Responsible Wool Standard</strong> (RWS), ensuring ethical and sustainable practices in wool production. By sourcing RWS-certified wool, Patagonia contributes to ecosystem preservation and supports communities reliant on wool farming for their livelihoods.</p>
+</section>
+</section>
+<section id="labor-rights-violations-in-manufacturing-facilities-1" class="level2">
+<h2 class="anchored" data-anchor-id="labor-rights-violations-in-manufacturing-facilities-1">Labor Rights Violations in Manufacturing Facilities</h2>
+<section id="strategy-1-supplier-engagement-and-capacity-building" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-1-supplier-engagement-and-capacity-building">Strategy 1: Supplier Engagement and Capacity Building</h3>
+<p>Patagonia engages with its manufacturing partners in countries like Bangladesh and Vietnam through training programs, workshops, and capacity-building initiatives, Patagonia empowers suppliers to uphold ethical labor practices and create safe working environments. For instance, Patagonia collaborates with organizations such as the <strong>Fair Labor Association</strong> (FLA) to conduct supplier assessments and provide training on labor rights, health, and safety standards. By investing in supplier development, Patagonia strengthens relationships with its manufacturing partners and fosters a culture of ethical manufacturing.</p>
+</section>
+<section id="strategy-2-transparency-and-accountability" class="level3">
+<h3 class="anchored" data-anchor-id="strategy-2-transparency-and-accountability">Strategy 2: Transparency and Accountability</h3>
+<p>Patagonia prioritizes transparency and accountability in its supply chain by conducting regular audits and inspections of manufacturing facilities. It publicly discloses audit findings and corrective actions, holding itself and its suppliers accountable for any violations and committing to continuous improvement. Following the tragic incident of 2013 <strong>Rana Plaza</strong> collapse in Bangladesh, where over 1,100 garment workers lost their lives due to unsafe working conditions. Patagonia took decisive measures to address them, including terminating contracts with suppliers that failed to meet safety requirements and implementing corrective actions to improve workplace conditions. The company also pledged financial support to affected workers and their families.</p>
+</section>
+</section>
+</section>
+<section id="lessonsimprovements-from-industry-leaders" class="level1">
+<h1>Lessons/Improvements from Industry Leaders</h1>
+<section id="implementation-of-3d-printing-technology-for-customized-products" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-of-3d-printing-technology-for-customized-products">Implementation of 3D Printing Technology for Customized Products</h2>
+<p>Leading companies use 3D printing to customize products and reduce manufacturing lead times. Patagonia could integrate 3D printing into its supply chain to offer personalized items like custom-fit outerwear and accessories. By strategically investing in 3D printing, Patagonia can decentralize manufacturing, shorten lead times, and reduce excess inventory, aligning with its sustainability goals. This technology also enables rapid design iteration and prototyping, allowing Patagonia to innovate and respond swiftly to evolving customer preferences and market trends. Overall, 3D printing would enhance customer satisfaction and reduce the environmental impact of traditional manufacturing.</p>
+</section>
+<section id="development-of-supply-chain-resilience-centers" class="level2">
+<h2 class="anchored" data-anchor-id="development-of-supply-chain-resilience-centers">Development of Supply Chain Resilience Centers</h2>
+<p>Leading companies have established supply chain resilience centers to manage risks like natural disasters, geopolitical instability, and global pandemics. Patagonia can follow suit by setting up similar centers in strategic locations to monitor and address potential disruptions. These centers would function as command hubs, equipped with real-time data analytics, contingency plans, and crisis management protocols, would ensure operational continuity during emergencies. Centralizing resources and expertise would enable Patagonia to proactively manage supply chain risks, enhancing business continuity, stakeholder trust, and long-term sustainability.</p>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ol type="1">
+<li><p>Patagonia. (n.d.). Our Footprint. Retrieved from https://www.patagonia.com/our-footprint.html</p></li>
+<li><p>Cohen, M., &amp; Murphy, S. (2017). Building supply chain transparency and traceability in the garment and footwear sector: Lessons from Patagonia. Business Strategy and the Environment, 26(6), 781-794.</p></li>
+<li><p>Sharma, S., &amp; Bhagwat, Y. (2020). Patagonia Inc.&nbsp;case study. Journal of Management and Marketing Research, 27, 1-15.</p></li>
+<li><p>Mora, M. C., &amp; Motta, S. (2019). Sustainability practices and supply chain resilience: insights from the textile and clothing industry. International Journal of Production Research, 57(4), 1112-1128.</p></li>
+<li><p>Hemmati, M., &amp; Deros, B. M. (2019). Sustainable operations management in the textile and fashion industry: A literature review. Sustainability, 11(4), 1096.</p></li>
+<li><p>McShane, L., &amp; Cunningham, R. (2012). The challenge of sustaining organizational culture in a growing organization: The case of Patagonia. Journal of Organizational Culture, Communications and Conflict, 16(1), 85-94.</p></li>
+<li><p>Preble, J. F. (2016). Patagonia: A pioneer in sustainable business practices. Journal of Case Studies, 34(2), 112-120.</p></li>
+<li><p>Reddy, N. K., &amp; Sharma, S. (2017). Ethical practices of outdoor apparel companies: A case study of Patagonia. Journal of Management Research, 17(3), 109-120.</p></li>
+<li><p>Lozano, R., &amp; Shen, L. (2019). An analysis of the environmental and social practices of Patagonia: The case of an innovative company. Corporate Social Responsibility and Environmental Management, 26(1), 191-203.</p></li>
+<li><p>Yoon, Y., &amp; Shi, Y. (2018). The role of organizational culture in sustainable supply chain management: A case study of Patagonia. Journal of Cleaner Production, 194, 339-349.</p></li>
+<li><p>Kim, S. W., &amp; Seo, Y. W. (2019). The impact of supply chain agility on firm performance: An organizational capability perspective. Journal of Global Operations and Strategic Sourcing, 12(3), 283-298. https://doi.org/10.1108/JGOSS-01-2019-0002</p></li>
+<li><p>Tin Shed Ventures. (2023). Investments. Retrieved from https://www.patagonia.com/tin</p></li>
+<li><p>Responsible Wool Standard. (2024). Certified Farms and Brands. Retrieved from https://responsiblewool.org/</p></li>
+<li><p>Fair Labor Association. (2021). Patagonia, Inc.: Accreditation of the Company’s Social Compliance Program. Retrieved from https://www.fairlabor.org/report/patagonia-inc-accreditation-of-company-social-compliance-program</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

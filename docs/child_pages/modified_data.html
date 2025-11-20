@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Output Files – Pooja Rajendran Raju</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.34.0/datatables.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Pooja Rajendran Raju</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/praj0022"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Output Files</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="original-data" class="level2">
+<h2 class="anchored" data-anchor-id="original-data">Original Data</h2>
+<p>This section provides a preview of the original dataset used in this analysis.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Preview of Original Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load original dataset</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>original_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts/Proj_3_wcd2/raw_data/loanData.rds"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(original_data, <span class="dv">20</span>),     <span class="co"># show first 20 rows</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="dv">20</span>,           <span class="co"># display 20 rows</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollX =</span> <span class="cn">TRUE</span>,            <span class="co"># horizontal scrolling</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollY =</span> <span class="st">"500px"</span>,         <span class="co"># vertical scrolling</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">paging =</span> <span class="cn">FALSE</span>,            <span class="co"># no page numbers — all 20 rows visible</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">autoWidth =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Preview of the Original Loan Data (First 20 Rows)"</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4998169923829d622739" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4998169923829d622739">{"x":{"filter":"none","vertical":false,"caption":"<caption>Preview of the Original Loan Data (First 20 Rows)<\/caption>","data":[["100002130634","100003080256","100003722619","100004837443","100007361597","100014264039","100014590941","100015242204","100015715149","100015845775","100019520450","100021015676","100021519010","100022856839","100023490738","100025374033","100027040138","100027126003","100028414629","100034912112"],["R","B","R","R","C","C","C","R","C","R","C","C","B","R","C","R","R","R","R","C"],["Quicken Loans Inc.","United Shore Financial Services, Llc Dba United Wholesale Mortgage","Quicken Loans Inc.","Other","Other","Amerihome Mortgage Company, Llc","Other","Other","Truist Bank (Formerly Suntrust Bank)","Other","Truist Bank (Formerly Suntrust Bank)","Truist Bank (Formerly Suntrust Bank)","Other","Freedom Mortgage Corp.","Flagstar Bank, Fsb","Wells Fargo Bank, N.A.","Other","Other","Quicken Loans Inc.","U.S. Bank N.A."],[null,54,null,55,56,null,57,56,null,null,null,58,57,null,null,null,null,null,null,null],[4.375,4.875,3.875,3.5,3.625,4.5,4.75,3.125,4.25,4.125,4.25,3,3.5,4.375,4.375,3,5.25,3.75,4.375,4.375],[159000,94000,113000,198000,94000,114000,90000,60000,165000,250000,233000,251000,262000,114000,380000,215000,122000,237000,104000,189000],[360,360,240,360,360,360,360,180,360,360,360,180,360,180,360,180,360,180,360,360],[62,75,75,33,67,90,75,59,80,65,95,75,95,20,93,57,80,79,65,90],[62,75,75,33,67,90,75,59,80,65,95,75,95,20,93,57,80,79,65,90],[2,2,1,1,1,1,2,1,1,2,1,2,1,1,2,2,2,1,1,1],[39,36,36,30,29,38,41,26,28,45,34,41,27,26,39,31,40,40,40,36],[723,804,732,652,746,776,786,803,743,748,778,788,772,712,692,771,724,790,799,727],["N","N","N","N","N","N","N","N","Y","N","Y","N","N","N","Y","N","N","N","N","Y"],["R","P","C","R","C","P","P","C","P","P","P","C","P","C","P","R","P","R","P","P"],["SF","SF","SF","SF","SF","PU","CO","SF","SF","SF","CO","SF","SF","SF","SF","SF","CO","SF","SF","SF"],[1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],["P","I","I","P","P","P","I","P","P","P","P","S","P","P","P","P","I","P","P","P"],["CO","CT","TN","CA","AR","AR","FL","OH","TX","TN","IL","TX","MO","NJ","CA","NJ","OR","CA","NY","OR"],["804","060","370","950","729","727","331","445","786","379","606","751","631","077","906","085","972","956","138","973"],[null,null,null,null,null,25,null,null,null,null,30,null,30,null,30,null,null,null,null,25],[701,723,null,null,null,null,804,null,null,747,null,788,null,null,759,739,784,null,null,null],["/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01","/Use-12-01"],["2016-12-01","2017-02-01","2016-12-01","2017-01-01","2016-12-01","2017-03-01","2016-11-01","2016-12-01","2017-01-01","2017-03-01","2017-01-01","2016-10-01","2016-11-01","2017-01-01","2016-12-01","2017-01-01","2017-01-01","2016-12-01","2017-01-01","2017-02-01"],["2017-02-01","2017-04-01","2017-02-01","2017-03-01","2017-02-01","2017-05-01","2017-01-01","2017-02-01","2017-03-01","2017-05-01","2017-03-01","2016-12-01","2017-01-01","2017-03-01","2017-02-01","2017-03-01","2017-03-01","2017-02-01","2017-03-01","2017-04-01"],[4.375,4.875,3.875,3.5,3.625,4.5,4.75,3.125,4.25,4.125,4.25,3,3.5,4.375,4.375,3,5.25,3.75,4.375,4.375],[71623.93000000001,86259.58,99703.59,179439.55,84004.66,110497.19,82775.75999999999,43767.46,158858.72,230604.43,217884.33,182250.49,236651.18,106836.78,371582.41,161261.48,111650,225494.43,101696.14,179357.79],["19740","25540","34980","41940","22900","22220","33100","49660","12420","28940","16980","00000","41180","35620","31080","37980","38900","40900","13780","10540"],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["2019-07-01","2021-09-01","2020-03-01","2021-09-01","2021-09-01","2019-06-01","2021-09-01","2021-09-01","2019-05-01","2021-05-01","2020-10-01","2021-09-01","2021-09-01","2018-06-01","2018-06-01","2020-08-01","2021-05-01","2017-12-01","2018-06-01","2019-07-01"],["","","","","","","","","","","","","","","","","","","",""],["","","","","","","","","","","","","","","","","","","",""],["","","","","","","","","","","","","","","","","","","",""],["Quicken Loans Inc.","NationStar Mortgage, LLC","Quicken Loans, Llc","MUFG Union Bank, National Association","Other","Other","New Residential Mortgage LLC","Citizens Bank, National Association","Suntrust Bank","Pingora Loan Servicing, LLC","Truist Bank (formerly SunTrust Bank)","Truist Bank (formerly SunTrust Bank)","Other","Freedom Mortgage Corp.","Matrix Financial Services Corporation","Wells Fargo Bank, N.A.","Other","Other","Quicken Loans Inc.","U.S. Bank N.A."],[null,null,null,null,null,"2019-04-01",null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,110661.35,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],["Yoon","Guerette","Napelbaum","Wheeler","al-Mustafa","Dodge","Blais","Saqib","Broyles","Kimble","Miller","Gonzalez Hernandez","Padilla","Talley","Garcia","Le","Pagliasotti","Taylor","Leopold","Blalock"],["Rachel","Sarah","Joseph","Spencer","Sebastian","Kirubel","Faraah","Kiana","Logan","Naqaa","Cayla","Kaile","Muzammil","Juana","Tyler","Harley","Michael","Joshua","Morgan","Bryce"],[560288,904405,645585,476061,676947,34568,682922,791690,757784,773632,90861,886109,214057,301016,464881,560901,663158,980476,556976,327853],[31,42,41,41,35,35,30,30,32,31,34,45,33,34,32,33,39,38,36,41],[0,5,2,3,0,0,2,0,2,0,1,2,2,0,2,0,3,3,2,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>loan_id<\/th>\n      <th>orig_chn<\/th>\n      <th>seller<\/th>\n      <th>loan_age<\/th>\n      <th>orig_rt<\/th>\n      <th>orig_amt<\/th>\n      <th>orig_trm<\/th>\n      <th>oltv<\/th>\n      <th>ocltv<\/th>\n      <th>num_bo<\/th>\n      <th>dti<\/th>\n      <th>cscore_b<\/th>\n      <th>fthb_flg<\/th>\n      <th>purpose<\/th>\n      <th>prop_typ<\/th>\n      <th>num_unit<\/th>\n      <th>occ_stat<\/th>\n      <th>state<\/th>\n      <th>zip_3<\/th>\n      <th>mi_pct<\/th>\n      <th>cscore_c<\/th>\n      <th>aqsn_dte<\/th>\n      <th>orig_dte<\/th>\n      <th>frst_dte<\/th>\n      <th>last_rt<\/th>\n      <th>last_upb<\/th>\n      <th>msa<\/th>\n      <th>fcc_cost<\/th>\n      <th>pp_cost<\/th>\n      <th>ar_cost<\/th>\n      <th>ie_cost<\/th>\n      <th>tax_cost<\/th>\n      <th>ns_procs<\/th>\n      <th>ce_procs<\/th>\n      <th>rmw_procs<\/th>\n      <th>o_procs<\/th>\n      <th>repch_flag<\/th>\n      <th>last_activity_date<\/th>\n      <th>lpi_dte<\/th>\n      <th>fcc_dte<\/th>\n      <th>disp_dte<\/th>\n      <th>servicer<\/th>\n      <th>f30_dte<\/th>\n      <th>f60_dte<\/th>\n      <th>f90_dte<\/th>\n      <th>f120_dte<\/th>\n      <th>f180_dte<\/th>\n      <th>fce_dte<\/th>\n      <th>f180_upb<\/th>\n      <th>fce_upb<\/th>\n      <th>f30_upb<\/th>\n      <th>f60_upb<\/th>\n      <th>f90_upb<\/th>\n      <th>mod_flag<\/th>\n      <th>fmod_dte<\/th>\n      <th>fmod_upb<\/th>\n      <th>pfg_cost<\/th>\n      <th>net_loss<\/th>\n      <th>net_sev<\/th>\n      <th>modtot_cost<\/th>\n      <th>last_name<\/th>\n      <th>first_name<\/th>\n      <th>income<\/th>\n      <th>cus_age<\/th>\n      <th>no_depend<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollX":true,"scrollY":"500px","paging":false,"autoWidth":true,"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8,9,10,11,15,19,20,24,25,27,28,29,30,31,32,33,34,35,48,49,50,51,52,55,56,57,58,59,62,63,64]},{"name":"loan_id","targets":0},{"name":"orig_chn","targets":1},{"name":"seller","targets":2},{"name":"loan_age","targets":3},{"name":"orig_rt","targets":4},{"name":"orig_amt","targets":5},{"name":"orig_trm","targets":6},{"name":"oltv","targets":7},{"name":"ocltv","targets":8},{"name":"num_bo","targets":9},{"name":"dti","targets":10},{"name":"cscore_b","targets":11},{"name":"fthb_flg","targets":12},{"name":"purpose","targets":13},{"name":"prop_typ","targets":14},{"name":"num_unit","targets":15},{"name":"occ_stat","targets":16},{"name":"state","targets":17},{"name":"zip_3","targets":18},{"name":"mi_pct","targets":19},{"name":"cscore_c","targets":20},{"name":"aqsn_dte","targets":21},{"name":"orig_dte","targets":22},{"name":"frst_dte","targets":23},{"name":"last_rt","targets":24},{"name":"last_upb","targets":25},{"name":"msa","targets":26},{"name":"fcc_cost","targets":27},{"name":"pp_cost","targets":28},{"name":"ar_cost","targets":29},{"name":"ie_cost","targets":30},{"name":"tax_cost","targets":31},{"name":"ns_procs","targets":32},{"name":"ce_procs","targets":33},{"name":"rmw_procs","targets":34},{"name":"o_procs","targets":35},{"name":"repch_flag","targets":36},{"name":"last_activity_date","targets":37},{"name":"lpi_dte","targets":38},{"name":"fcc_dte","targets":39},{"name":"disp_dte","targets":40},{"name":"servicer","targets":41},{"name":"f30_dte","targets":42},{"name":"f60_dte","targets":43},{"name":"f90_dte","targets":44},{"name":"f120_dte","targets":45},{"name":"f180_dte","targets":46},{"name":"fce_dte","targets":47},{"name":"f180_upb","targets":48},{"name":"fce_upb","targets":49},{"name":"f30_upb","targets":50},{"name":"f60_upb","targets":51},{"name":"f90_upb","targets":52},{"name":"mod_flag","targets":53},{"name":"fmod_dte","targets":54},{"name":"fmod_upb","targets":55},{"name":"pfg_cost","targets":56},{"name":"net_loss","targets":57},{"name":"net_sev","targets":58},{"name":"modtot_cost","targets":59},{"name":"last_name","targets":60},{"name":"first_name","targets":61},{"name":"income","targets":62},{"name":"cus_age","targets":63},{"name":"no_depend","targets":64}],"order":[],"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="modified-data" class="level2">
+<h2 class="anchored" data-anchor-id="modified-data">Modified Data</h2>
+<p>This section provides a preview of the modified dataset after performing the de-identification and cleaning steps.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the modified dataset</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>release_dataset <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts/Proj_3_wcd2/data/release_dataset.csv"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show first 10 rows</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(release_dataset, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 0%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 6%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">X</th>
+<th style="text-align: left;">orig_chn</th>
+<th style="text-align: right;">loan_age</th>
+<th style="text-align: right;">orig_trm</th>
+<th style="text-align: right;">oltv</th>
+<th style="text-align: right;">ocltv</th>
+<th style="text-align: left;">fthb_flg</th>
+<th style="text-align: left;">purpose</th>
+<th style="text-align: left;">prop_typ</th>
+<th style="text-align: right;">num_unit</th>
+<th style="text-align: left;">occ_stat</th>
+<th style="text-align: left;">state</th>
+<th style="text-align: right;">mi_pct</th>
+<th style="text-align: left;">aqsn_dte</th>
+<th style="text-align: left;">orig_dte</th>
+<th style="text-align: right;">msa</th>
+<th style="text-align: right;">fcc_cost</th>
+<th style="text-align: right;">pp_cost</th>
+<th style="text-align: right;">ar_cost</th>
+<th style="text-align: right;">ie_cost</th>
+<th style="text-align: right;">tax_cost</th>
+<th style="text-align: right;">ns_procs</th>
+<th style="text-align: right;">ce_procs</th>
+<th style="text-align: right;">rmw_procs</th>
+<th style="text-align: right;">o_procs</th>
+<th style="text-align: right;">repch_flag</th>
+<th style="text-align: left;">lpi_dte</th>
+<th style="text-align: left;">fcc_dte</th>
+<th style="text-align: left;">disp_dte</th>
+<th style="text-align: left;">servicer</th>
+<th style="text-align: left;">f30_dte</th>
+<th style="text-align: left;">f60_dte</th>
+<th style="text-align: left;">f90_dte</th>
+<th style="text-align: left;">f120_dte</th>
+<th style="text-align: left;">f180_dte</th>
+<th style="text-align: left;">fce_dte</th>
+<th style="text-align: right;">f180_upb</th>
+<th style="text-align: right;">fce_upb</th>
+<th style="text-align: right;">f30_upb</th>
+<th style="text-align: right;">f60_upb</th>
+<th style="text-align: right;">f90_upb</th>
+<th style="text-align: right;">mod_flag</th>
+<th style="text-align: left;">fmod_dte</th>
+<th style="text-align: right;">fmod_upb</th>
+<th style="text-align: right;">pfg_cost</th>
+<th style="text-align: right;">net_loss</th>
+<th style="text-align: right;">net_sev</th>
+<th style="text-align: right;">modtot_cost</th>
+<th style="text-align: left;">age_group</th>
+<th style="text-align: right;">income_main</th>
+<th style="text-align: left;">last_activity_quarter</th>
+<th style="text-align: left;">first_date_quarter</th>
+<th style="text-align: right;">cscore_b_gen</th>
+<th style="text-align: right;">dti_p</th>
+<th style="text-align: right;">loan_amount</th>
+<th style="text-align: left;">interest_rate</th>
+<th style="text-align: left;">last_rate</th>
+<th style="text-align: left;">seller_anon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">CO</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2016-12-01</td>
+<td style="text-align: right;">19740</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Quicken Loans Inc.</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">534968.18</td>
+<td style="text-align: left;">2019-Q3</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">34.31025</td>
+<td style="text-align: right;">170237</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">Seller 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">CT</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2017-02-01</td>
+<td style="text-align: right;">25540</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">NationStar Mortgage, LLC</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(38,48]</td>
+<td style="text-align: right;">887391.10</td>
+<td style="text-align: left;">2021-Q3</td>
+<td style="text-align: left;">2017-Q2</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">33.40396</td>
+<td style="text-align: right;">91535</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">Seller 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">TN</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2016-12-01</td>
+<td style="text-align: right;">34980</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Quicken Loans, Llc</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(38,48]</td>
+<td style="text-align: right;">734186.16</td>
+<td style="text-align: left;">2020-Q1</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">39.89688</td>
+<td style="text-align: right;">113777</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">Seller 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">CA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2017-01-01</td>
+<td style="text-align: right;">41940</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">MUFG Union Bank, National Association</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(38,48]</td>
+<td style="text-align: right;">478838.56</td>
+<td style="text-align: left;">2021-Q3</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">33.16592</td>
+<td style="text-align: right;">204159</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">Seller 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">AR</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2016-12-01</td>
+<td style="text-align: right;">22900</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">684206.82</td>
+<td style="text-align: left;">2021-Q3</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">33.13404</td>
+<td style="text-align: right;">103263</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">Seller 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">PU</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">AR</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2017-03-01</td>
+<td style="text-align: right;">22220</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: left;">2019-04-01</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">110661.4</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">39822.61</td>
+<td style="text-align: left;">2019-Q2</td>
+<td style="text-align: left;">2017-Q2</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">37.99148</td>
+<td style="text-align: right;">104733</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">Seller 4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">CO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">I</td>
+<td style="text-align: left;">FL</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2016-11-01</td>
+<td style="text-align: right;">33100</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">New Residential Mortgage LLC</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">709393.14</td>
+<td style="text-align: left;">2021-Q3</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">38.44388</td>
+<td style="text-align: right;">88679</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">Seller 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">OH</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2016-12-01</td>
+<td style="text-align: right;">49660</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Citizens Bank, National Association</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">713221.74</td>
+<td style="text-align: left;">2021-Q3</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">23.96745</td>
+<td style="text-align: right;">54017</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">(2,4]</td>
+<td style="text-align: left;">Seller 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">TX</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2017-01-01</td>
+<td style="text-align: right;">12420</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Suntrust Bank</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">716033.97</td>
+<td style="text-align: left;">2019-Q2</td>
+<td style="text-align: left;">2017-Q1</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">29.35040</td>
+<td style="text-align: right;">166669</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">Seller 5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">R</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">360</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">SF</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">P</td>
+<td style="text-align: left;">TN</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">/Use-12-01</td>
+<td style="text-align: left;">2017-03-01</td>
+<td style="text-align: right;">28940</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Pingora Loan Servicing, LLC</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">(28,38]</td>
+<td style="text-align: right;">745701.72</td>
+<td style="text-align: left;">2021-Q2</td>
+<td style="text-align: left;">2017-Q2</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">46.95794</td>
+<td style="text-align: right;">234125</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">(4,6]</td>
+<td style="text-align: left;">Seller 3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="read-me" class="level2">
+<h2 class="anchored" data-anchor-id="read-me">Read Me</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>readme_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts/Proj_3_wcd2/README-Pooja-Rajendran-Raju.txt"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>readme_text <span class="ot">&lt;-</span> <span class="fu">readLines</span>(readme_path, <span class="at">warn =</span> <span class="cn">FALSE</span>, <span class="at">encoding =</span> <span class="st">"UTF-8"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(readme_text, <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1. Origin of data: The release_dataset is derived from loan performance data provided by ABC Bank. The original dataset contained personal information such as names, ages, and demographic variables, as well as transaction information related to mortgage loans. The data was collected as part of ABC Bank's efforts to analyse and understand the credit performance of mortgage loans.
+
+2. Files included with data: 
+
+a. Data Code Book: Comprehensive reference guide for understanding the variables and structure of the dataset. It provides detailed descriptions of each variable, including their names, types, values, and any transformations or processing applied to them. 
+
+b. README file: Provides information about the dataset, including its origin, contents, and usage guidelines.
+
+3. Author and the date of release: The dataset was processed and released by Pooja Rajendran Raju on 17th May 2024. 
+
+4. Data Usage and Assumptions:
+Users can utilise the dataset for analysing mortgage loan performance trends and patterns. 
+
+Assumptions made during data processing include:
+
+a. De-identification of personal information: Personal information such as names and addresses has been removed or replaced with anonymized identifiers to protect individuals' privacy and and age has been binned into age groups to preserve privacy.
+
+b. Transactional data anonymization: Transactional details have been aggregated or generalised to prevent identification of individual loan transactions.
+
+c. Compliance with regulations: The dataset has been processed in compliance with relevant privacy and data protection laws and regulations, ensuring that individuals' rights are respected and protected.</code></pre>
+</div>
+</div>
+</section>
+<section id="data-code-book" class="level2">
+<h2 class="anchored" data-anchor-id="data-code-book">Data Code Book</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>codebook_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"posts/Proj_3_wcd2/data/data-dictionary-Pooja-Rajendran-Raju.xlsx"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>codebook <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(codebook_path)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove completely blank columns</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>codebook <span class="ot">&lt;-</span> codebook <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(<span class="sc">~</span> <span class="sc">!</span><span class="fu">all</span>(<span class="fu">is.na</span>(.))))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean column names (no weird characters)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>codebook <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(codebook)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  codebook,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollX =</span> <span class="cn">TRUE</span>,         <span class="co"># horizontal scroll</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">scrollY =</span> <span class="st">"500px"</span>,      <span class="co"># fixed height + vertical scroll</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">paging =</span> <span class="cn">TRUE</span>,          <span class="co"># keep table tidy</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">autoWidth =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="dv">20</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># FORCE specific column widths (adjustable)</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">columnDefs =</span> <span class="fu">list</span>(</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"100px"</span>, <span class="at">targets =</span> <span class="dv">0</span>),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"120px"</span>, <span class="at">targets =</span> <span class="dv">1</span>),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"180px"</span>, <span class="at">targets =</span> <span class="dv">2</span>),</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"350px"</span>, <span class="at">targets =</span> <span class="dv">3</span>),   <span class="co"># Description column</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"220px"</span>, <span class="at">targets =</span> <span class="dv">4</span>),</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"120px"</span>, <span class="at">targets =</span> <span class="dv">5</span>),</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">width =</span> <span class="st">"150px"</span>, <span class="at">targets =</span> <span class="dv">6</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatStyle</span>(</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">names</span>(codebook),</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">white-space</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"normal"</span>,   <span class="co"># wrap long text</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">word-wrap</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"break-word"</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-41804439bee6827b1ce3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-41804439bee6827b1ce3">{"x":{"filter":"none","vertical":false,"data":[["Alpha List #","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108"],["File Layout Order #","18","107","106","108","100","95","94","88","101","89","56","58","24","69","71","25","70","72","60","78","76","12","9","68","67","40","77","75","104","85","53","15","38","26","102","54","52","80","87","103","79","90","96","37","91","51","98","16","83","84","2","41","27","7","19","32","57","42","3","39","43","73","99","59","92","93","63","22","29","30","21","23","8","66","65","13","20","10","4","14","62","97","36","64","34","35","55","31","28","86","1","81","17","47","61","105","48","5","74","6","49","50","11","46","44","82","45","33"],["Data Element","Adjusted Months To Maturity","Alternative Delinquency  Resolution Count","Alternative Delinquency Resolution","Total Deferral Amount","ARM Balloon Indicator","ARM Cap Structure","ARM Index","ARM Initial Fixed-Rate Period  ≤ 5 YR Indicator","ARM Plan Number","ARM Product Type","Asset Recovery Costs","Associated Taxes for Holding Property","Borrower Credit Score at Origination","Borrower Credit Score At Issuance","Borrower Credit Score Current","Co-Borrower Credit Score at Origination","Co-Borrower Credit Score At Issuance","Co-Borrower Credit Score Current","Credit Enhancement Proceeds","Cumulative Credit Event Net Gain or Loss","Cumulative Modification Loss Amount","Current Actual UPB","Current Interest Rate","Current List Price","Current List Start Date","Current Loan Delinquency Status","Current Period Credit Event Net Gain or Loss","Current Period Modification Loss Amount","Deal Name","Delinquent Accrued Interest","Disposition Date","First Payment Date","First Principal and Interest Payment Date for Interest Only Products","First Time Home Buyer Indicator","Borrower Assistance Plan","Foreclosure Costs","Foreclosure Date","Foreclosure Principal Write-off Amount","High Balance Loan Indicator","High Loan to Value (HLTV) Refinance Option Indicator","HomeReady® Program Indicator","Initial Fixed-Rate Period","Initial Interest Rate Cap Up Percent","Interest Only Indicator","Interest Rate Adjustment Frequency","Last Paid Installment Date","Lifetime Interest Rate Cap Up Percent","Loan Age","Loan Holdback Indicator","Loan Holdback Effective Date","Loan Identifier","Loan Payment History","Loan Purpose","Master Servicer","Maturity Date","Metropolitan Statistical Area (MSA)","Miscellaneous Holding Expenses and Credits","Modification Flag","Monthly Reporting Period","Months to Amortization for Interest Only Products","Mortgage Insurance Cancellation Indicator","Mortgage Insurance Type","Mortgage Margin","Net Sales Proceeds","Next Interest Rate Change Date","Next Payment Change Date","Non-Interest Bearing UPB","Number of Borrowers","Number of Units","Occupancy Type","Original Combined Loan to Value Ratio (CLTV)","Original Debt to Income Ratio","Original Interest Rate","Original List Price","Original List Start Date","Original Loan Term","Original Loan to Value Ratio (LTV)","Original UPB","Origination Channel","Origination Date","Other Foreclosure Proceeds","Periodic Interest Rate Cap Up Percent","Prepayment Premium Mortgage Flag","Principal Forgiveness Amount","Primary Mortgage Insurance Percent","Product Type","Property Preservation and Repair Costs","Property State","Property Type","Property Inspection Waiver Valuation Method","Reference Pool ID","Relocation Mortgage Indicator","Remaining Months to Legal Maturity","Repurchase Date","Repurchase Make Whole Proceeds","Repurchase Make Whole Proceeds Flag","Scheduled Principal Current","Seller Name","Servicing Activity Indicator","Servicer Name","Total Principal Current","Unscheduled Principal Current","UPB at Issuance","UPB at the Time of Removal from the Reference Pool","Zero Balance Code","Zero Balance Code Change Date","Zero Balance Effective Date","Zip Code Short"],["Description","The number of calendar months remaining until the outstanding unpaid principal balance of the mortgage loan amortizes to a zero balance, taking into account any additional prepayments, which could lead to the loan paying off earlier than its maturity date.","The total number of Alternative Delinquency Resolutions as reported by the servicer for a specific loan.","An indicator that denotes that the mortgage loan has been granted, as per the terms of Fannie Mae’s Servicing Guide, a specified plan that provides for an alternative form of mortgage payment relief to a borrower under certain eligible instances to cure a mortgage delinquency by deferring all or a certain portion of past due amounts until the maturity date of the loan.","The total amount related to one or more Alternative Delinquency Resolutions which will not accrue interest.","For an adjustable-rate mortgage loan, a code that denotes if the loan has a balloon feature.","For an adjustable-rate mortgage loan, a numeric string that explains the interest rate caps on the ARM. The first number is the Initial Interest Rate Cap Up Percent (i.e., the maximum percentage points the interest rate can adjust upward at the initial rate change date). The second number is the Periodic Interest Rate Cap Up Percent (i.e., the maximum percentage points the interest rate can adjust upward at each interest rate change date after the initial interest rate change date). The third number is the Lifetime Interest Rate Cap Up Percent (i.e., the maximum percentage points that the interest rate can adjust upward over the life of the loan relative to the initial interest rate).","For an adjustable-rate mortgage loan, the index on which an adjustable interest rate is based. The index is generally a published number, such as the average interest rate or yield on U.S. Treasury bills.","For an adjustable-rate mortgage loan, an indicator that denotes if the Initial Fixed-Rate Period is less than or equal to five years.","For an adjustable-rate mortgage loan, a code identifying the standardized plan under which the mortgage loan was delivered to Fannie Mae. The ARM plan outlines the characteristics of the adjustable-rate mortgage loan, including the ARM Index, the Initial Fixed-Rate Period, the Cap Structure, look-back days, assumability, and the option to convert to a fixed-rate mortgage loan..","For an adjustable-rate mortgage loan, a string that denotes the Initial Fixed-Rate Period, the subsequent Interest Rate Adjustment Frequency, and the Original Loan Term.","Expenses associated with removing occupants and personal property from an occupied property post foreclosure. Such expenses include relocation assistance, deed-in-lieu fee, and fees and costs associated with eviction actions.","Payment of taxes associated with holding the property.","A numerical value used by the financial services industry to evaluate the quality of borrower credit. Credit scores are typically based on a proprietary statistical model that is developed for use by credit data repositories. These credit repositories apply the model to borrower credit information to arrive at a credit score. When this term is used by Fannie Mae, it is referring to the \"classic\" FICO score developed by Fair Isaac Corporation.","A numerical value used by the financial services industry to evaluate the quality of borrower credit. Credit scores are typically based on a proprietary statistical model that is developed for use by credit data repositories. These credit repositories apply the model to borrower credit information to arrive at a credit score. When this term is used by Fannie Mae, it is referring to FICO Score 5(1) developed by Fair Isaac Corporation and provided by Equifax Inc. and is distinct from the FICO Score referenced in Fannie Mae's Selling Guide, which may be provided by any of the three major credit repositories","A numerical value used by the financial services industry to evaluate the quality of borrower credit. Credit scores are typically based on a proprietary statistical model that is developed for use by credit data repositories. These credit repositories apply the model to borrower credit information to arrive at a credit score. When this term is used by Fannie Mae, it is referring to FICO Score 5(1) developed by Fair Isaac Corporation and provided by Equifax Inc and is distinct from the FICO Score referenced in Fannie Mae's Selling Guide, which may be provided by any of the three major credit repositories.","A numerical value used by the financial services industry to evaluate the quality of borrower credit. Credit scores are typically based on a proprietary statistical model that is developed for use by credit data repositories. These credit repositories apply the model to co-borrower credit information to arrive at a credit score. When this term is used by Fannie Mae, it is referring to the \"classic\" FICO score developed by Fair Isaac Corporation.","A numerical value used by the financial services industry to evaluate the quality of borrower credit. Credit scores are typically based on a proprietary statistical model that is developed for use by credit data repositories. These credit repositories apply the model to borrower credit information to arrive at a credit score. When this term is used by Fannie Mae, it is referring to FICO Score 5(1) developed by Fair Isaac Corporation and provided by Equifax Inc and is distinct from the FICO Score referenced in Fannie Mae's Selling Guide.","A numerical value used by the financial services industry to evaluate the quality of borrower credit. Credit scores are typically based on a proprietary statistical model that is developed for use by credit data repositories. These credit repositories apply the model to borrower credit information to arrive at a credit score. When this term is used by Fannie Mae, it is referring to FICO Score 5(1) developed by Fair Isaac Corporation and provided by Equifax Inc and is distinct from the FICO Score referenced in Fannie Mae's Selling Guide.","Proceeds from primary mortgage insurance policy claims and recourse and indemnification payments from lenders under arrangements designed to limit credit exposure to Fannie Mae. ","The cumulative net realized gain or loss amounts for a mortgage loan resulting from a credit event.","The cumulative loss amount calculated for a mortgage loan resulting from a modification event.","The current actual outstanding unpaid principal balance of a mortgage loan as it contributes to the current outstanding balance of the Reference Pool, reflective of payments as actually received from the related borrower.","The rate of interest in effect for the periodic installment due.","The price at which a real property is offered for sale.","The agreed upon date, between a property seller and a broker, authorizing the broker to begin the process to procure a buyer or tenant for the property seller’s real property.","The number of months the obligor is delinquent as determined by the governing mortgage documents.","The net realized gain or loss amount calculated for a mortgage loan resulting from a credit event for the corresponding reporting period.","The loss amount calculated for a mortgage loan resulting from a modification event for the corresponding reporting period.","The title of the series issuance.","The lost accrued interest amount calculated for a mortgage loan that becomes subject to a credit event for the corresponding reporting period.","The date on which Fannie Mae’s interest in a property ends through either the transfer of the property to a third party or the satisfaction of the mortgage obligation.","The date of the first scheduled mortgage loan payment to be made by the borrower under the terms of the mortgage loan documents.","For an interest-only mortgage loan, the due date of the first monthly scheduled amortizing principal and interest (P&amp;I) payment.","An indicator that denotes if the borrower or co-borrower qualifies as a first-time homebuyer.","An indicator that denotes that the mortgage loan has been granted, as per the terms of Fannie Mae’s Servicing Guide, a specified plan that provides temporary mortgage payment relief or an opportunity for the borrower to cure a mortgage delinquency over a defined period.","Expenses associated with obtaining title to property from the mortgagor, valuing the property, and maintaining utility services to the property. Such costs include costs and fees associated with bankruptcy and foreclosure.","The date on which the completion of the legal action of foreclosure occurred.","Amounts that Fannie Mae or its loan servicers have determined to be uncollectable under applicable state laws, due to foreclosure statute of limitations.","An indicator that denotes if the original principal balance of a mortgage loan is greater than the general conforming loan limit and up to the high-cost area loan limit.","An indicator that denotes if an eligible original reference loan is refinanced under Fannie Mae’s HLTV refinance option, which results in such mortgage loan remaining in the Reference Pool, as further defined in each individual CRT document, if applicable.","An indicator that denotes if the borrower participated in Fannie Mae’s HomeReady program.\r\n\r\nHomeReady is our affordable, low down payment mortgage product designed to expand the availability of mortgage financing to creditworthy low-to-moderate-income borrowers.","For an adjustable-rate mortgage loan, the number of months between the first full month the mortgage loan accrues interest and the initial interest rate change date.","For an adjustable-rate mortgage loan, the maximum percentage points the interest rate can adjust upward at the initial interest rate change date.","An indicator that denotes if the mortgage loan is an interest-only loan, in which during an initial period of time, no scheduled principal payment is due on the mortgage loan, and the borrower's required monthly payment is set at an amount sufficient to pay only the interest due.","For an adjustable-rate mortgage loan, the number of months between scheduled rate changes. For loans with an Initial Fixed-Rate Period, the number of months between subsequent rate adjustments.","The due date of the last paid installment that was collected for the mortgage loan.","For an adjustable-rate mortgage loan, the maximum percentage points that the interest rate can adjust upward over the life of the loan relative to the initial interest rate.","The number of calendar months since the mortgage loan's origination date. For purposes of calculating this data element, origination means the date on which the first full month of interest begins to accrue.","An indicator that denotes if a loan has been moved temporarily into a ‘hold’ status to allow Fannie Mae to further evaluate unique situations that may otherwise result in a credit event or loan removal. Such situations may include loans with reported data anomalies, loans currently in forbearance due to a natural disaster or loans refinanced under the High LTV program that will continue to be included in the reference pool.","The date of the latest Loan Holdback indicator change.","A unique identifier for the mortgage loan.","The coded string of values that describes the payment performance of the loan over the most recent 24 months.  The most recent month is located to the right.","An indicator that denotes whether the mortgage loan is either a refinance mortgage or a purchase money mortgage. Purpose may be the purchase of a new property or refinance of an existing lien (with cash out or with no cash out).","Fannie Mae","The month and year in which a mortgage loan is scheduled to be paid in full as defined in the mortgage loan documents.","The numeric Metropolitan Statistical Area Code for the property securing the mortgage loan. MSAs are established by the US Office of Management and Budget. An area usually qualifies as an MSA if it is defined by the Bureau of the Census as an urbanized area and has a population of 50,000 or more in a total metropolitan area of at least 100,000. An MSA may consist of one or more counties.","Expenses and credits associated with preserving the property, including Homeowners Association and other dues; flood, hazard, and MI premiums and refunds; rental income; and title insurance costs.","An indicator that denotes if the mortgage loan has been modified.","The month and year that pertains to the servicer’s cut-off period for mortgage loan information.","For an interest-only mortgage loan, the number of months remaining until the mortgage loan begins to amortize.","An indicator that denotes if the mortgage insurance (MI) has been cancelled since origination.","The entity that is responsible for the Mortgage Insurance premium payment.","For an adjustable-rate mortgage loan, the rate that is added to the index value to establish the new interest rate (after applying all applicable caps and floors) accruing on the loan at each interest rate change date.","Total cash received from the sale of the property net of any applicable selling expenses, such as fees and commissions, allowable for inclusion under the terms of the property sale, as currently reported on the HUD-1 or other settlement statement.","For an adjustable-rate mortgage loan, the next date on which the interest rate for a loan is subject to change.","For an adjustable-rate mortgage loan, the next date on which the payment amount due from the borrower is subject to change.","A portion of the UPB, as a result of an eligible loan modification, that will not accrue interest.","The number of individuals obligated to repay the mortgage loan.","The number of units comprising the related mortgaged property (one, two, three, or four).","An indicator that denotes whether the mortgage loan, at its origination date, is secured by a principal residence, second home or investment property.","A ratio calculated at the time of origination for a mortgage loan. The CLTV reflects the loan-to-value ratio inclusive of all loans secured by a mortgaged property on the origination date of the underlying mortgage loan.","A ratio calculated at origination derived by dividing the borrower’s total monthly obligations (including housing expense) by his or her stable monthly income. This calculation is used to determine the mortgage amount for which a borrower qualifies. For values outside the allowable range, or if unknown, or if the mortgage loan is a HARP refinance, this will be blank","The original interest rate on a mortgage loan as identified in the original mortgage note.","The initial price at which a real property is offered for sale by the property seller.  ","The agreed upon date, between a property seller and a broker, authorizing the broker to begin the process to procure a buyer or tenant for the property seller’s real property.","The number of months in which regularly scheduled borrower payments are due under the terms of the related mortgage documents.","A ratio calculated at the time of origination for a mortgage loan. The Original LTV reflects the loan-to-value ratio of the loan amount secured by a mortgaged property on the origination date of the underlying mortgage loan.","The original amount of the mortgage loan as indicated by the mortgage documents.","Origination Channel refers to the way in which the loans was sourced.","The date of each individual note.","Amounts, other than sale proceeds, received by Fannie Mae following foreclosure of a property, including redemption proceeds received from the mortgagor.","For an adjustable-rate mortgage loan, the maximum percentage points the interest rate can adjust upward at each interest rate change date after the initial interest rate change date.","An indicator that denotes if the obligor is subject to a prepayment premium when voluntarily prepaying the mortgage loan.","A reduction of the UPB owed on a mortgage by a borrower that is formally agreed to by the lender and the borrower, usually in conjunction with a loan modification.","The original percentage of mortgage insurance coverage obtained for an insured conventional mortgage loan and used following the occurrence of an event of default to calculate the insurance benefit, as defined by the underlying master primary insurance policy.","An indicator that denotes whether a mortgage loan is a fixed-rate or adjustable-rate mortgage.","The expenses associated with securing and preserving the property including two major categories:  maintenance and repairs. Maintenance costs are associated with preserving the property through normal upkeep, while repairs are associated with either avoiding deterioration of the asset or a marketing decision to help maximize sales proceeds upon final disposition.","A two-letter abbreviation indicating the state or territory within which the property securing the mortgage loan is located.","An indicator that denotes whether the property type secured by the mortgage loan is a condominium, co-operative, planned urban development (PUD), manufactured home, or single-family home.","An indicator that denotes the method by which the value of the subject property was obtained.  if the appraisal requirement for a mortgage loan has been waived.","A unique identifier for the reference pool.","An indicator that denotes whether or not the type of mortgage loan is a relocation mortgage loan, made to borrowers whose employers relocate their employees.","The number of calendar months remaining until the mortgage loan is due to be paid in full based on the maturity date as defined in the mortgage documents.","The date on which a Reversed Credit Event Reference Obligation occurs with respect to a loan.","Amounts received by Fannie Mae under the terms of our representation and warranty arrangements for the repurchase of the mortgage loan or the subject property or loss reimbursement subsequent to property disposition.","Indicates if Fannie Mae received proceeds under the terms of its representation and warranty arrangements for the repurchase of the mortgage loan.","The minimum principal payment the borrower is obligated to pay for the corresponding reporting period, based on the terms provided in the related mortgage loan documents, provided that the payment is collected from the borrower by the servicer and reported to Fannie Mae for the corresponding reporting period.","The name of the entity that delivered the mortgage loan to Fannie Mae.","An indicator that denotes a change in servicing activity during the corresponding reporting period.","The name of the entity that serves as the primary servicer of the mortgage loan.","The change between the prior reporting period’s disclosed Current Actual UPB and the current reporting period’s disclosed Current Actual UPB.","The principal amount received in excess of the scheduled principal payment collected from the borrower by the servicer and reported to Fannie Mae for the corresponding reporting period.","The unpaid principal balance of the loan as of the cut-off date of the reference pool.","The unpaid principal balance of the loan at the time of removal from the reference pool.","A code indicating the reason the loan's balance was reduced to zero or experienced a credit event, if applicable.","The most recent date in which a loan status change was identified, resulting from corresponding change to the Zero Balance Code.","Date on which the mortgage loan balance was reduced to zero.","Limited to the first three digits of the code designated by the U.S. Postal Service where the subject property is located."],["Date Bound Notes",null,"CAS/CIRT/SF Loan Performance: Populated starting with the July 2020 activity period.","CAS/CIRT/SF Loan Performance: Populated starting with the July 2020 activity period.","CAS/CIRT/SF Loan Performance: Populated starting with the July 2020 activity period.",null,null,null,null,null,null,null,null,null,"CAS/CIRT: Enhanced starting with the July 2020 activity period","CAS/CIRT: Enhanced starting with the July 2020 activity period",null,"CAS/CIRT: Enhanced starting with the July 2020 activity period","CAS/CIRT: Enhanced starting with the July 2020 activity period",null,null,null,null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period","SF Loan Performance: Enhanced format with the October 2020 Release",null,null,null,null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period. Single-Family Loan Performance: Enhanced format with the October 2020 Release","SF Loan Performance: Enhanced format with the October 2020 Release",null,null,"CAS/CIRT/SF Loan Performance: Enhanced format starting with the July 2020 activity period;  previously known as Forbearance Indicator; CAS/CIRT: Starting with 2017 acquisitions and through the June 2020 activity period only the forbearance indicator (\"F\") will be reported, thereafter the as shown indicators will be reported",null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period. SF Loan Performance: Enhanced format with the October 2020 Release",null,"CAS/CIRT/SF Loan Performance: Based on loan limits after 2008. CAS/CIRT: Enhanced format starting with the July 2020 activity period","CAS/CIRT/SF Loan Performance: The note date of the mortgage being refinanced must be on or after Oct 1, 2017. CAS/CIRT: Enhanced format starting with the July 2020 activity period","CAS/CIRT/SF Loan Performance: HomeReady was rolled out with DU release 9.3 in December 2015. CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,null,null,null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period. SF Loan Performance: Enhanced format with the October 2020 Release",null,null,null,null,null,"SF Loan Performance : Align to standard starting with April 2020 monthly reporting period","CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,"SF Loan Performance: Enhanced format with the October 2020 Release",null,null,null,"SF Loan Performance: Enhanced format with the October 2020 Release",null,"CAS/CIRT: October 2017 remittance period notice","SF Loan Performance: A limited number of our loans in the SF Loan Performance data set from between [2000 and 2002] were acquired under our Investor Paid Mortgage Insurance (IPMI) programs, such loans are also coded as \"3\"",null,null,null,null,null,null,null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period","CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,null,"SF Loan Performance: Enhanced format with the October 2020 Release",null,"SF Loan Performance: Enhanced format with the October 2020 Release",null,null,null,null,null,null,null,null,"CAS/CIRT: Enhanced format starting with the July 2020 activity period","CAS/CIRT: Enhanced format starting with the July 2020 activity period",null,null,null,null,null,null,null,null,null,"SF Loan Performance: For activity periods prior to December 2001, Servicer Name will be blank since the servicer information for this period is unavailable.","SF Loan Performance: Populated starting with the July 2020 activity period.",null,null,null,null,null,null,null],["CAS","This field will be left blank for mortgage loans that have been modified.","√","Alternative Delinquency Resolution as of the respective reporting period\r\n\r\nP = payment deferral option\r\nC = payment deferral option specific to COVID-19\r\nD = payment deferral option specific to certain natural disaster related events\r\n7 = Not Applicable\r\n9 = Not Available","√","NA","NA","NA","NA","NA","NA","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","Represents the credit score provided to Fannie Mae by the Seller at the time of loan acquisition.  If the borrower credit score is unknown, the value will be blank.","Represents the most recently available borrower credit score provided by Equifax to Fannie Mae for the reference loan as of the date the CRT deal is issued. Starting with the July 2020 activity period, such borrower credit scores will be published as the mid point within a 5 point range.  If the borrower credit score is unknown, the value will be blank.","Represents the most recently available borrower credit score provided by Equifax to Fannie Mae for the reference loan. Starting with the July 2020 activity period, such borrower credit scores will be published as the mid point within a 5 point range.  If the borrower credit score is unknown, the value will be blank.","Represents the credit score provided to Fannie Mae by the Seller at the time of loan acquisition. If the co-borrower credit score  is not applicable or unknown, the value will be blank.","Represents the most recently available co-borrower credit score provided by Equifax to Fannie Mae for the reference loan as of the date the CRT deal is issued.  Starting with the July 2020 activity period, such borrower credit scores will be published as the mid point within a 5 point range.  If the co-borrower credit score is not applicable or unknown, the value will be blank.","Represents the most recently available co-borrower credit score provided by Equifax to Fannie Mae for the reference loan. Starting with the July 2020 activity period, such borrower credit scores will be published as the mid point within a 5 point range.  If the co-borrower credit score is not applicable or unknown, the value will be blank.","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","Determination of a credit event is defined in each of the individual CRT offering documents.  If the cumulative credit event net gain or loss is not applicable, the value will be blank.  This field will be populated based on the individual deal claims and reporting timeline after the disclosed Disposition Date of the mortgage loan or the subject property.","Determination of a modification event is, if applicable, defined in each of the individual CRT offering documents.  If the cumulative modification loss amount is not applicable, the value will be zero.","For a mortgage loan that has been modified, the current actual UPB will be updated to reflect the modified terms, including principal forgiveness, if applicable. The current actual UPB will be reduced to zero in the month in which the loan is removed from the Reference Pool, as applicable.  \r\n\r\nDue to borrower privacy considerations, this value will be rounded to the nearest $1,000 for the first six months of the life of the loan.","For a mortgage loan that has been modified, this value will be updated to reflect the modified terms, if applicable.","√","√","For mortgage loans removed from the reference pool or historical data set, this field will be blank, subsequent to the month of removal. If the delinquency is unknown, the value ‘XX’ will display.","Determination of a credit event is defined in each of the individual CRT offering documents.  If the current period credit event net gain or loss is not applicable, the value will be blank.  This field will be populated based on the individual deal claims and reporting timeline after the disclosed Disposition Date of the mortgage loan or the subject property.","Determination of a modification event is defined, if applicable,  in each of the individual CRT offering documents.  If the current period modification loss amount is not applicable, the value will be blank.","√","Determination of delinquent accrued interest is defined in each of the individual CRT offering documents.  This field will be populated based on the individual deal claims and reporting timeline after the disclosed Disposition Date of the mortgage loan or the subject property.","√","√","√","An individual is to be considered a first-time homebuyer who (1) is purchasing the property; (2) will reside in the property; and (3) had no ownership interest (sole or joint) in a residential property during the three-year period preceding the date of the purchase of the property. In addition, an individual who is a displaced homemaker or single parent also will be considered a first-time homebuyer if he or she had no ownership interest in a principal residence (other than a joint ownership interest with a spouse) during the preceding three-year time period.\r\n\r\nY = Yes\r\nN= No\r\nNull = Unknown","Such Borrower Assistance Plan indicator is as of the respective reporting period.\r\n\r\nF = Forbearance Plan\r\nR = Repayment Plan\r\nT = Trial Period Plan\r\nO = Other Workout Plan\r\nN = No Workout Plan\r\n7 = Not Applicable\r\n9 = Not Available","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","Servicers may also refer to this as the liquidation or sale date, not to be confused with the REO sale date.","√","Y = Yes; N = No","Y = Yes; N = No","Y = Yes; N = No","NA","NA","Y = Yes; N = No","NA","√","NA","√","Y = Yes (current)\r\nN = No (previously in loan hold but no longer in loan hold status)\r\nNull = Has not been classified under loan hold status.\r\n","√","The Loan Identifier does not correspond to other mortgage loan identifiers found in existing Fannie Mae disclosures.","For mortgage loans removed from the reference pool, this field will be blank.\r\n\r\n00 = Current\r\n01 = 30-59 days\r\n02 = 60-89 days\r\n03 = 90-119 days\r\n04 = 120 - 149 days\r\n05 = 150 - 179 days\r\n06 = 180 - 209 days, etc.\r\nXX = unknown","CASH-OUT REFINANCE = C\r\nRefinance = R\r\nPurchase = P\r\nREFINANCE-NOT SPECIFIED = U","√","For a mortgage loan that has been modified, the maturity date will be updated to reflect the modified terms, if applicable.","If the property is not in a designated MSA, the value will default to “00000.”","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","Y = Yes\r\nN = No\r\n\r\nThe Modification Flag will be set to “Y” once a mortgage loan has been modified. Given the various mortgage loan modification programs available to borrowers, a mortgage loan could be modified more than once. Although the Modification Flag is already set to “Y” from the first modification, changes related to a subsequent modification will be reflected in the data.\r\n\r\n","√","√","Y = MI has been cancelled\r\nM = MI has not been cancelled\r\nNA = Never has MI\r\n\r\nAs of the October 2017 remittance period, the MI coverage status will continue to be populated for loans removed from a given reference pool. Prior to this remittance period, the MI Cancellation reflected “Null” for all loans upon removal.","1 = Borrower Paid\r\n2 = Lender Paid\r\n3 = Enterprise Paid *\r\nNull = No MI","NA","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","NA","NA","√","√","√","Principal = P, Second = S, Investor = I  and Unknown = U","This field is calculated by adding together (i) the original loan amount of the first lien mortgage loan, (ii) the amount then currently drawn on a home equity line of credit as of the origination date of the underlying mortgage loan, and (iii) the outstanding principal balance of any other subordinate mortgage loan as of the origination date of the underlying mortgage loan, and dividing the resulting sum by the lower of (x) the sales price of the mortgaged property and (y) the value of the mortgaged property.","√","√","√","√","√","This field is calculated by dividing the original loan amount by either (1) in the case of a purchase, the lower of the sales price of a mortgaged property or its value at the time of the sale, or (2) in the case of a refinancing, the value of the mortgaged property at the time of refinancing. For the purposes of calculating the LTV ratio and determining eligibility for a mortgage loan acquired through a HARP refinancing, an appraisal is not required if Fannie Mae waived the property fieldwork requirements to establish program eligibility.  The disclosed LTV ratio for that loan is based on an estimate of value produced by an automated valuation model at the time of the refinance.  Alternatively, if Fannie Mae did not waive the property fieldwork requirements, an appraisal can be provided to Fannie Mae by the lender to establish program eligibility.  When an appraisal is obtained and is used to successfully establish HARP program eligibility, it is used to calculate the disclosed LTV ratio. Value is reported as null if LTV is &gt;97% or is &gt;200% for a mortgage loan acquired through a HARP refinance, or unknown.","Values disclosed will be rounded.","Retail = R; Correspondent = C; Broker = B","√","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","NA","Y = Yes; N = No","√","√","Adjustable Rate Mortgages = ARM; Fixed Rate Mortgages = FRM","This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","√","CO = condominium\r\nCP = co-operative\r\nPU = Planned Urban Development\r\nMH = manufactured home\r\nSF = single-family home","A = Appraisal\r\nP = Onsite Property Data Collection\r\nR = GSE Targeted Refinance\r\nW = Appraisal Waiver\r\nO = Other\r\n\r\nCAS: Applies to CAS deals after CAS 2017C07, all prior deals will reflect null values. CIRT: Applies to deals after CIRT 2017-7, all prior deals will reflect null values SF Loan Performance: Applies to acquisitions on or after Jan 1 2017, all prior acquisitions will show null values","√","Y = Yes; N = No","√","√","Includes make whole proceeds associated with mortgage loans that were part of a bulk settlement. This field will be populated after the disclosed disposition date of the mortgage loan or the subject property, as applicable, based on individual CRT deal claims and reporting timelines.","Y = Yes; N = No","The scheduled principal amount may be affected by changes to the amortization schedule resulting from prior period borrower prepayments of principal (e.g., unscheduled principal payments),  advanced scheduled payments, delinquency status of the loan, or corrections of previously made errors related to principal payments.","For sellers whose combined loans' contribution to the At Issuance UPB represents less than 1% of the total At Issuance reference pool UPB, the file will reflect \"Other\".","This indicator is designed to identify changes that have generally occurred to the primary servicer or sub-servicing arrangement for the mortgage loan.  Not all mortgage loans identified with this indicator require specific action on the part of the respective borrower or co-borrower.  \r\n\r\nY = Yes\r\nN = No","For servicers whose combined loans' contribution to the At Issuance UPB represents less than 1% of the total At Issuance reference pool UPB, the file will reflect \"Other\".","The total principal amount may be affected by corrections of previously made errors related to principal payments.  ","The unscheduled principal amount may be affected by corrections of previously made errors related to principal payments.","Cut-off date as is defined in each of the individual CRT offering documents.","Populated as a loan hits a Zero Balance Code, or is otherwise liquidated.","01 = Prepaid or Matured\r\n02 =  Third Party Sale\r\n03 = Short Sale\r\n06 = Repurchased\r\n09 = Deed-in-Lieu; REO Disposition\r\n15 = Notes Sales\r\n96 = Removal (non-credit event)\r\n\r\nApplies to all CAS deals prior to and including 2015-C03:\r\n\r\n97 = Delinquency (credit event due to D180)\r\n98 = Other Credit Event","√","√","√"],["CIRT",null,"√",null,"√","Applicable to certain CIRT offerings\r\n\r\nY = Yes; N = No","Applicable to certain CIRT offerings","Applicable to certain CIRT offerings","Applicable to certain CIRT offerings\r\n\r\nY = Yes; N = No","Applicable to certain CIRT offerings.\r\n\r\nThe list of ARM Plans can be found in Fannie Mae’s Selling Guide.","Applicable to certain CIRT offerings",null,null,null,null,null,null,null,null,null,null,null,null,null,"√","√",null,null,null,"√",null,"√","√","√",null,null,null,null,"√",null,null,null,"Applicable to certain CIRT offerings","√",null,"Applicable to certain CIRT offerings","√","Applicable to certain CIRT offerings","√",null,"√",null,null,null,"√",null,null,null,null,"√","√",null,null,"Applicable to certain CIRT offerings",null,"√","Applicable to certain CIRT offerings","√","√","√",null,null,"√","√","√","√","√",null,null,null,"√",null,"Applicable to certain CIRT offerings",null,"√","√",null,null,"√",null,null,"√",null,"√","√",null,null,"NA",null,null,null,null,"NA",null,null,null,"√","√","√"],["Single-Family Loan Performance",null,"√",null,"√","NA","NA","NA","NA","NA","NA",null,null,null,"NA","NA",null,"NA","NA",null,"NA","NA",null,null,"NA","NA",null,"NA","NA","NA","NA","√","√","√",null,null,null,null,"√",null,null,null,"NA","NA",null,"NA","√","NA","√","NA","NA",null,null,null,"NA",null,null,null,null,"√","√","NA",null,"NA",null,"NA","NA","√","√","√",null,null,"√","√","NA","NA","√",null,null,null,"√",null,"NA",null,"√","√",null,null,"√",null,null,"NA",null,"√","√",null,null,"NA","For sellers that represent less than one percent of volume within a given acquisition quarter as represented by the original unpaid principal balance, \"Other\" will be displayed in this field.",null,"For servicers that represent less than one percent of the current actual unpaid principal balance for the last month of a given quarter, \"Other\" will be displayed in this field.",null,"NA","NA",null,null,"NA","√","√"],["Type","NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","DATE","ALPHA-NUMERIC","NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","DATE","DATE","DATE","ALPHA-NUMERIC","ALPHA-NUMERIC","NUMERIC","DATE","NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","DATE","NUMERIC","NUMERIC","ALPHA-NUMERIC","DATE","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","DATE","ALPHA-NUMERIC","NUMERIC","ALPHA-NUMERIC","DATE","NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","NUMERIC","NUMERIC","DATE","DATE","NUMERIC","NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","DATE","NUMERIC","NUMERIC","NUMERIC","ALPHA-NUMERIC","DATE","NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","NUMERIC","ALPHA-NUMERIC","NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","NUMERIC","DATE","NUMERIC","ALPHA-NUMERIC","NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","ALPHA-NUMERIC","NUMERIC","NUMERIC","NUMERIC","NUMERIC","ALPHA-NUMERIC","DATE","DATE","ALPHA-NUMERIC"],["Max Length","9(3)","9(3)","X(1)","9(10).99","X(1)","X(10)","X(100)","X(1)","9(4)","X(100)","9(10).99","9(10).99","9(3)","9(3)","9(3)","9(3)","9(3)","9(3)","9(10).99","9(10).99","9(10).99","9(10).99","9(2).999","9(10).99","MMYYYY","X(2)","9(10).99","9(10).99","X(200)","9(10).99","MMYYYY","MMYYYY","MMYYYY","X(1)","X(1)","9(10).99","MMYYYY","9(10).99","X(1)","X(1)","X(1)","9(4)","9(2).9999","X(1)","9(4)","MMYYYY","9(2).9999","9(3)","X(1)","MMYYYY","X(12)","X(48)","X(1)","X(10)","MMYYYY","X(5)","9(10).99","X(1)","MMYYYY","9(3)","X (2)","X(1)","9.(2).9999","9(10).99","MMYYYY","MMYYYY","9(10).99","9(2)","9(1)","X(1)","9(3)","9(2)","9(2).999","9(10).99","MMYYYY","9(3)","9(3)","9(10).99","X(1)","MMYYYY","9(10).99","9(2).9999","X(1)","9(10).99","9(3).99","X(3)","9(10).99","X(2)","X(2)","X(1)","X(4)","X(1)","9(3)","MMYYYY","9(10).99","X(1)","9(10).99","X(50)","X(1)","X(50)","9(10).99","9(10).99","9(10).99","9(10).99","X(3)","MMYYYY","MMYYYY","X(3)"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>x1<\/th>\n      <th>x2<\/th>\n      <th>x3<\/th>\n      <th>x5<\/th>\n      <th>x7<\/th>\n      <th>respective_disclosure_notes<\/th>\n      <th>x9<\/th>\n      <th>x10<\/th>\n      <th>x11<\/th>\n      <th>x12<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"scrollY":"500px","paging":true,"autoWidth":true,"pageLength":20,"columnDefs":[{"width":"100px","targets":0},{"width":"120px","targets":1},{"width":"180px","targets":2},{"width":"350px","targets":3},{"width":"220px","targets":4},{"width":"120px","targets":5},{"width":"150px","targets":6},{"name":"x1","targets":0},{"name":"x2","targets":1},{"name":"x3","targets":2},{"name":"x5","targets":3},{"name":"x7","targets":4},{"name":"respective_disclosure_notes","targets":5},{"name":"x9","targets":6},{"name":"x10","targets":7},{"name":"x11","targets":8},{"name":"x12","targets":9}],"order":[],"orderClasses":false,"lengthMenu":[10,20,25,50,100],"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[0]; $(this.api().cell(row, 0).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[1]; $(this.api().cell(row, 1).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[2]; $(this.api().cell(row, 2).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[3]; $(this.api().cell(row, 3).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[4]; $(this.api().cell(row, 4).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[6]; $(this.api().cell(row, 6).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[7]; $(this.api().cell(row, 7).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[8]; $(this.api().cell(row, 8).node()).css({'white-space':'normal','word-wrap':'break-word'});\nvar value=data[9]; $(this.api().cell(row, 9).node()).css({'white-space':'normal','word-wrap':'break-word'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

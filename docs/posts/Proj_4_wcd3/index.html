@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Pooja Rajendran Raju">
+<meta name="dcterms.date" content="2024-05-20">
+
+<title>Exploring data methods to uncover how individuals managed anxiety and depression in 2020 – Pooja Rajendran Raju</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a14e3238c51140e99ccc48519b6ed9ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Pooja Rajendran Raju</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/praj0022"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Exploring data methods to uncover how individuals managed anxiety and depression in 2020</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Blog</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Pooja Rajendran Raju </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 20, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="how-did-individuals-manage-anxiety-and-depression-in-2020" class="level2 panel-tabset">
+<h2 class="panel-tabset anchored" data-anchor-id="how-did-individuals-manage-anxiety-and-depression-in-2020">How did individuals manage anxiety and depression in 2020?</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Data Details</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Blog post</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Behind the Scenes</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<section id="research-question" class="level4">
+<h4 class="anchored" data-anchor-id="research-question">Research Question</h4>
+<p>Exploring the prevalence of depression by age, this study aims to analyze and understand the most three commonly used methods by individuals worldwide to cope with anxiety and depression in 2020. For each coping strategy, the aim is to uncover the top five countries that relied on it the most.</p>
+</section>
+<section id="data-description" class="level4">
+<h4 class="anchored" data-anchor-id="data-description">Data Description</h4>
+<p>Our World in Data is an online platform that provides accessible and comprehensive data on global development issues. The following datasets are used from the platform for analysis:</p>
+<ol type="1">
+<li><a href="https://ourworldindata.org/grapher/dealing-with-anxiety-depression-approaches?tab=table">How do people deal with anxiety or depression? 2020</a></li>
+</ol>
+<ul>
+<li>The dataset covers the mental health sections of the Wellcome Global Monitor Survey 2020 conducted in 113 countries and territories worldwide on mental health views and experiences. The full questionnaire of the survey can be found <a href="https://cms.wellcome.org/sites/default/files/2021-11/WGM_Full_Questionnaire.pdf">here</a>.<br>
+</li>
+<li>The dataset consists of <strong>survey</strong> type data. It was last updated on April 19, 2023.</li>
+<li>Detailed description of the variables is provided in metadata and readme files.</li>
+<li><strong>Source</strong>: Wellcome Global Monitor (2021) – processed by Our World in Data</li>
+<li><strong>License</strong>: Creative Commons Attribution 4.0 International License (CC BY 4.0), this license allows users to share and adapt for any purpose, even commercially, as long as appropriate credit is given, a link to the license is provided, and any changes made are indicated.</li>
+</ul>
+<section id="data-privacy-and-ethical-considerations" class="level5">
+<h5 class="anchored" data-anchor-id="data-privacy-and-ethical-considerations">Data Privacy and Ethical Considerations</h5>
+<ul>
+<li>Based on the Deon’s Data Science Checklist the following parameters, _Informed consent, <em>Collection bias, Limit PII exposure, Data security, Missing perspectives and Dataset bias</em> in terms of Data Collection, Data Storage and Analysis respectively are considered and addressed appropriately.</li>
+<li>The share is obtained weighting the answers based on the characteristics of the participant. Data weighting is used to minimize bias in survey estimates and is intended to be used to generate nationally representative estimates within a country.</li>
+<li>Data for answers where the demographic group had less than 100 participants are filtered out.</li>
+<li>Empty answers have been filtered out. Empty answers may appear because the question was not applicable to the respondent or the respondent did not answer the question.</li>
+</ul>
+</section>
+<section id="data-limitations" class="level5">
+<h5 class="anchored" data-anchor-id="data-limitations">Data limitations</h5>
+<ul>
+<li>The dataset includes data for the year 2020 only, which restricts us from performing comparative analysis and understand what coping mechanisms dominated before and after COVID 19.</li>
+<li>Analyzing just one years data is insufficient to understand if the trends in usage of various coping methods remained consistent across the years or if there existed any variations.</li>
+<li>An age variable, wherein the preference of coping mechanism categorized by age groups would have been more useful to conduct a detailed analysis.</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://ourworldindata.org/grapher/depressive-disorders-prevalence-by-age">Depressive disorders prevalence, by age, World</a></li>
+</ol>
+<ul>
+<li>The dataset gives insight into the share of population with depressive disorders. This is estimated as the total number of cases with depressive disorders relative to the population of a country for various age groups.</li>
+<li>The dataset consists of both <strong>survey</strong> and <strong>experimental</strong> data considering the use of representative surveys and medical data . It was last updated on May 15, 2023.</li>
+<li>Detailed description of the variables is provided in metadata and readme files.</li>
+<li><strong>Source</strong>: IHME, Global Burden of Disease (2020) – processed by Our World in Data</li>
+<li><strong>License</strong>: Creative Commons Attribution 4.0 International License (CC BY 4.0), this license allows users to share and adapt for any purpose, even commercially, as long as appropriate credit is given, a link to the license is provided, and any changes made are indicated.</li>
+</ul>
+</section>
+<section id="data-privacy-and-ethical-considerations-1" class="level5">
+<h5 class="anchored" data-anchor-id="data-privacy-and-ethical-considerations-1">Data Privacy and Ethical Considerations</h5>
+<ul>
+<li>Based on the Deon’s Data Science Checklist the following parameters, _Informed consent, <em>Collection bias, Limit PII exposure, Data security, Missing perspectives and Dataset bias</em> in terms of Data Collection, Data Storage and Analysis respectively are considered and addressed appropriately.</li>
+<li>Personally identifiable information (PII) is completely anonymized.</li>
+<li>Subjects have given informed consent and collection bias is taken care of. For instance, data is collected from both diagnosed and un-diagnosed individuals.</li>
+</ul>
+</section>
+<section id="data-limitations-1" class="level5">
+<h5 class="anchored" data-anchor-id="data-limitations-1">Data limitations</h5>
+<ul>
+<li>There is a lag in the data records. Data is available only until 2019.</li>
+<li>A variable representing gender would have made the analysis more interesting and informative.</li>
+<li>Shares related to diagnosed and un-diagnosed cases should have been represented separately for better understanding.</li>
+</ul>
+</section>
+</section>
+<section id="data-download-process" class="level4">
+<h4 class="anchored" data-anchor-id="data-download-process">Data Download Process</h4>
+<ul>
+<li>Navigate to Our World in data website.</li>
+<li>Click on Browse by Topic and under Health, select Mental Health.</li>
+<li>Using the search bar, search for “How do people deal with anxiety or depression around the world? 2020”</li>
+<li>Click on the download button and select to download data in csv format.</li>
+<li>Repeat the previous two steps for downloading dataset 2. In the search bar, instead search for “Depressive disorders prevalence, by age, World, 2019”.</li>
+</ul>
+</section>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<section id="motivation" class="level4">
+<h4 class="anchored" data-anchor-id="motivation">Motivation</h4>
+<p>In today’s world, given the fast-paced life, societal pressures and economic instability, mental health especially depression has been on the rise and is becoming a global challenge affecting individuals across all ages, backgrounds, and cultures. As of 2019, the share of population in the world , suffering from either diagnosed or un-diagnosed depression from different age groups can be observed below. There is a steady increase in percentage of individuals feeling depressed with increasing age.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Moreover, the COVID-19 has significantly highlighted the importance of mental health, amplifying feelings of isolation, anxiety, and uncertainty. Despite growing awareness, stigma surrounding mental illness persists, hindering individuals from seeking help and accessing adequate support. Addressing mental health and depression requires multifaceted approaches, encompassing de-stigmatization efforts, accessible and culturally sensitive mental health services, and holistic strategies that prioritize prevention, early intervention, and community support.</p>
+<p>The blog aims to provide a comprehensive overview of global prevalence of depression and coping strategies being used. It serves as a valuable resource for anyone looking to understand the prevalence of depression among various age groups and the various ways it is being managed globally. By showcasing different coping methods being used around the world, it encourages a more inclusive and empathetic approach to mental health care, ultimately fostering a more supportive and understanding global community.</p>
+</section>
+<section id="benefits-of-analysing-how-individuals-managed-anxiety-and-depression-in-2020" class="level4">
+<h4 class="anchored" data-anchor-id="benefits-of-analysing-how-individuals-managed-anxiety-and-depression-in-2020">Benefits Of Analysing How Individuals Managed Anxiety and Depression In 2020</h4>
+<p>In ordinary circumstances, dealing with mental health conditions is already challenging. However, the additional restrictions and the distressing environment brought about by the COVID-19 pandemic have undoubtedly exacerbated these difficulties. Prolonged periods of isolation have intensified symptoms, making it even more arduous for individuals to cope. In such times, it becomes imperative to understand which coping methods have been most effective for people. This understanding plays a vital role in advancing our comprehension of mental health, enhancing support systems, and nurturing resilience within communities. It would have a direct impact on the following:</p>
+<ul>
+<li><p><strong>Improving Mental Health Interventions</strong>: Provide insights into effective coping strategies which can be used to tailor interventions that better support individuals in managing their mental health.</p></li>
+<li><p><strong>Enhancing Treatment Approaches</strong>: Refine treatment approaches to better address the specific needs based on their coping mechanisms.</p></li>
+<li><p><strong>Enhancing Self-Awareness and Resilience</strong>: Individuals themselves can benefit from understanding various coping strategies used by others and enhance theirs.</p></li>
+<li><p><strong>Advancing Research</strong>: Research into how individuals manage anxiety and depression contributes to the broader understanding of mental health leading to development of new therapeutic interventions.</p></li>
+</ul>
+</section>
+<section id="data" class="level4">
+<h4 class="anchored" data-anchor-id="data">Data</h4>
+<p>The data used for analysis can be found on Our World In Data, an online platform that provides accessible and comprehensive data on global development issues. The two datasets can be searched for as follows:</p>
+<ol type="1">
+<li><p>“How do people deal with anxiety or depression around the world? 2020”</p></li>
+<li><p>“Depressive disorders prevalence, by age, World, 2019”</p></li>
+</ol>
+<p>For more detailed information of the datasets, refer to the data code-book and readme file.</p>
+</section>
+<section id="analysis" class="level4">
+<h4 class="anchored" data-anchor-id="analysis">Analysis</h4>
+<section id="top-three-coping-methods" class="level5">
+<h5 class="anchored" data-anchor-id="top-three-coping-methods">Top Three Coping Methods</h5>
+<p>While coping with anxiety and depression varies greatly among individuals, influenced by factors such as their environment, ethnicity, and available resources, certain coping methods enjoy widespread popularity worldwide. Understanding these universally favored coping mechanisms can shed light on effective strategies for managing mental health challenges across diverse populations. So, what are the top 3 coping methods preferred by the individuals around the world?</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small" data-quarto-postprocess="true">
+<caption>Share of Use of Various Coping Methods</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Methods</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Share of Use in Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Talked_to_friends_or_family</td>
+<td style="text-align: right;">79.53809</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Spent_time_in_nature</td>
+<td style="text-align: right;">72.01470</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Improved_healthy_lifestyle_behaviors</td>
+<td style="text-align: right;">70.84874</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Made_a_change_to_personal_relationships</td>
+<td style="text-align: right;">60.42453</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Made_a_change_to_work_situation</td>
+<td style="text-align: right;">49.71871</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Took_prescribed_medication</td>
+<td style="text-align: right;">49.11862</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Talked_to_mental_health_professional</td>
+<td style="text-align: right;">44.11910</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Religious_spiritual_activities</td>
+<td style="text-align: right;">42.88649</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Among, the eight methods listed above we can conclude that three most used methods to cope with anxiety and depression were:</p>
+<ul>
+<li><p><strong>Talked_to_friends_or_family</strong>: With 79.5% of individuals reporting this as a coping method, it underscores the crucial role of social support in managing mental health. Emotional connections and conversations with loved ones provide significant comfort and reduce feelings of isolation.</p></li>
+<li><p><strong>Spending Time in Nature</strong>: At 72.01%, this method highlights the therapeutic benefits of the natural environment. Time spent outdoors is linked to reduced stress levels and improved mood, indicating the importance of incorporating nature into mental health strategies.</p></li>
+<li><p><strong>Improving Healthy Lifestyle Behaviors</strong>: With 70.85% of individuals adopting this approach, it emphasizes the impact of healthy habits, such as regular exercise, balanced nutrition, and adequate sleep, on mental well-being. These behaviors contribute to overall physical health, which is closely connected to mental health.</p></li>
+</ul>
+</section>
+<section id="for-each-coping-strategy-what-were-the-top-5-countries-they-were-most-popular-in" class="level5">
+<h5 class="anchored" data-anchor-id="for-each-coping-strategy-what-were-the-top-5-countries-they-were-most-popular-in">For Each Coping Strategy, What Were The Top 5 Countries They Were Most Popular In</h5>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1728"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above figure, we can observe that the coping methods of individuals in different countries varied widely, highlighting that there is no one-size-fits-all approach. This underscores the importance of analyzing diverse strategies to spread awareness of the various methods available and to understand which methods are best suited for different demographics. Such analysis is crucial for developing targeted interventions that cater to individuals’ specific needs based on their demographic, ethnic, and socio-economic backgrounds.</p>
+<ul>
+<li><p>For example, in countries like Ecuador, Peru, and Nicaragua, individuals tend to prefer coping methods such as improving healthy lifestyle behaviors, making changes to personal relationships, and altering work situations. These strategies reflect a focus on personal and social adjustments to manage mental health.</p></li>
+<li><p>In contrast, developed countries like the United Kingdom, Switzerland, and Canada show a preference for seeking professional help through methods such as taking prescribed medication and talking to mental health professionals. This trend indicates a reliance on medical and professional support systems available in these nations.</p></li>
+<li><p>Interestingly, the United States, Italy, and Albania show a tendency towards spending time in nature as a preferred coping method. This suggests a recognition of the therapeutic benefits of natural environments in managing stress and enhancing mental well-being.</p></li>
+<li><p>On the other hand, lower-middle-income countries such as Kenya, Nigeria, and Sri Lanka predominantly engage in religious or spiritual activities as their main coping mechanism. This highlights the cultural and spiritual dimensions of mental health management in these regions.</p></li>
+<li><p>Finally, talking to friends or family is a common coping strategy in countries like the Philippines, Zimbabwe, and Laos, emphasizing the importance of social support and community connections in these societies.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusions" class="level4">
+<h4 class="anchored" data-anchor-id="conclusions">Conclusions</h4>
+<p>In conclusion, these findings suggest that effective coping strategies for anxiety and depression often involve a combination of social interaction, engagement with nature, and the adoption of healthy lifestyle practices. These methods collectively contribute to enhancing resilience and promoting mental well-being.</p>
+<p>It highlights the importance of both professional and non-professional support systems. It shows that while some individuals in developed countries may prefer seeking help from mental health professionals and taking prescribed medication, others in lower-middle-income countries might find solace in religious or spiritual activities. Understanding diverse preferences of coping methods is essential for tailoring mental health interventions to different populations. It also provides valuable insights for researchers aiming to develop more specific and culturally appropriate strategies to support individuals across various demographics and backgrounds.</p>
+</section>
+<section id="what-makes-the-blog-interesting-to-me" class="level4">
+<h4 class="anchored" data-anchor-id="what-makes-the-blog-interesting-to-me">What Makes the Blog Interesting to Me</h4>
+<p>The blog post is particularly interesting to me as it illuminates and spreads awareness about the importance of mental health. It not only discusses the prevalence of depression but also highlights the diverse methods being used around the world to cope with it. This approach captures the essence of the problem while providing a practical guide for people to explore various strategies.</p>
+<p>One of the most compelling aspects of the post is the way it illustrates how coping methods vary based on demographics, background, and ethnicity. This variation emphasizes the necessity of understanding mental health within different cultural and socio-economic contexts. It demonstrates that while there are numerous ways to manage depression, effective coping often begins with personal-level changes, such as adjusting behaviors, spending time in nature, and reaching out to friends and family.</p>
+</section>
+<section id="references" class="level4">
+<h4 class="anchored" data-anchor-id="references">References</h4>
+<ol type="1">
+<li>Thibaut, F. (2020). “Anxiety and depression in the context of COVID-19.” International Journal of Psychiatry in Clinical Practice, 24(3), 229-231. DOI: 10.1080/13651501.2020.1760227</li>
+<li>Charlson, F., van Ommeren, M., Flaxman, A., Cornett, J., Whiteford, H., &amp; Saxena, S. (2019).”New WHO prevalence estimates of mental disorders in conflict settings: a systematic review and meta-analysis.” The Lancet, 394(10194), 240-248. DOI: 10.1016/S0140-6736(19)30934-1</li>
+<li>Thibaut, F. (2020). “Anxiety and depression in the context of COVID-19.” International Journal of Psychiatry in Clinical Practice, 24(3), 229-231. DOI: 10.1080/13651501.2020.1760227 4.Park, C. L., Russell, B. S., Fendrich, M., Finkelstein-Fox, L., Hutchison, M., &amp; Becker, J. (2020). “Americans’ COVID-19 stress, coping, and adherence to CDC guidelines.” Journal of General Internal Medicine, 35(8), 2296-2303. DOI: 10.1007/s11606-020-05898-9</li>
+<li>Wellcome Global Monitor (2021) – processed by Our World in Data. “How do people deal with anxiety or depression around the world? 2020”. Wellcome Global Monitor (2021) [original data].</li>
+<li>IHME, Global Burden of Disease (2020) – processed by Our World in Data. “Depressive disorders prevalence, by age, World”. IHME, Global Burden of Disease (2020) [original data].</li>
+</ol>
+</section>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<section id="tell-us-about-a-parts-of-your-data-processing-or-analysis-that-werent-sexy-and-wouldnt-typically-be-included-in-a-blog-post." class="level4">
+<h4 class="anchored" data-anchor-id="tell-us-about-a-parts-of-your-data-processing-or-analysis-that-werent-sexy-and-wouldnt-typically-be-included-in-a-blog-post.">Tell us about a part(s) of your data processing or analysis that weren’t “sexy” and wouldn’t typically be included in a blog post.</h4>
+<ul>
+<li>One of the most exhausting aspects of data processing was cleaning the dataset. Manually renaming all the variables, as they were poorly formatted in the raw data, was not only uninteresting but also repetitive and time-consuming. Ensuring accurate and meaningful variable names was crucial for clarity and ease of analysis.</li>
+<li>The datasets were relatively small, with a limited number of variables. This simplicity made the analysis straightforward and efficient. Additionally, there were almost no missing values, except for one instance, which ensured consistent data without any interruptions or need for extensive imputation methods.</li>
+<li>I would certainly omit the data cleaning and analysis code from the blog post. Instead, the blog would focus on the key insights and findings derived from the analysis, making it more engaging for readers. By highlighting the results and their implications, the blog can effectively communicate the value of the analysis without delving into the technical details of data preparation.</li>
+</ul>
+</section>
+<section id="were-there-any-challenges-that-you-faced-in-conducting-this-analysis.-these-may-take-the-form-of-data-limitations-or-coding-challenges" class="level4">
+<h4 class="anchored" data-anchor-id="were-there-any-challenges-that-you-faced-in-conducting-this-analysis.-these-may-take-the-form-of-data-limitations-or-coding-challenges">Were there any challenges that you faced in conducting this analysis. These may take the form of data limitations or coding challenges?</h4>
+<ul>
+<li>Conducting the analysis posed no significant challenges; however, the limited availability of data for just one year in the comparison dataset “dealing-with-anxiety-depression” severely constrained the scope of the analysis. While I managed to draw key conclusions, the absence of data spanning pre- and post-COVID periods hindered the ability to analyze any temporal trends or changes over time. Further, not having individual gender and age group variables, limited the analysis to a broader perspective.</li>
+<li>Creating the plots proved to be time-consuming, as achieving the right aesthetics and formatting to present the data in a clear and organized manner required considerable effort. -Initially, I did not anticipate substantial variations in the utilization of different coping methods for anxiety and depression across various countries. I had hoped to group the coping method variables for common countries. However, due to the unexpected diversity in coping strategies, I had to resort to using “facet_wrap” to represent each variable separately.</li>
+</ul>
+</section>
+<section id="tell-us-about-any-imperfect-parts-of-your-work-or-how-would-like-to-expand-this-analysis-in-future" class="level4">
+<h4 class="anchored" data-anchor-id="tell-us-about-any-imperfect-parts-of-your-work-or-how-would-like-to-expand-this-analysis-in-future">Tell us about any imperfect parts of your work or how would like to expand this analysis in future?</h4>
+<ul>
+<li>I aim to conduct a more comprehensive analysis by incorporating variables indicating age groups and gender and their utilization of various coping methods. This expanded dataset would enable a deeper understanding of which coping strategies are most effective for different age and gender demographics across diverse countries.</li>
+<li>Furthermore, I plan to enhance the analysis by delving into the prevalence of depression and the corresponding utilization of coping methods within each individual country. By examining these factors on a country-specific level, I aim to uncover nuanced insights into the interplay between mental health trends and coping behaviors within distinct socio-cultural contexts.</li>
+<li>Additionally, I intend to explore the potential influence of a country’s GDP on the prevalence of depression and the variation in coping method usage. By analyzing these relationships, I seek to discern whether economic factors significantly impact mental health outcomes and coping strategies. This investigation could shed light on the socio-economic determinants of mental health and inform targeted interventions aimed at mitigating disparities.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

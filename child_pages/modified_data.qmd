@@ -1,0 +1,127 @@
+---
+title: "Output Files"
+format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Original Data
+
+This section provides a preview of the original dataset used in this analysis.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show code"
+
+## Preview of Original Data
+
+library(DT)
+library(here)
+
+# Load original dataset
+original_data <- readRDS(
+  here::here("posts/Proj_3_wcd2/raw_data/loanData.rds")
+)
+
+datatable(
+  head(original_data, 20),     # show first 20 rows
+  rownames = FALSE,
+  options = list(
+    pageLength = 20,           # display 20 rows
+    scrollX = TRUE,            # horizontal scrolling
+    scrollY = "500px",         # vertical scrolling
+    paging = FALSE,            # no page numbers — all 20 rows visible
+    autoWidth = TRUE
+  ),
+  caption = "Preview of the Original Loan Data (First 20 Rows)"
+)
+
+```
+
+## Modified Data 
+
+This section provides a preview of the modified dataset after performing the de-identification and cleaning steps.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show code"
+
+library(here)
+library(knitr)
+library(readxl)
+
+
+# Load the modified dataset
+release_dataset <- read.csv(
+  here::here("posts/Proj_3_wcd2/data/release_dataset.csv")
+)
+
+# Show first 10 rows
+kable(head(release_dataset, 10))
+```
+
+## Read Me 
+```{r}
+#| code-fold: true
+#| code-summary: "Show code"
+
+readme_path <- here::here("posts/Proj_3_wcd2/README-Pooja-Rajendran-Raju.txt")
+
+readme_text <- readLines(readme_path, warn = FALSE, encoding = "UTF-8")
+
+cat(paste(readme_text, collapse = "\n"))
+```
+
+## Data Code Book 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show code"
+
+library(DT)
+library(janitor)
+library(dplyr)  
+
+
+codebook_path <- here::here("posts/Proj_3_wcd2/data/data-dictionary-Pooja-Rajendran-Raju.xlsx")
+
+codebook <- read_excel(codebook_path)
+
+# Remove completely blank columns
+codebook <- codebook %>% select(where(~ !all(is.na(.))))
+
+# Clean column names (no weird characters)
+codebook <- clean_names(codebook)
+
+
+datatable(
+  codebook,
+  rownames = FALSE,
+  options = list(
+    scrollX = TRUE,         # horizontal scroll
+    scrollY = "500px",      # fixed height + vertical scroll
+    paging = TRUE,          # keep table tidy
+    autoWidth = TRUE,
+    pageLength = 20,
+
+    # FORCE specific column widths (adjustable)
+    columnDefs = list(
+      list(width = "100px", targets = 0),
+      list(width = "120px", targets = 1),
+      list(width = "180px", targets = 2),
+      list(width = "350px", targets = 3),   # Description column
+      list(width = "220px", targets = 4),
+      list(width = "120px", targets = 5),
+      list(width = "150px", targets = 6)
+    )
+  )
+) %>%
+  formatStyle(
+    columns = names(codebook),
+    `white-space` = "normal",   # wrap long text
+    `word-wrap` = "break-word"
+  )
+```
+

@@ -1,0 +1,175 @@
+---
+title: "Coping Methods App Documentation"
+author: "Pooja Rajendran Raju"
+date: "Aug 5, 2024"
+quarto-required: ">=1.3.0"
+output:
+    html: 
+        code-fold: true
+        toc: true
+        toc-depth: 2
+categories: [App]
+---
+
+
+# Coping Methods App
+
+The **Coping Methods App** is an interactive Shiny application included with this package.
+It enables users to explore mental-health–related data through visualisations such as:
+
+- depression trends across age groups  
+- year-to-year changes  
+- comparison of coping strategies between countries  
+
+Because the app runs locally, this page provides static screenshots, key insights,
+and clear explanations to help readers understand the functionality before launching it.
+
+To run the app:
+
+```{r, eval=FALSE}
+library(copingmethods)
+launch_copingmethods()
+```
+
+---
+
+# 1. Depression by Age — Country View
+
+::: {.card style="padding: 1.2rem; margin-bottom: 1.5rem;"}
+
+###  What this visualisation shows
+
+This tab displays **depression percentages across age groups** for a selected **country/entity** and **year**.
+
+The screenshot below shows **Afghanistan (1990)**.  
+The bar chart visualises depression levels across age groups, while the table on the right provides:
+
+- depression (%) for each age group  
+- differences relative to the comparison year  
+
+::: {.center}
+<div style="text-align:center; margin-top: 1rem; margin-bottom: 1rem;">
+  <embed src="img1.pdf" type="application/pdf" width="100%" height="900px" />
+</div>
+:::
+
+*Figure 1: Depression percentages by age group for Afghanistan in 1990.*
+
+### Key insights
+::: {.callout-tip}
+- Depression increases steadily across age groups in the displayed dataset.  
+- The table provides precise numerical values alongside the visual chart.  
+- This view makes it easy to compare age-specific depression profiles across countries and years.  
+:::
+
+:::
+
+---
+
+# 2. Year-to-Year Comparison (Trend Analysis)
+
+::: {.card style="padding: 1.2rem; margin-bottom: 1.5rem;"}
+
+###  What this visualisation shows
+
+This tab compares **how depression percentages have changed over time** relative to a baseline year.
+
+The screenshot below shows **America (IHME GBD), 2009**, compared against **1990**.
+
+The plot includes:
+
+- depression (%) by age group in 2009  
+- a **yellow dashed reference line** showing the world average depression level  
+- a table that lists:
+  - depression in 1990  
+  - depression in 2009  
+  - the percentage differences  
+
+::: {.center}
+<div style="text-align:center; margin-top: 1rem; margin-bottom: 1rem;">
+  <embed src="img2.pdf" type="application/pdf" width="100%" height="900px" />
+</div>
+:::
+
+*Figure 2: Depression percentages in America (IHME GBD) for 2009 compared with 1990.*
+
+###  Key insights
+::: {.callout-tip}
+- Several age groups show increases or decreases between 1990 and 2009.  
+- The “Standardised” row provides an overall summary measure of change.  
+- The global average line allows quick comparison between America and global levels.  
+:::
+
+:::
+
+---
+
+# 3. Coping Methods Comparison — Between Countries
+
+::: {.card style="padding: 1.2rem; margin-bottom: 1.5rem;"}
+
+###  What this visualisation shows
+
+This tab compares **coping strategies** used in two selected countries.
+
+The screenshot below compares **Australia** and **India**.  
+The chart illustrates coping strategies such as:
+
+- talking to friends or family  
+- lifestyle improvements  
+- spending time in nature  
+- seeking professional help  
+- medication use  
+- work or social adjustments  
+
+::: {.center}
+<div style="text-align:center; margin-top: 1rem; margin-bottom: 1rem;">
+  <embed src="img3.pdf" type="application/pdf" width="100%" height="500px" />
+</div>
+:::
+
+
+
+*Figure 3: Comparison of coping methods between Australia and India.*
+
+###  Key insights
+::: {.callout-tip}
+- Australia shows greater use of professional services and lifestyle-based coping methods.  
+- India shows stronger use of community and family-based support strategies.  
+- The ranked bar chart clearly highlights cultural differences in coping preferences.  
+:::
+
+:::
+
+---
+
+# Full Vignette Documentation
+
+For a complete walkthrough of the app, dataset, functions, and development process, refer to:
+
+ **[Full App Overview Documentation](https://etc5523-2024.github.io/assignment-4-packages-and-shiny-apps-praj0022/)**
+
+---
+
+# Run the App Locally
+
+```{r, eval=FALSE}
+library(copingmethods)
+launch_copingmethods()
+```
+
+Launching this command will open the interactive Shiny app in your browser.
+
+---
+
+# Why This Page Exists
+
+Because hosting Shiny apps online requires paid servers,  
+this documentation page ensures the app is still fully understandable by providing:
+
+- static screenshots  
+- clear explanations  
+- highlighted insights  
+- a faithful visual representation of the interface  
+
+This allows assessors, collaborators, and website viewers to understand the app without needing to run it immediately.

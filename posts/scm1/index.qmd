@@ -1,0 +1,150 @@
+---
+title: Patagonia - Exploring Sustainable Supply Chain
+author: Pooja Rajendran Raju
+date: "May 12, 2024"
+output: 
+  html:
+    toc: true
+    toc_float:
+      collapsed: true
+categories: [Supply Chain]
+---
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+
+
+# Introduction
+
+Established in 1973 by Yvon Chouinard, [Patagonia](https://www.patagonia.com.au) began as a small climbing gear business before diversifying into outdoor apparel. The brand swiftly gained renown for its durable outdoor clothing. From the outset, Patagonia prioritized environmental sustainability and ethics, pioneering initiatives like recycled materials and fair labor standards, earning recognition for its Fair Trade Certified™ apparel.
+
+
+
+## Core Products and Services
+
+- Prolonging the longevity of its products and reducing waste. Example: [Worn Wear Program](https://wornwear.patagonia.com) promotes sustainability by repairing and recycling outdoor apparel and gear. 
+- Providing a lifetime warranty for all items sold.
+- Selecting products based on a combination of functional necessity and environmental impact, utilizing metrics like environmental profit and loss evaluations. 
+- Its core products include outdoor apparel: _Jackets_, _Fleeces_, _Base Layers_, _Backpacks & Gears_ and _Footwear_ 
+
+
+
+## Customer Base
+
+- Patagonia's customer base consists primarily of environmentally conscious individuals who value transparency, sustainability, and ethical practices along with individuals interested in sports and outdoors adventures.
+- They are attracted to Patagonia's commitment to disclosing the origin and manufacturing process of its products and sustainability measures undertaken at every stage. Materials used by company [Environmental Responsibility](https://www.patagonia.com/environmental-responsibility-materials/)
+
+
+
+## Suppliers
+- As of May 2023, Patagonia is partnered with 70 suppliers globally. Here are a few examples:
+1. **Finished Goods Outerwear** : Bangladesh: _Youngone - KSL_ , Colombia:	_Supertex - Eje Cafetero_
+2. **Finished Goods Boots** : Portugal:	_HUGAL - Indústria de Calçado, Lda_
+3. **Finished Goods Sportswear**: _Sri Lanka	Hirdaramani - Kahathuduwa_
+- Patagonia updates a comprehensive list of suppliers biannually, in May and November, making it publicly available. [Supplier List](https://eu.patagonia.com/on/demandware.static/-/Library-Sites-PatagoniaShared/default/dw0118d18e/PDF-EU/Patagonia-Finished-Goods-Supplier-List-May-2023.xlsx). 
+- Patagonia collaborates with suppliers committed to sustainability, fair labor, and transparent supply chains, implementing multi-tier checks.
+
+
+## Functional Factors 
+
+### Selling Formats
+
+- Patagonia using different selling formats through both physical and online channels including: 
+
+1. Company-Owned Retail stores: It approximately boasts of 70 retail stores globally, located in cities like New York, Chicago in the United States, Paris and Amsterdam in Europe and Osaka, Tokyo in Asia, among others. 
+
+2. Online Retail: The company hosts its own website to sell products. Where customers can browse and purchase items online. [Official Website](https://www.patagonia.com/home/)
+
+3. Authorized Dealers: It has a network of dealers whose ideals align with their pro-environmental motives. A list of its dealers is shared on their [website](https://www.patagonia.com/actionworks/dealers/). To list a few: _Evo_, _Great Outdoor Provision Co._, _The Trail Head_ and _Pack & Paddle_ 
+
+4. Wholesale Partnerships: The company engages in wholesale distribution, enabling other retailers to carry and sell Patagonia products in their stores. A few wholesale dealers are: [LA Vintage](https://lavintage.com/products/north-face-patagonia-colombia-bale-of-100-lbs), 
+[Aggregator Wholesale](https://aggregatorwholesale.com/products/copy-of-carhartt-jacket-mix)
+
+
+## What Makes Patagonia Unique 
+
+- Patagonia's holistic sustainability approach, transparency, and advocacy make it a compelling case study at the intersection of business, ethics, and environmental conservation amidst the rise of fast fashion.
+- It prioritizes product innovation using sustainable materials and conventional manufacturing to reduce its environmental footprint and maintains robust environmental and animal welfare programs for material sourcing.
+- Initiatives such as the following distinguish it from others in the industry:
+[Supply Chain Environmental Responsibility Program](https://www.patagonia.com/our-footprint/supply-chain-environmental-responsibility-program.html) , [Responsible Wool Standard](https://www.patagonia.com/our-footprint/responsible-wool-standard.html), [Fair Trade](https://www.patagonia.com/our-footprint/fair-trade.html), [Living Wage](https://www.patagonia.com/our-footprint/living-wage.html), [Regenerative Organic Certification](https://www.patagonia.com/our-footprint/regenerative-organic-certification.html)
+
+```{r echo=FALSE, fig.cap="CSR Initiatives _Source: (Patagonia, 2021)_"}
+knitr::include_graphics("sc1.png")
+
+```
+- Patagonia collaborates with NGOs, governments, academic institutions, and research centers to develop environmentally responsible supply chains, supporting its sustainability goals. Additionally, it allocates 1% of its annual revenue to environmental initiatives through the "1% for the Planet Foundation."
+
+## Data Collection
+
+- The data collection involved thorough research from Patagonia's official website, blogs, founder's notes, company history, and supplier list. Most data came from open-source information provided by the company.
+- Academic research articles and papers sourced from platforms such as _ResearchGate_, _Scholarship @ Claremont_, and _Wiley Online Library_ were consulted. Business-related data was also obtained from _Statista_ to enrich the analysis.
+- All sources are referenced below. 
+
+# Patagonia Supply Chain
+
+```{r echo=FALSE, fig.cap="Patagonia Supply Chain and Value Chain. _Source: (Pongtratic, 2007; Patagonia, 2021; Bosco, 2017)_"}
+knitr::include_graphics("sc2.png")
+
+```
+
+
+# Customer Value Creation 
+## Dimensions of Customer Value
+1. __Conformance to Requirements__
+- Patagonia emphasizes quality, longevity, and eco-friendliness in its products, using top-notch materials and ethical production standards to ensure environmental sustainability. Customers value the brand's dedication to crafting dependable and ethically sourced outdoor clothing and equipment.
+
+2. __Product Selection__
+- Patagonia provides a wide range of products suitable for outdoor enthusiasts, including technical outerwear, performance gear, casual clothing and accessories.
+- It caters to different activities and lifestyles producing high performing gear, striking a balance between functionality and sustainability.
+
+3. __Price and Brand__
+- Patagonia is a premium outdoor apparel brand with higher-priced products as compared to its competitors, due to their emphasis on quality, durability, and ethical values, which customers value and are willing to invest in. 
+- Its positive reputation for ethical business practices and environmental care enhances the value of its products and customers perception of the brand.
+
+4. __Value-added Services__
+- Patagonia provides additional services to enhance customer satisfaction. Repair Services and programs such as **Worn Wear** encourage customers to extend the life of their clothing by repairing, reusing, and recycling Patagonia products. 
+- Patagonia offers generous product warranties and guarantees on their products. 
+
+5. __Relationships and Experiences__
+- Patagonia emphasizes authentic connections with customers through personalized interactions and community engagement. Through events, workshops, and online platforms, outdoor enthusiasts have opportunities to connect, exchange experiences, and gain knowledge collectively.
+
+## Service Quality Discussion
+
+__SERVQUAL__ Service quality model in Patagonia.
+
+1. __Reliability__
+- Patagonia guarantees the quality and durability of its products through lifetime warranties and repair services. Customers can rely on their Patagonia gear to perform effectively in diverse outdoor environments.
+
+2. __Responsiveness__
+- Patagonia's customer support team is recognized for its prompt handling of inquiries, offering product suggestions, and swiftly resolving concerns. Its online resources and educational content provide access to information and support for guidance on sustainability, product maintenance, or outdoor pursuits.
+
+3. __Assurance__
+- Patagonia builds trust through transparency, sustainability, and ethical conduct. Its transparent supply chain, manufacturing procedures, and environmental efforts, assures customers of its integrity and commitment to social and environmental ethics. Fair Trade Certified™ products guarantee fair wages and safe working conditions, reinforcing Patagonia's ethical commitments.
+
+4. __Empathy__
+- Patagonia shows empathy by considering customer feedback and integrating it into product design and improvement. Through customer feedback platforms like surveys and online forums, the company provides avenues for customers to express their experiences and ideas directly to Patagonia. 
+
+5. __Tangibles__
+- Patagonia's focus on the design and layout of its retail stores, longevity of its products, and efficiency of its communication materials, like website content and product packaging elevates the holistic customer journey and strengthens its brand identity.
+
+## Service Gap Discussion
+- Considering the brand's dedication to eco-friendly supply chains, there may be unique challenges in product availability and inventory management, especially for popular or seasonal items. Variations in customer preferences, traditional manufacturing processes, and ongoing audits to ensure suppliers adhere to sustainable practices could result in occasional product shortages or unavailability.
+- Patagonia invested in a new inventory analytics model by [Aviana](https://avianaglobal.com/portfolio/patagonia/) which aims to enhance merchandising and supply planning, providing detailed inventory forecasts as said by _Sandy Buechley, Business Intelligence Manager, Patagonia_
+
+# References 
+
+1. _Official Patagnia Website_, https://www.patagonia.com.au/pages/our-footprint
+2. Environmental Responsibility, Source: Patagonia,  https://www.patagonia.com/environmental-responsibility-materials/
+3. _Patagonia Dealers_, Source: Patagonia , https://www.patagonia.com/actionworks/dealers/
+4. _How We’re Making Change_, Source: Patagonia, https://www.patagonia.com.au/pages/our-footprint
+5. _Factories, Farms and Mills_, Source: Patagonia, https://www.patagonia.com/factories-farms-mills/
+6. _Patagonia Activism_, Source: Patagonia, https://www.patagonia.com.au/pages/activism
+7. _Patagonia Supplier List_, Source: Patagonia, https://eu.patagonia.com/on/demandware.static/-/Library-Sites-PatagoniaShared/default/dw0118d18e/PDF-EU/Patagonia-Finished-Goods-Supplier-List-May-2023.xlsx
+8. Mojtaba M. Shourkaei, Kelsey M. Taylor, Bruno Dyck, _Examining sustainable supply chain management via a social-symbolic work lens: Lessons from Patagonia_, 31 August 2023,  https://doi.org/10.1002/bse.3552
+9. Bosco, Mary-Clare, _"From Yosemite to a Global Market: How Patagonia, Inc. has Created an Environmentally Sustainable and Socially Equitable Model of Supply-Chain Management"_ (2017). Pomona Senior Theses. 178. http://scholarship.claremont.edu/pomona_theses/178
+10. Aviana, _Patagonia leverages analytics and gains new insight_, https://avianaglobal.com/portfolio/patagonia/
+11. Reema Alkuwari, _Patagonia Case Analysis from a Strategic Management & Corporate Responsibility Perspective_, May 2021, https://www.researchgate.net/publication/355683944_Patagonia_Case_Analysis_from_a_Strategic_Management_Corporate_Responsibility_Perspective
+12. Martin Armstrong, _The Size of the Company 'Given Away' to Save the Planet_, Sep 15, 2022, https://www.statista.com/chart/28257/patagonia-inc-revenue-company-db/
+13. Christian Schillmann, _Patagonia Inc. under a sustainability perspective_, December 2020, https://www.researchgate.net/publication/346918561_Patagonia_Inc_under_a_sustainability_perspective

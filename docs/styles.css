@@ -1,0 +1,35 @@
+/* ================================
+   NAVBAR — force your green always
+   ================================ */
+
+.navbar,
+.navbar-dark,
+.navbar-light,
+.quarto-navbar {
+  background-color: #085E4D !important;
+  border-bottom: none !important;
+}
+
+/* ================================
+   TITLE BANNER — smooth green gradient
+   ================================ */
+
+.quarto-title-banner {
+  background: linear-gradient(90deg, #0A6F5A, #34D1A9) !important;
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+  color: white !important;
+}
+
+/* Ensure heading + subtitle text stays white */
+.quarto-title-banner h1,
+.quarto-title-banner p,
+.quarto-title-banner .title,
+.quarto-title-banner .subtitle {
+  color: white !important;
+}
+
+/* Optional tidy spacing */
+.quarto-title {
+  margin-top: 0 !important;
+}

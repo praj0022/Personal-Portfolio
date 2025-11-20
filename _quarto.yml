@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Pooja Rajendran Raju"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/praj0022
+      - icon: linkedin
+        href: https://www.linkedin.com/in/pooja-rajendran-raju-6245a2301/
+format:
+  html:
+    theme: cosmos
+    css: styles.css
+
+
+
