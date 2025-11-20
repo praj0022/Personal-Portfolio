@@ -1,0 +1,322 @@
+---
+title: "Data deidentification and modification"
+author: Pooja Rajendran Raju
+date: "2024-05-18"
+categories: [Blog]
+
+format:
+  html:
+    code-fold: true
+    include-before-body: header.html
+---
+
+```{r setup, include=FALSE}
+
+
+knitr::opts_chunk$set(echo = TRUE, 
+                      messages = FALSE, 
+                      warning = FALSE)
+library(tidyverse)
+library(here)
+library(lubridate)
+
+
+```
+
+
+
+```{r}
+loanData <- readRDS(here::here("posts/Proj_3_wcd2/raw_data/loanData.rds"))
+```
+
+# What are the steps that you need to do/check before dive in to the data.
+
+As a data ethics officer, it is imperative to verify the ethical sourcing of data and ensure that adequate measures are in place to safeguard the security and privacy of information before its use. Following [Deon's data science ethics checklist](https://deon.drivendata.org/#default-checklist), the following checks have been conducted:
+
+## Data Collection
+
+a. _Informed Consent_
+- Yes, the individual are fully informed about the data collection, its purpose, sharing and associated risks. Further, they have clear comprehension of its usage and have voluntarily agreed to participate. 
+- Contact Information of the data custodian has been made available for seeking further information on data collection and its processing. 
+- The consent records are well documented and updated regularly. Lastly, legal compliance governing the use and sharing of financial and personal data have been taken into consideration.
+
+b. _Collection Bias_
+- Yes, collection bias is considered and a diverse set of protocols are in place to mitigate collection bias, namely:
+- Varied data sources and sampling methods are used. To reduce bias, incorporation of data from multiple demographics, regions and markets, avoiding reliance on a single source or method.
+- Conducting regular audits and reviews to identify and address any emerging bias. 
+- Use of statistical adjustments, such as weighting, applied to data to correct for either under-underrepresented or over-represented groups. 
+
+c. _Limit PII exposure_
+- Yes, steps are taken to limit the exposure of personally identifiable information in the data. 
+- Data Minimization: Only data that is required and adds value to the analysis is collected. Any irrelevant information that could potentially increase the privacy risks is avoided. 
+- Anonymization: Altering PII's so that individuals can't be readily identified. For example, ZIP3 codes are provided, instead of storing the exact addresses of the property. 
+- Data Governance Policies - Clear policies and procedures are established for data handling to ensure consistent and secure data practices. 
+
+## Data Storage
+
+a. _Data Security_
+- Significant emphasis on data security to safeguard sensitive information is imposed. Data security concerns are handled diligently, following are a few: 
+- Data is encrypted to keep it safe, whether it's stored or being transmitted. A further layer of protection is added, in case of any interceptions using decryption keys. 
+- Regularly updating software and infrastructure to address any known vulnerabilities. Applying security patches and ensuring software is update date with security updates. 
+- Strictly controlled access to data with authentication mechanisms. 
+
+b. _Right to be Forgotten_
+- Yes, provisions are in place to respect individual's privacy and the right to have their personal information removed from the database upon request. 
+- Procedures and mechanisms allow individuals to submit such requests and appropriate steps will be taken to erase their information. 
+
+c. _Data Retention Plan_ 
+- To minimize privacy risks, and complying with regulatory requirements there exists a structured data retention plan to govern the duration for which data is kept. This plan specifies timelines and criteria for data deletion once no longer required for its intended use. 
+
+# 🔍 Analysis
+
+## Identification and Removal of Direct Identifiers
+- The direct identifiers identified in the dataset are as follows:
+1. Loan ID 
+2. Last name 
+3. First name 
+- Loan ID is a distinct identifier which directly links to a specific borrowers financial information. Associated with borrowers and their loan details makes it a direct identifier. 
+- Both last name and first name are directly associated with individuals and can be easily used to identify a specific individual within the dataset, following which all the loan data related to the borrower can be identified. 
+
+```{r}
+release_dataset <- loanData |>
+                   select(-loan_id, -last_name, -first_name)
+```
+
+
+## De-identification Strategy
+
+- The de- identification strategy considers the modification of the following variables: _seller_, _orig_rt_, _orig_amt_, _dti_, _cscore_b_, _frst_date_, _last_activity_date_, _last_rt_, _income_, _age_. 
+
+
+### Removal of Quasi-Identifiers 
+
+```{r}
+release_dataset <- release_dataset |>
+                   select(-no_depend, -cscore_c, -last_upb, -num_bo, -zip_3)
+```
+
+- The following variables have been excluded because they are not essential for understanding the credit performance of mortgage loans. Additionally, they are not directly relevant and could potentially be linked to the borrower.
+- _no_depend - Number of dependents_ ;  _last_upb - Last upstanding balance_ ; _num_bo - Number of borrowers_ ; _cscore_c - Credit score of co-borrower_
+ - Zip3 : After careful consideration of the variables state, MSA, and zip3, decision to remove zip3 is made. Zip3 offers more granular geographic information compared to MSA. Combining state and MSA provides a broader representation of geographical areas, reducing concerns of reidentification.
+
+
+### Aggregating the customer age 
+
+```{r}
+
+# Aggregating age into bins of 10 years
+release_dataset <- release_dataset |>
+                    mutate(age_group = cut(cus_age, breaks = c(28,38,48))) |> 
+                    select(!cus_age)                   
+```
+
+- Grouping age into bins preserves important trends and patterns while reducing the granularity of the data, making it harder to identify individuals when combined with other data. This protects privacy while still allowing analysis of credit performance across age groups.
+
+### Pertubation of Income Values
+
+```{r}
+# Using log normal pertubation on income 
+log_income <- log(release_dataset$income)
+
+# Calculating mean and standard deviation of the log-transformed income
+mean_log <- mean(log_income)
+sd_log <- sd(log_income)
+```
+
+
+```{r}
+# Log-normal perturbation
+set.seed(123) 
+
+perturbed_log_income <- log_income +
+                        rnorm(length(release_dataset$income), 
+                               mean = 0, sd = 0.1 * sd_log)
+
+perturbed_income <- exp(perturbed_log_income)
+
+# Unlisting perturbed_income 
+unlisted_perturbed_income <- unlist(perturbed_income)
+```
+
+
+```{r}
+# Adding new income to the release_dataset 
+release_dataset$income_main <- unlisted_perturbed_income
+
+# Checking the margin of error
+margin_of_error <- abs(perturbed_income - release_dataset$income)
+
+```
+
+
+```{r echo=FALSE}
+# Removing the original income variable from the dataset 
+release_dataset <- release_dataset |>
+                   select(-income)
+```
+
+
+- Initial analysis of the income variable revealed challenges with higher income ranges when using a normal distribution, as the absolute magnitude of change was relatively lesser compared to the lower margin incomes. Adjusting the standard deviation to address this issue resulted in negative values for lower income ranges.
+- Hence, log normal distribution was considered which introduced proportional variability, adding substantial changes for higher incomes as compared to the lower range of incomes. 
+- Using log normal distribution preserves statistical meaning for analysis, making it harder to identify individuals by income levels. It also addresses outliers and skewed distributions, enhancing de-identification.
+
+### Masking Dates
+
+```{r, eval= FALSE}
+
+# Converting first payment date and last activity date to quarters of the year
+release_dataset <- release_dataset |>
+                   mutate(last_activity_date = ymd(last_activity_date), 
+                          frst_dte = ymd(frst_dte))
+
+
+# Creating a function format the dates 
+get_quarter_year <- function(date) {
+  year <- format(date, "%Y")
+  month <- month(date)
+  quarter <- ceiling(month / 3)
+  paste0(year, "-Q", quarter)
+}
+
+# Applying function to last activity date
+release_dataset$last_activity_quarter <- sapply(release_dataset$last_activity_date,                                                             get_quarter_year)
+
+# Applying function to first payment date
+release_dataset$first_date_quarter <- sapply(release_dataset$frst_dte, 
+                                             get_quarter_year)
+
+release_dataset <- release_dataset |> 
+                   select(-last_activity_date,    
+                           -frst_dte)
+```
+```{r}
+library(dplyr)
+library(lubridate)
+
+release_dataset <- release_dataset |>
+  mutate(
+    last_activity_date = ymd(last_activity_date),
+    frst_dte = ymd(frst_dte),
+    last_activity_quarter = paste0(year(last_activity_date), "-Q", quarter(last_activity_date)),
+    first_date_quarter = paste0(year(frst_dte), "-Q", quarter(frst_dte))
+  ) |>
+  select(-last_activity_date, -frst_dte)
+
+```
+
+- Dates can reveal specific events and transactions associated with individuals. Converting dates into quarters of the year retains the temporal information while obscuring the exact dates. This strategy preserves the chronological order of events, allowing for analysis of trends and patterns over time and making it more challenging for re-identification.
+
+
+### Rounding borrower credit score 
+
+```{r}
+
+# Generalizing the credit score by rounding it to the nearest 100
+release_dataset$cscore_b_gen <- round(release_dataset$cscore_b / 100) * 100
+
+release_dataset <- release_dataset |> 
+                   select(-cscore_b)
+```
+
+- Borrower credit scores are specific to each borrower and can widely vary, highly increasing the risk of identification. 
+- Rounding the credit scores to the nearest 100, obscures the exact score while still preserving the general information. 
+- This maintains the overall distribution and trends of credit scores while making it more difficult to identify specific individuals based solely on their credit score.
+
+### Perturbation of DTI using Uniform Noise 
+
+```{r}
+# Adding uniform noise to each DTI value
+
+# Define the range for uniform noise
+noise_min <- -5  
+noise_max <- 5   
+
+# Add uniform noise to each DTI value
+release_dataset$dti_p <- release_dataset$dti +
+                         runif(length(release_dataset$dti), 
+                               min = noise_min, max = noise_max) 
+
+release_dataset <- release_dataset |> 
+                   select(-dti)
+```
+
+- Debt to income ratio calculated by dividing the total monthly debt expense by the total monthly income of the borrower, provides insight into the borrowers finances and can be easily identified as variables such as income are available. 
+- By adding uniform noise, it makes it harder to discern precise values while still ensuring overall distribution of DTI values remains consistent. 
+- It introduces randomness to the data, while retaining its statistical properties. 
+
+### Pertubation of Original Loan Amount
+
+```{r}
+# Scaling and adding noise 
+
+# Random scaling factor between 0.9 and 1.1
+# Random Gaussian noise with mean 0 and standard deviation 1000
+
+scaling_factor <- 0.9 + runif(length(release_dataset$orig_amt), 
+                              min = 0, max = 0.2)  
+
+noise <- rnorm(length(release_dataset$orig_amt), 
+               mean = 0, sd = 1000)  
+
+# Scaling loan amounts and add noise
+release_dataset$loan_amount <- release_dataset$orig_amt * scaling_factor + 
+                               noise
+
+# Round scaled loan amounts (optional)
+release_dataset$loan_amount <- round(release_dataset$loan_amount)
+
+release_dataset <- release_dataset |> 
+                   select(-orig_amt)
+```
+
+- Original loan amount is a distinct value unique to each borrower. This uniqueness can make it relatively easy to cross-reference with other datasets.
+- Scaling normalizes the loan amounts to a standard range and maintains a relative distribution, making it harder to link the values back to the original amounts directly. Further, rounding the scaled loan amounts to reduce precision. Lastly, adding noise to to introduce random variation in loan amounts. 
+- This approach ensures that the original loan amounts are sufficiently anonymized, reducing the risk of re-identification. It further strikes a balance between protecting borrower privacy and providing valuable insights into loan performance.
+
+### Aggregating the Original Interest Rate & Last Rate of Interest
+
+```{r}
+# Creating bins and mapping values to bins
+release_dataset <- release_dataset |>
+                    mutate(interest_rate = cut(orig_rt, breaks = c(0,2,4,6,8)), 
+                          last_rate = cut(last_rt, c(0,2,4,6,8))) |>     
+                    select(-orig_rt, -last_rt)   
+```
+
+- The loan rate is a specific financial detail and without de-identification, the loan rate, when combined with other available data (such as loan amount, date, and borrower demographics), can significantly increase the risk of re-identifying individual borrowers. 
+-  Binning groups loan rates into broader categories, which reduces the precision of the data while still preserving important patterns and trends. It masks individual loan rates within a range, enhancing privacy while allowing for meaningful analysis.
+
+
+```{r}
+
+# Anonymize seller
+unique_sellers <- unique(release_dataset$seller)
+anonymized_sellers <- paste("Seller", seq_along(unique_sellers))
+
+# Mapping anonymized sellers names to original seller names.
+seller_mapping <- setNames(anonymized_sellers, unique_sellers)
+
+release_dataset$seller_anon <- seller_mapping[release_dataset$seller]
+
+release_dataset <- release_dataset |> 
+                   select(-seller)
+```
+
+- While the seller can provide valuable insights, it can also act as an indirect identifier. Knowing the seller can sometimes lead to identification of specific loans or groups of loans further bearing implications for competition and business confidentiality.
+- Anonymizing ensures that the seller’s identity cannot be reconstructed or traced back.
+
+# Final Review of the Modified Dataset, Read Me and Datacode book
+
+- [Modified Data Review](../../child_pages/modified_data.qmd)
+
+# Resources
+
+1. National Institute of Standards and Technology. (2015). _De-Identification of Personal Information_. NISTIR 8053. Retrieved from https://nvlpubs.nist.gov/nistpubs/ir/2015/NIST.IR.8053.pdf
+2. Xie, M., & Liu, X. (2013). _Financial data protection: Data masking and encryption in core banking systems_. Journal of Financial Regulation and Compliance, 21(4), 360-372. doi:10.1108/JFRC-08-2012-0035
+3.Financial Industry Regulatory Authority. (2018). _Regulatory Notice 18-31: Guidance on Data Security Practices_. Retrieved from https://www.finra.org/sites/default/files/notice_doc_file_ref/Regulatory-Notice-18-31.pdf
+4. Deon. _An ethics checklist for data scientists_. 
+Retrieved from https://deon.drivendata.org/#default-checklist
+5. Barker, E., Branstad, D., & Smid, M. (2015). _Guide to Protecting the Confidentiality of Personally Identifiable Information (PII) (NIST SP 800-122)_. National Institute of Standards and Technology. Retrieved from https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-122.pdf
+
+
+

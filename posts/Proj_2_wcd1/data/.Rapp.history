@@ -1,0 +1,9 @@
+load("/Users/ksau0003/Documents/Git/wcd-private/assessments/assignment1_template/data/airports.rda")
+example_data
+airports
+load("/Users/ksau0003/Documents/Git/wcd-private/assessments/assignment1_template/data/bird.rda")
+birds
+example_data
+bird
+ls
+ls()
