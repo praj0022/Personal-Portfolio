@@ -99,3 +99,10 @@ posts/scm2/*.png
 # -----------------------------
 .DS_Store
 Thumbs.db
+
+posts/Proj_2_wcd1/
+posts/Proj_3_wcd2/
+posts/ml1/
+posts/ml2/
+docs/posts/assign02-fix-praj0022/assign02-submission.html
+
