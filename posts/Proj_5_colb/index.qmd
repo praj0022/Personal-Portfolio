@@ -347,6 +347,7 @@ ggplot(energy_data_long, aes(x = Year, y = value, color = variable)) +
 ```{r Loading Dataset}
 #Here's the dataset looks like
 dataset <- read.csv("data/share-of-low-carbon-energy-vs-gdp.csv")
+
 ```
 
 ```{r Data Cleaning step-1: column names and removing irrelevant, message=FALSE}

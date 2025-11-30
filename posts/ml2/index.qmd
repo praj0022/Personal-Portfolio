@@ -84,11 +84,13 @@ conflicts_prefer(palmerpenguins::penguins)
 conflicts_prefer(tourr::flea)
 ```
 
+This project explores two areas of statistical learning: understanding structure in multivariate data using resampling, and comparing modelling approaches for a supervised classification task. In the first part, the focus is on the women’s cricket dataset, where principal component analysis (PCA) is used to identify the main sources of variation after removing non-numeric variables. Bootstrap resampling and permutation tests are then used to assess which variables contribute most strongly to the leading components and whether observed relationships between variables are stronger than what would be expected by chance.
 
+The second part shifts to a classification problem involving time-series features from birdsongs and financial data. Here, several classifiers: logistic regression, linear discriminant analysis, decision trees, random forests, and boosted trees are fitted and evaluated. The analysis examines model performance, tuning behaviour, and how well each approach captures the patterns that differentiate the two classes.
 
 #### Bootstrapping and permuting your way to provide evidence 
 
-#### a.
+This section applies PCA to the women’s cricket data (after removing irrelevant variables) to identify the main directions of variation in player performance. Bootstrap resampling is then used to determine which variables consistently contribute to PC1 and PC2, providing stability insight beyond the original PCA loadings.
 
 **Data Wrangling**
 
@@ -320,7 +322,9 @@ Based on the analysis, PC1 reflects overall activity, with large contributions f
 
 Whereas in PC2, The original PCA loadings show a clear contrast between bowling and batting as in bowling metrics have positive loadings, while batting metrics are negative. This separation suggests that PC2 distinguishes bowlers from batters. The bootstrap confidence intervals support this finding, intervals for bowling-related variables such as Economy, Wickets, BowlingAverage, BowlingStrikeRate, RunsConceeded and Maidens remain fully above zero, indicating a consistent and significant contribution to PC2. In contrast, intervals for batting metrics like RunsScored, HighScore, BattingAverage, and Fifties are negative or cross zero, suggesting their influence on PC2 is weaker and  contribution is less stable.
 
-#### b.
+#### Observing Correlations Through Permutation Tests and Lineups
+
+Here we investigate whether observed correlations in the cricket data are stronger than what would occur under randomness. Using permutation tests, null distributions, and lineup plots, we assess the strength, visual detectability, and statistical significance of relationships such as RunsScored–HighScore.
 
 **RunsScored vs HighScore** 
 
@@ -571,7 +575,7 @@ In the lineup plot for RunsScored versus RunsConceded, the true data plot is pos
 
 #### How well can we build a simple classifier? 
 
-#### a.
+Here we examine how birdsong and financial time-series features differ through visualisations, grand tours, and plots. The goal is to understand class separation and assess assumptions such as normality, equal variances and independence required for linear classifiers.
 
 **Data Analysis**
 
@@ -744,7 +748,9 @@ The dataset is ordered with 500 finance samples followed by 474 birdsongs sample
 
 
 
-#### b. 
+#### Train-Test Split
+
+A stratified train–test split is used to preserve the class balance between birdsongs and finance data. This prepares a fair setting for training models and evaluating their out of sample performance.
 
 **Split the data into training and testing sets**
 ```{r}
@@ -793,9 +799,11 @@ train_plot + test_plot
 
 The distribution looks good and well-balanced across the training and testing datasets, which means the stratified sampling worked correctly. The bars are nearly equal for both birdsongs and finance, indicating there is no class imbalance.
 
-#### c.
+#### Exploring Linear Classifiers
 
 **Fitting a linear classifier to the training data**
+
+Linear models are fitted to study how well simple decision boundaries separate the two time-series classes. Coefficients and discriminant directions are interpreted to understand which features drive model decisions.
 
 **Logistic model**
 
@@ -869,9 +877,11 @@ Both classes are equally weighted (0.5), reflecting balanced consideration durin
 
 The LDA model leverages entropy as the most powerful discriminator for birdsongs, while linearity and covariate2 drive the classification towards finance. This reinforces the understanding that financial data are more structured, while birdsongs are more random and disordered.
 
-#### d. 
+#### Evaluating Classifier Performance
 
 **Evaluate the model** 
+
+Using confusion matrices, prediction probabilities, and misclassification patterns, we assess how logistic regression and LDA perform on both training and testing sets. This shows where linear models succeed and where class overlap leads to errors.
 
 **Trainig data evaluation**
 
@@ -1197,7 +1207,10 @@ ggplot() +
 - Several points overlap, confirming the 62 common misclassifications.
 
 
-#### e. 
+#### ROC and AUC Analysis
+
+ROC curves and AUC values are used to compare the ranking ability of the linear models across all possible thresholds. This provides a threshold-free measure of classification quality.
+
 ```{r}
 #| echo: true
 #| code-fold: true
@@ -1240,7 +1253,8 @@ Both models perform well, but LDA has a slight advantage with its higher AUC.
 While the difference is not massive, it indicates LDA is just a bit better at identifying true positives while keeping false positives lower.
 
 
-#### f. 
+#### f. Interpreting Model Findings and Class Differences
+
 - The analysis shows that financial time series and birdsongs have pretty distinct patterns. Financial data are generally more structured and linear, with higher linearity and covariate2 values reflecting the smooth, predictable trends you’d expect in markets. On the other hand, birdsongs are much more random and unpredictable, which is captured well by their higher entropy values. 
 - Both models picked up on these differences, entropy was a strong indicator for birdsongs, while linearity pointed more towards finance. Interestingly, finance series were sometimes mistaken for birdsongs, suggesting there are some irregularities in financial data that mirror the chaotic patterns of birdsongs. 
 - Lastly, the models did a good job capturing these differences, though there are still some tricky overlaps that lead to misclassifications.
@@ -1249,9 +1263,11 @@ While the difference is not massive, it indicates LDA is just a bit better at id
 
 #### Tuning a non-linear classifier 
 
-#### a. Fitting a bad decision tree 
+#### Fitting a bad decision tree 
 
-Below, a decision tree is constructed using constarints min_n = 1 and cost_complexity = 0. This is a bad decision tree as it is not regularized and will likely overfit the training data. 
+Understanding the need for regularization in decision trees:
+
+- Below, a decision tree is constructed using constarints min_n = 1 and cost_complexity = 0. This is a bad decision tree as it is not regularized and will likely overfit the training data. 
 
 ```{r}
 #| echo: true
@@ -1334,7 +1350,9 @@ rpart.plot::rpart.plot(bad_tree_model, main = "Bad Decision Tree", roundint = FA
 - With cost_complexity = 0, there’s no pruning to reduce unnecessary splits, resulting in an overgrown structure that’s cluttered and difficult to interpret.
 - The model memorises the training data but fails to generalise, this is a clear case of overfitting. It captures noise instead of meaningful patterns, highlighting the importance of proper tuning.
 
-#### b. Hyper parameters 
+#### Hyper parameters 
+
+Tree depth, minimum node size, and cost-complexity are tuned using cross-validation to identify a more stable model. This section examines how tuning affects tree behaviour and generalisation.
 
 **Defineing  the decision tree model with the hyperparameters set to tune()**
 
@@ -1494,7 +1512,9 @@ Cost Complexity: 1e-10
 This configuration achieved the highest average accuracy of 0.91, with strong ROC AUC and low standard errors, indicating reliable and consistent performance across cross-validation folds.
 
 
-#### c. 
+#### Fitting the model using the best hyperparameters
+
+The best hyperparameters are used to fit a refined decision tree, which is then evaluated on the test set. Improvements are compared against the unregularised tree to show the impact of tuning.
 
 **Fit the final model using the best hyperparameters**
 
@@ -1638,6 +1658,8 @@ roc_auc(test_predictions, truth = type, .pred_birdsongs)
 
 
 #### Which is the better classifier? 
+
+A random forest is tuned and fitted to capture nonlinear patterns and feature interactions. We compare its performance to linear and single-tree models to see how ensemble methods improve stability and accuracy.
 
 #### a. Random Forest Model 
 
@@ -1785,7 +1807,9 @@ test_rf_metrics
 The model achieved 86.5% accuracy and a Kappa of 0.73 on the test set. The ~11% drop from training accuracy is reasonable and indicates that the model didn’t overfit. It was able to learn meaningful patterns from the training data that carry over to new data. The Kappa score still shows strong agreement with the true labels, suggesting reliable generalisation.
 
 
-#### b. 
+#### Exploring Boosted Trees 
+
+A boosted tree model is fitted to explore how sequential learning captures difficult cases. Tuning results and performance metrics help assess bias-variance trade-offs relative to the random forest.
 
 **Boosted tree model**
 
@@ -1955,7 +1979,9 @@ test_boost_conf
 
 
 
-#### c
+#### Classifier Comparison and Final Insights
+
+All classifiers (logistic, LDA, tuned tree, random forest, boosted tree) are compared using ROC curves. AUC scores give a clear performance ranking across modelling strategies.
 
 **ROC Comparison**
 
@@ -2039,7 +2065,9 @@ The ROC curves for all five models highlight how well each one distinguishes bet
 
 In conclusion, the ROC curve shows that Random Forest did the best job at separating the classes, followed closely by Boosted Tree and the Tuned Decision Tree. The linear models performed reasonably well but struggled more with the class overlap in the data. This conclusion is consistent with the earlier observations when fitiing and summarizing the models. Random Forest and Boosted Tree are the most reliable classifiers for this dataset, effectively capturing the complex patterns in the time series data.
 
-#### d. 
+#### Which model is best?
+
+The best-performing classifier is identified, and its results are used to characterise how birdsongs differ from financial time-series. This ties the modelling results back to the data structure and feature behaviour observed earlier.
 
 **Best Model and how the time series for financial data and birdsongs typically differ**
 
