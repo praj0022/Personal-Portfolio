@@ -670,6 +670,9 @@ Overall, entropy and x_acf1 show the strongest separation, with finance exhibiti
 ```{r}
 #| echo: true
 #| code-fold: true
+#| message: false
+#| warning: false
+
 
 
 # Standardize the numerical columns
@@ -701,11 +704,6 @@ knitr::include_graphics("tour_fb.gif")
 ```
 
 ## Grand Tour
-
-<video autoplay loop muted playsinline width="400">
-  <source src="tour_fb.gif" type="gif">
-</video>
-
 
 The grand tour reveals how the five features interact across varying projections. While some projections reveal partial separation between birdsongs and financial time series, there remains a significant overlap in many views. This overlap, along with the irregular and unequal spread of each class, suggests that the assumptions of multivariate normality and equal variance-covariance matrices are not fully satisfied. The finance series tend to cluster more tightly, whereas birdsongs exhibit more variation, particularly in entropy and x_acf1. Although classification is still possible, the way the data breaks some of LDA’s assumptions suggests that more flexible models, like decision trees or ensemble methods might handle it more effectively.
 
@@ -1253,7 +1251,7 @@ Both models perform well, but LDA has a slight advantage with its higher AUC.
 While the difference is not massive, it indicates LDA is just a bit better at identifying true positives while keeping false positives lower.
 
 
-#### f. Interpreting Model Findings and Class Differences
+#### Interpreting Model Findings and Class Differences
 
 - The analysis shows that financial time series and birdsongs have pretty distinct patterns. Financial data are generally more structured and linear, with higher linearity and covariate2 values reflecting the smooth, predictable trends you’d expect in markets. On the other hand, birdsongs are much more random and unpredictable, which is captured well by their higher entropy values. 
 - Both models picked up on these differences, entropy was a strong indicator for birdsongs, while linearity pointed more towards finance. Interestingly, finance series were sometimes mistaken for birdsongs, suggesting there are some irregularities in financial data that mirror the chaotic patterns of birdsongs. 
@@ -1647,9 +1645,9 @@ roc_auc(test_predictions, truth = type, .pred_birdsongs)
 - The AUC value of 0.90 confirms this, it means that, across all possible thresholds, the model ranks birdsongs higher than finance 90% of the time.
 - Even though the test accuracy was lower at 82%, the high AUC shows that the model is still effective at distinguishing between the two classes.
 
-**Compasion with models on test data Q2**
+**Comparison with linear models on test data**
 
-- Compared to the linear models in Q2, the tuned decision tree performed slightly better on both accuracy and AUC.
+- Compared to the linear models, the tuned decision tree performed slightly better on both accuracy and AUC.
 - Logistic regression achieved 79% accuracy and an AUC of 0.876, while LDA reached 80% accuracy with an AUC of 0.882.
 - The decision tree outperformed both, with 82% accuracy and an AUC of 0.90, suggesting it separated the classes more effectively.
 - The tree also had the advantage of capturing non-linear patterns and didn’t rely on assumptions like multivariate normality or equal covariance, which the data didn’t fully satisfy.
