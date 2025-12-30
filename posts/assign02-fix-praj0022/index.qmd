@@ -90,7 +90,7 @@ wiki_page <- read_html(wiki_link)
 tables <- html_nodes(wiki_page, "table")
 
 #Selecting the olympic medal table 
-medal_table <- tables[[4]]
+medal_table <- tables[[3]]
 
 #Converting to dataframe 
 medal_tally <- html_table(medal_table, fill = TRUE)

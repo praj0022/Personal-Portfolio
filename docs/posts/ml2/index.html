@@ -984,9 +984,6 @@ $ covariate2 &lt;dbl&gt; 2.81219129, -0.21610577, 0.87087536, 0.59675859, 1.8158
 </section>
 <section id="grand-tour" class="level2">
 <h2 class="anchored" data-anchor-id="grand-tour">Grand Tour</h2>
-<video autoplay="" loop="" muted="" playsinline="" width="400">
-<source src="tour_fb.gif" type="gif">
-</video>
 <p>The grand tour reveals how the five features interact across varying projections. While some projections reveal partial separation between birdsongs and financial time series, there remains a significant overlap in many views. This overlap, along with the irregular and unequal spread of each class, suggests that the assumptions of multivariate normality and equal variance-covariance matrices are not fully satisfied. The finance series tend to cluster more tightly, whereas birdsongs exhibit more variation, particularly in entropy and x_acf1. Although classification is still possible, the way the data breaks some of LDA’s assumptions suggests that more flexible models, like decision trees or ensemble methods might handle it more effectively.</p>
 <p><strong>1. Multivariate Normality</strong></p>
 <div class="cell" data-layout-align="center">
@@ -1712,8 +1709,8 @@ covariate2  0.76381428</code></pre>
 </div>
 <p>Logistic Regression - The ROC curve shows good separation, with an AUC of 0.876, this indicates strong ability to differentiate between birdsongs and finance time series. - It’s clearly above the diagonal, the model performs better than random guessing consistently. LDA - LDA’s ROC curve is quite similar to Logistic Regression but has a slightly higher AUC of 0.882. - This small improvement suggests LDA handles classification boundaries a bit more accurately, especially when separating birdsongs from finance. Both models perform well, but LDA has a slight advantage with its higher AUC. While the difference is not massive, it indicates LDA is just a bit better at identifying true positives while keeping false positives lower.</p>
 </section>
-<section id="f.-interpreting-model-findings-and-class-differences" class="level4">
-<h4 class="anchored" data-anchor-id="f.-interpreting-model-findings-and-class-differences">f.&nbsp;Interpreting Model Findings and Class Differences</h4>
+<section id="interpreting-model-findings-and-class-differences" class="level4">
+<h4 class="anchored" data-anchor-id="interpreting-model-findings-and-class-differences">Interpreting Model Findings and Class Differences</h4>
 <ul>
 <li>The analysis shows that financial time series and birdsongs have pretty distinct patterns. Financial data are generally more structured and linear, with higher linearity and covariate2 values reflecting the smooth, predictable trends you’d expect in markets. On the other hand, birdsongs are much more random and unpredictable, which is captured well by their higher entropy values.</li>
 <li>Both models picked up on these differences, entropy was a strong indicator for birdsongs, while linearity pointed more towards finance. Interestingly, finance series were sometimes mistaken for birdsongs, suggesting there are some irregularities in financial data that mirror the chaotic patterns of birdsongs.</li>
@@ -2162,9 +2159,9 @@ Prediction  birdsongs finance
 <li>The AUC value of 0.90 confirms this, it means that, across all possible thresholds, the model ranks birdsongs higher than finance 90% of the time.</li>
 <li>Even though the test accuracy was lower at 82%, the high AUC shows that the model is still effective at distinguishing between the two classes.</li>
 </ul>
-<p><strong>Compasion with models on test data Q2</strong></p>
+<p><strong>Comparison with linear models on test data</strong></p>
 <ul>
-<li>Compared to the linear models in Q2, the tuned decision tree performed slightly better on both accuracy and AUC.</li>
+<li>Compared to the linear models, the tuned decision tree performed slightly better on both accuracy and AUC.</li>
 <li>Logistic regression achieved 79% accuracy and an AUC of 0.876, while LDA reached 80% accuracy with an AUC of 0.882.</li>
 <li>The decision tree outperformed both, with 82% accuracy and an AUC of 0.90, suggesting it separated the classes more effectively.</li>
 <li>The tree also had the advantage of capturing non-linear patterns and didn’t rely on assumptions like multivariate normality or equal covariance, which the data didn’t fully satisfy.</li>
