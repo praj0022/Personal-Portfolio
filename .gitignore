@@ -51,6 +51,13 @@ renv.lock
 # keep html only inside docs (needed for website)
 !docs/**/*.html
 
+# publish Quarto figure assets inside docs
+!docs/**/index_files/
+!docs/**/_files/
+!docs/**/figure-html/
+!docs/**/site_libs/
+
+
 # -----------------------------
 # Large media files
 # -----------------------------
